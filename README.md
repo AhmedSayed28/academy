@@ -1,6 +1,6 @@
 # Academy
 
-Academy is a practical technology education platform. This repository currently contains only the project foundation; product features will be implemented in focused follow-up work.
+Academy is a practical technology education platform. The current public experience includes the homepage and a course catalog that is ready to display approved course records.
 
 ## Local development
 

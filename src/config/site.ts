@@ -11,7 +11,7 @@ export interface SocialLink {
 
 const navigation = [
   { label: "Home", href: "/", available: true },
-  { label: "Courses", href: "/courses", available: false },
+  { label: "Courses", href: "/courses", available: true },
   { label: "Tracks", href: "/tracks", available: false },
   { label: "Instructors", href: "/instructors", available: false },
   { label: "About", href: "/about", available: false },

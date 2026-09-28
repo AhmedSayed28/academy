@@ -45,7 +45,8 @@ function NavigationEntry({
     );
   }
 
-  const isCurrent = pathname === item.href;
+  const isCurrent =
+    pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
 
   return (
     <Link

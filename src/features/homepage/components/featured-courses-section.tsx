@@ -29,11 +29,11 @@ export function FeaturedCoursesSection() {
             Start with the documented learning tracks while the course catalog is finalized.
           </p>
           <Link
-            href="#learning-tracks"
+            href="/courses"
             className={cn(buttonVariants({ variant: "secondary" }), "mt-6")}
           >
             <Compass aria-hidden="true" className="size-4" />
-            Explore learning tracks
+            View course catalog
           </Link>
         </div>
       </Container>

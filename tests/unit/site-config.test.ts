@@ -18,7 +18,7 @@ describe("site configuration", () => {
   it("only marks routes implemented in this phase as available", () => {
     expect(
       siteConfig.navigation.filter(({ available }) => available).map(({ href }) => href),
-    ).toEqual(["/"]);
+    ).toEqual(["/", "/courses"]);
     expect(siteConfig.primaryAction).toMatchObject({
       label: "Explore Tracks",
       href: "/#learning-tracks",
