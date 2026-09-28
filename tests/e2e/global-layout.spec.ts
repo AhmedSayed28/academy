@@ -19,6 +19,10 @@ test("desktop layout exposes global navigation and footer without broken future 
     "href",
     "/tracks",
   );
+  await expect(primaryNavigation.getByRole("link", { name: "Instructors" })).toHaveAttribute(
+    "href",
+    "/instructors",
+  );
   await expect(
     primaryNavigation.getByRole("link", { name: "Explore Tracks" }),
   ).toHaveAttribute("href", "/tracks");
