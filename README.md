@@ -21,4 +21,4 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test:e2e` validates the global responsive layout and navigation behavior. See `AGENTS.md` and `docs/` for engineering and product requirements.
+`pnpm test:e2e` validates the global responsive layout, navigation behavior, and homepage experience. See `AGENTS.md` and `docs/` for engineering and product requirements.

@@ -24,9 +24,9 @@ export const siteConfig = {
   url: null as string | null,
   navigation,
   primaryAction: {
-    label: "Browse Courses",
-    href: "/courses",
-    available: false,
+    label: "Explore Tracks",
+    href: "/#learning-tracks",
+    available: true,
   } satisfies NavigationItem,
   contact: {
     email: null as string | null,

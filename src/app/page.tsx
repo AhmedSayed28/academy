@@ -1,12 +1,27 @@
-import { Container } from "@/components/layout/container";
-import { siteConfig } from "@/config/site";
+import type { Metadata } from "next";
+
+import { FeaturedCoursesSection } from "@/features/homepage/components/featured-courses-section";
+import { FinalCtaSection } from "@/features/homepage/components/final-cta-section";
+import { HeroSection } from "@/features/homepage/components/hero-section";
+import { LearningJourneySection } from "@/features/homepage/components/learning-journey-section";
+import { LearningTracksSection } from "@/features/homepage/components/learning-tracks-section";
+import { WhyAcademySection } from "@/features/homepage/components/why-academy-section";
+
+export const metadata: Metadata = {
+  title: "Practical Technology Education",
+  description:
+    "Explore structured technology learning tracks built around practical skills, real-world application, and career-oriented development.",
+};
 
 export default function Home() {
   return (
-    <Container className="flex min-h-[50vh] items-center py-section">
-      <h1 className="text-heading-1 font-bold tracking-tight text-foreground">
-        {siteConfig.name}
-      </h1>
-    </Container>
+    <>
+      <HeroSection />
+      <LearningTracksSection />
+      <FeaturedCoursesSection />
+      <WhyAcademySection />
+      <LearningJourneySection />
+      <FinalCtaSection />
+    </>
   );
 }

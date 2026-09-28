@@ -65,7 +65,13 @@ function NavigationEntry({
   );
 }
 
-function PrimaryAction({ mobile = false }: { mobile?: boolean }) {
+function PrimaryAction({
+  mobile = false,
+  onNavigate,
+}: {
+  mobile?: boolean;
+  onNavigate?: () => void;
+}) {
   const action = siteConfig.primaryAction;
 
   if (!action.available) {
@@ -90,6 +96,7 @@ function PrimaryAction({ mobile = false }: { mobile?: boolean }) {
   return (
     <Link
       href={action.href}
+      onClick={onNavigate}
       className={cn(
         buttonVariants({ variant: "primary", size: mobile ? "large" : "default" }),
         mobile && "w-full",
@@ -190,7 +197,7 @@ export function SiteHeader() {
               ))}
             </ul>
             <div className="mt-4 border-t border-border pt-4">
-              <PrimaryAction mobile />
+              <PrimaryAction mobile onNavigate={closeMenu} />
             </div>
           </Container>
         </nav>
