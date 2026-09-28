@@ -14,7 +14,9 @@ test("desktop layout exposes global navigation and footer without broken future 
   await expect(
     primaryNavigation.getByText("CoursesSoon", { exact: true }),
   ).toHaveAttribute("aria-disabled", "true");
-  await expect(page.getByText("Browse Courses")).toHaveAttribute("aria-disabled", "true");
+  await expect(
+    primaryNavigation.getByRole("link", { name: "Explore Tracks" }),
+  ).toHaveAttribute("href", "/#learning-tracks");
   await expect(page.getByRole("contentinfo")).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
@@ -50,7 +52,16 @@ test("mobile menu supports disclosure, focus, escape, and touch-sized controls",
 
   await page.keyboard.press("Escape");
   await expect(mobileNavigation).toBeHidden();
-  await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeFocused();
+  const reopenedMenuButton = page.getByRole("button", { name: "Open navigation menu" });
+  await expect(reopenedMenuButton).toBeFocused();
+
+  await reopenedMenuButton.click();
+  await page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Explore Tracks" })
+    .click();
+  await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeHidden();
+  await expect(page).toHaveURL(/#learning-tracks$/);
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

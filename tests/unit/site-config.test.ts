@@ -19,7 +19,11 @@ describe("site configuration", () => {
     expect(
       siteConfig.navigation.filter(({ available }) => available).map(({ href }) => href),
     ).toEqual(["/"]);
-    expect(siteConfig.primaryAction.available).toBe(false);
+    expect(siteConfig.primaryAction).toMatchObject({
+      label: "Explore Tracks",
+      href: "/#learning-tracks",
+      available: true,
+    });
   });
 
   it("does not invent contact or social details", () => {

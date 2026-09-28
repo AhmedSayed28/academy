@@ -102,3 +102,9 @@
     @apply bg-primary/20 text-foreground;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
