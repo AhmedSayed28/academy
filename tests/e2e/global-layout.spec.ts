@@ -11,9 +11,10 @@ test("desktop layout exposes global navigation and footer without broken future 
     "aria-current",
     "page",
   );
-  await expect(
-    primaryNavigation.getByText("CoursesSoon", { exact: true }),
-  ).toHaveAttribute("aria-disabled", "true");
+  await expect(primaryNavigation.getByRole("link", { name: "Courses" })).toHaveAttribute(
+    "href",
+    "/courses",
+  );
   await expect(
     primaryNavigation.getByRole("link", { name: "Explore Tracks" }),
   ).toHaveAttribute("href", "/#learning-tracks");

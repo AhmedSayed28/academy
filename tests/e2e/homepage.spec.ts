@@ -49,7 +49,10 @@ test("homepage presents only documented tracks and an honest featured-course emp
   await expect(
     page.getByRole("heading", { name: "No featured courses are published yet" }),
   ).toBeVisible();
-  await expect(page.getByRole("main").getByRole("link", { name: /course/i })).toHaveCount(0);
+  await expect(page.getByRole("main").getByRole("link", { name: "View course catalog" })).toHaveAttribute(
+    "href",
+    "/courses",
+  );
 });
 
 test("homepage preserves section hierarchy and readable layouts across common widths", async ({
