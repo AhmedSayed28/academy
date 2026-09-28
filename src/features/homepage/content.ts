@@ -1,15 +1,4 @@
-export const learningTracks = [
-  { name: "Software Testing", icon: "bug" },
-  { name: "Frontend Development", icon: "layout" },
-  { name: "Backend Development", icon: "server" },
-  { name: "Artificial Intelligence", icon: "brain" },
-  { name: "DevOps", icon: "git-branch" },
-  { name: "Data Engineering", icon: "database" },
-  { name: "Cybersecurity", icon: "shield" },
-  { name: "Mobile Development", icon: "smartphone" },
-] as const;
-
-export type LearningTrackIcon = (typeof learningTracks)[number]["icon"];
+export { documentedLearningTracks as learningTracks } from "@/config/learning-tracks";
 
 export const academyDifferentiators = [
   {

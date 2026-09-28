@@ -45,6 +45,10 @@ test("homepage presents only documented tracks and an honest featured-course emp
   for (const trackName of documentedTrackNames) {
     await expect(tracksSection.getByRole("heading", { name: trackName })).toBeVisible();
   }
+  await expect(tracksSection.getByRole("link", { name: "View all learning tracks" })).toHaveAttribute(
+    "href",
+    "/tracks",
+  );
 
   await expect(
     page.getByRole("heading", { name: "No featured courses are published yet" }),

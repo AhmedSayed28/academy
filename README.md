@@ -1,6 +1,6 @@
 # Academy
 
-Academy is a practical technology education platform. The current public experience includes the homepage and a course catalog that is ready to display approved course records.
+Academy is a practical technology education platform. The public experience includes the homepage, course catalog, and documented learning-track directions, with detail routes ready for approved content.
 
 ## Local development
 
@@ -21,4 +21,4 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test:e2e` validates the global responsive layout, navigation behavior, and homepage experience. See `AGENTS.md` and `docs/` for engineering and product requirements.
+`pnpm test:e2e` validates the global responsive layout, navigation behavior, homepage, course, and learning-track experiences. See `AGENTS.md` and `docs/` for engineering and product requirements.

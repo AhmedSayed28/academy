@@ -15,12 +15,17 @@ export default function NotFound() {
         <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-primary">404</p>
         <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-dark">Page not found</h1>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">
-          The page may not exist, or the course may not be available for public viewing.
+          The requested content may not exist or may not be available for public viewing.
         </p>
-        <Link href="/courses" className={cn(buttonVariants({ size: "large" }), "mt-7")}>
-          <ArrowLeft aria-hidden="true" className="size-4" />
-          Browse courses
-        </Link>
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link href="/courses" className={buttonVariants({ size: "large" })}>
+            <ArrowLeft aria-hidden="true" className="size-4" />
+            Browse courses
+          </Link>
+          <Link href="/tracks" className={cn(buttonVariants({ variant: "secondary", size: "large" }))}>
+            Explore learning tracks
+          </Link>
+        </div>
       </div>
     </Container>
   );
