@@ -21,4 +21,4 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test:e2e` is configured for future browser journeys; there are no end-to-end scenarios yet. See `AGENTS.md` and `docs/` for engineering and product requirements.
+`pnpm test:e2e` validates the global responsive layout and navigation behavior. See `AGENTS.md` and `docs/` for engineering and product requirements.
