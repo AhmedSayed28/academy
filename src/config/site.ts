@@ -13,7 +13,7 @@ const navigation = [
   { label: "Home", href: "/", available: true },
   { label: "Courses", href: "/courses", available: true },
   { label: "Tracks", href: "/tracks", available: true },
-  { label: "Instructors", href: "/instructors", available: false },
+  { label: "Instructors", href: "/instructors", available: true },
   { label: "About", href: "/about", available: false },
   { label: "Contact", href: "/contact", available: false },
 ] satisfies NavigationItem[];
