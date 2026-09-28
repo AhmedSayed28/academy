@@ -1,30 +1,12 @@
-import {
-  BrainCircuit,
-  Bug,
-  Database,
-  GitBranch,
-  LayoutTemplate,
-  Server,
-  ShieldCheck,
-  Smartphone,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
-import { learningTracks, type LearningTrackIcon } from "@/features/homepage/content";
+import { LearningTrackIcon } from "@/components/learning-track-icon";
+import { buttonVariants } from "@/components/ui/button";
+import { documentedLearningTracks } from "@/config/learning-tracks";
 
 import { SectionHeading } from "./section-heading";
-
-const trackIcons: Record<LearningTrackIcon, LucideIcon> = {
-  bug: Bug,
-  layout: LayoutTemplate,
-  server: Server,
-  brain: BrainCircuit,
-  "git-branch": GitBranch,
-  database: Database,
-  shield: ShieldCheck,
-  smartphone: Smartphone,
-};
 
 export function LearningTracksSection() {
   return (
@@ -42,15 +24,13 @@ export function LearningTracksSection() {
         />
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {learningTracks.map((track, index) => {
-            const Icon = trackIcons[track.icon];
-
+          {documentedLearningTracks.map((track, index) => {
             return (
               <li key={track.name}>
                 <article className="group flex h-full min-h-44 flex-col rounded-xl border border-border bg-background p-5 transition-colors hover:border-primary/40 motion-reduce:transition-none">
                   <div className="flex items-start justify-between gap-4">
                     <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground motion-reduce:transition-none">
-                      <Icon aria-hidden="true" className="size-5" />
+                      <LearningTrackIcon name={track.icon} className="size-5" />
                     </span>
                     <span className="text-sm font-medium text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
@@ -65,6 +45,10 @@ export function LearningTracksSection() {
             );
           })}
         </ul>
+        <Link href="/tracks" className={`${buttonVariants({ variant: "secondary" })} mt-8`}>
+          View all learning tracks
+          <ArrowRight aria-hidden="true" className="size-4" />
+        </Link>
       </Container>
     </section>
   );

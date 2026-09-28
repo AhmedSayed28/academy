@@ -27,7 +27,7 @@ export function FinalCtaSection() {
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
-                href="#learning-tracks"
+                href="/tracks"
                 className={buttonVariants({ variant: "primary", size: "large" })}
               >
                 Explore learning tracks

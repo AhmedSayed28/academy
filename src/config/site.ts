@@ -12,7 +12,7 @@ export interface SocialLink {
 const navigation = [
   { label: "Home", href: "/", available: true },
   { label: "Courses", href: "/courses", available: true },
-  { label: "Tracks", href: "/tracks", available: false },
+  { label: "Tracks", href: "/tracks", available: true },
   { label: "Instructors", href: "/instructors", available: false },
   { label: "About", href: "/about", available: false },
   { label: "Contact", href: "/contact", available: false },
@@ -25,7 +25,7 @@ export const siteConfig = {
   navigation,
   primaryAction: {
     label: "Explore Tracks",
-    href: "/#learning-tracks",
+    href: "/tracks",
     available: true,
   } satisfies NavigationItem,
   contact: {
