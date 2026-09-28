@@ -1,7 +1,12 @@
+import { Container } from "@/components/layout/container";
+import { siteConfig } from "@/config/site";
+
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-7xl items-center px-5 md:px-6 lg:px-8">
-      <h1 className="text-foreground text-3xl font-semibold">Academy</h1>
-    </main>
+    <Container className="flex min-h-[50vh] items-center py-section">
+      <h1 className="text-heading-1 font-bold tracking-tight text-foreground">
+        {siteConfig.name}
+      </h1>
+    </Container>
   );
 }
