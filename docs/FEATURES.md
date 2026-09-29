@@ -926,6 +926,13 @@ Should communicate:
 - Page contains clear semantic heading hierarchy.
 - Page is responsive.
 
+### Implementation
+
+Implemented at `/about` as a server-rendered page with one primary heading and concise sections for
+Academy's mission, vision, teaching philosophy, practical learning approach, and career-oriented
+direction. The page links to the implemented courses and general-interest routes and avoids
+unsupported organizational history, credentials, metrics, testimonials, or outcome promises.
+
 ---
 
 # 10. Footer Features
