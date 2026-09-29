@@ -14,7 +14,7 @@ const navigation = [
   { label: "Courses", href: "/courses", available: true },
   { label: "Tracks", href: "/tracks", available: true },
   { label: "Instructors", href: "/instructors", available: true },
-  { label: "About", href: "/about", available: false },
+  { label: "About", href: "/about", available: true },
   { label: "Contact", href: "/contact", available: true },
 ] satisfies NavigationItem[];
 
