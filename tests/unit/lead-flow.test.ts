@@ -132,14 +132,14 @@ describe("Supabase lead repository", () => {
     expect(fetchImplementation).not.toHaveBeenCalled();
   });
 
-  it("writes the normalized record with an idempotent conflict policy", async () => {
+  it("upserts the normalized record and sends the secret key only as apikey", async () => {
     const fetchImplementation = vi
       .fn<typeof fetch>()
       .mockResolvedValue(new Response(null, { status: 201 }));
     const repository = createSupabaseLeadRepository(
       {
         SUPABASE_URL: "https://test-project.supabase.co",
-        SUPABASE_SERVICE_ROLE_KEY: "test-service-role-key",
+        SUPABASE_SECRET_KEY: "sb_secret_test-only-key",
       },
       fetchImplementation,
     );
@@ -159,10 +159,10 @@ describe("Supabase lead repository", () => {
       "https://test-project.supabase.co/rest/v1/leads?on_conflict=submission_id",
     );
     expect(options?.headers).toMatchObject({
-      apikey: "test-service-role-key",
-      Authorization: "Bearer test-service-role-key",
-      Prefer: "resolution=ignore-duplicates,return=minimal",
+      apikey: "sb_secret_test-only-key",
+      Prefer: "resolution=merge-duplicates,return=minimal",
     });
+    expect(options?.headers).not.toHaveProperty("Authorization");
     expect(JSON.parse(String(options?.body))).toEqual({
       submission_id: lead.submissionId,
       full_name: lead.fullName,

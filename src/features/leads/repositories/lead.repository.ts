@@ -4,7 +4,7 @@ import type { LeadRepository } from "@/features/leads/types/lead.types";
 
 const supabaseEnvironmentSchema = z.object({
   SUPABASE_URL: z.string().url(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+  SUPABASE_SECRET_KEY: z.string().min(1),
 });
 
 type FetchImplementation = typeof fetch;
@@ -32,10 +32,9 @@ export function createSupabaseLeadRepository(
       const response = await fetchImplementation(endpoint, {
         method: "POST",
         headers: {
-          apikey: configuration.SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${configuration.SUPABASE_SERVICE_ROLE_KEY}`,
+          apikey: configuration.SUPABASE_SECRET_KEY,
           "Content-Type": "application/json",
-          Prefer: "resolution=ignore-duplicates,return=minimal",
+          Prefer: "resolution=merge-duplicates,return=minimal",
         },
         body: JSON.stringify({
           submission_id: lead.submissionId,

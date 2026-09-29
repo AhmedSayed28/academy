@@ -473,10 +473,8 @@ Example:
 NEXT_PUBLIC_APP_NAME
 NEXT_PUBLIC_APP_URL
 
-NEXT_PUBLIC_SUPABASE_URL
-NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-SUPABASE_SERVICE_ROLE_KEY
+SUPABASE_URL
+SUPABASE_SECRET_KEY
 ```
 
 Sensitive environment variables must only be accessed server-side.
@@ -756,8 +754,8 @@ The API returns a predictable response to the UI.
 
 The initial general-interest flow collects full name and email plus optional phone and message.
 It intentionally does not require a course or track until approved records can be offered. The
-lead repository writes to Supabase's PostgreSQL-backed REST endpoint with a server-only service
-role. Configuration and migration steps are documented in `docs/DATABASE.md`; there is no
+lead repository writes to Supabase's PostgreSQL-backed REST endpoint with a server-only secret
+key. Configuration and migration steps are documented in `docs/DATABASE.md`; there is no
 in-memory production fallback.
 
 ---
@@ -804,7 +802,7 @@ The project should follow these baseline rules:
 
 - Validate all external input.
 - Keep secrets server-side.
-- Never expose service-role credentials to the browser.
+- Never expose Supabase secret credentials to the browser.
 - Never trust client authorization decisions.
 - Sanitize or safely render user content.
 - Avoid leaking database errors.

@@ -38,6 +38,9 @@ yarn-error.log*
 /playwright-report/
 /test-results/
 
+# Supabase CLI local link metadata
+/supabase/.temp/
+
 # vercel
 .vercel
 
