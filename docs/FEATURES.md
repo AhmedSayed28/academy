@@ -392,6 +392,14 @@ Potential topics:
 - User can clearly identify questions and answers.
 - Keyboard interaction works where appropriate.
 
+### Implementation
+
+Implemented as a shared, server-rendered FAQ list using native disclosure semantics. The homepage
+shows a four-question preview with a link to `/faq`, while the full FAQ page covers Academy's
+purpose, learning approach, course and track discovery, general-interest registration, and contact
+flow. Answers are limited to documented or implemented behavior and direct visitors to published
+course information or `/contact` when details vary.
+
 ---
 
 ## FEAT-011 — Final Homepage CTA

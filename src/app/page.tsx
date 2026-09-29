@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { FeaturedCoursesSection } from "@/features/homepage/components/featured-courses-section";
+import { FaqPreviewSection } from "@/features/homepage/components/faq-preview-section";
 import { FinalCtaSection } from "@/features/homepage/components/final-cta-section";
 import { HeroSection } from "@/features/homepage/components/hero-section";
 import { LearningJourneySection } from "@/features/homepage/components/learning-journey-section";
@@ -21,6 +22,7 @@ export default function Home() {
       <FeaturedCoursesSection />
       <WhyAcademySection />
       <LearningJourneySection />
+      <FaqPreviewSection />
       <FinalCtaSection />
     </>
   );

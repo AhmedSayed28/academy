@@ -66,7 +66,7 @@ test("homepage preserves section hierarchy and readable layouts across common wi
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
 
-    await expect(page.getByRole("main").getByRole("heading", { level: 2 })).toHaveCount(5);
+    await expect(page.getByRole("main").getByRole("heading", { level: 2 })).toHaveCount(6);
     const hasHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
     );
