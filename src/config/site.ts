@@ -18,11 +18,16 @@ const navigation = [
   { label: "Contact", href: "/contact", available: true },
 ] satisfies NavigationItem[];
 
+const footerNavigation = [
+  { label: "FAQ", href: "/faq", available: true },
+] satisfies NavigationItem[];
+
 export const siteConfig = {
   name: "Academy",
   description: "Practical, career-oriented technology education.",
   url: null as string | null,
   navigation,
+  footerNavigation,
   primaryAction: {
     label: "Register Interest",
     href: "/register-interest",

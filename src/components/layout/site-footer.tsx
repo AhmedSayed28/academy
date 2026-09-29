@@ -4,7 +4,10 @@ import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
-  const availableNavigation = siteConfig.navigation.filter((item) => item.available);
+  const availableNavigation = [
+    ...siteConfig.navigation.filter((item) => item.available),
+    ...siteConfig.footerNavigation.filter((item) => item.available),
+  ];
 
   return (
     <footer className="bg-dark text-dark-foreground">

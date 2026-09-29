@@ -24,6 +24,9 @@ describe("site configuration", () => {
       href: "/register-interest",
       available: true,
     });
+    expect(siteConfig.footerNavigation).toEqual([
+      { label: "FAQ", href: "/faq", available: true },
+    ]);
   });
 
   it("does not invent contact or social details", () => {
