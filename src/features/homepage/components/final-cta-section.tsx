@@ -34,13 +34,13 @@ export function FinalCtaSection() {
                 <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
               <Link
-                href="#learning-journey"
+                href="/register-interest"
                 className={cn(
                   buttonVariants({ variant: "secondary", size: "large" }),
                   "border-dark-border bg-dark-foreground/5 text-dark-foreground hover:border-accent/50 hover:bg-dark-foreground/10",
                 )}
               >
-                View the learning journey
+                Register general interest
               </Link>
             </div>
           </div>

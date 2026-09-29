@@ -20,8 +20,8 @@ describe("site configuration", () => {
       siteConfig.navigation.filter(({ available }) => available).map(({ href }) => href),
     ).toEqual(["/", "/courses", "/tracks", "/instructors"]);
     expect(siteConfig.primaryAction).toMatchObject({
-      label: "Explore Tracks",
-      href: "/tracks",
+      label: "Register Interest",
+      href: "/register-interest",
       available: true,
     });
   });

@@ -6,10 +6,12 @@ import { syntheticTrackRecords } from "./tests/fixtures/track-records";
 
 export default defineConfig({
   testDir: "./tests/e2e",
+  workers: 2,
   testMatch: [
     "courses-fixtures.spec.ts",
     "tracks-fixtures.spec.ts",
     "instructors-fixtures.spec.ts",
+    "leads-fixtures.spec.ts",
   ],
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   use: { baseURL: "http://localhost:3000" },

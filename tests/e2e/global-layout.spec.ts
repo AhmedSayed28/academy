@@ -24,8 +24,8 @@ test("desktop layout exposes global navigation and footer without broken future 
     "/instructors",
   );
   await expect(
-    primaryNavigation.getByRole("link", { name: "Explore Tracks" }),
-  ).toHaveAttribute("href", "/tracks");
+    primaryNavigation.getByRole("link", { name: "Register Interest" }),
+  ).toHaveAttribute("href", "/register-interest");
   await expect(page.getByRole("contentinfo")).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
@@ -67,10 +67,10 @@ test("mobile menu supports disclosure, focus, escape, and touch-sized controls",
   await reopenedMenuButton.click();
   await page
     .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "Explore Tracks" })
+    .getByRole("link", { name: "Register Interest" })
     .click();
   await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeHidden();
-  await expect(page).toHaveURL(/\/tracks$/);
+  await expect(page).toHaveURL(/\/register-interest$/);
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

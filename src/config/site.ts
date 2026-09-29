@@ -24,8 +24,8 @@ export const siteConfig = {
   url: null as string | null,
   navigation,
   primaryAction: {
-    label: "Explore Tracks",
-    href: "/tracks",
+    label: "Register Interest",
+    href: "/register-interest",
     available: true,
   } satisfies NavigationItem,
   contact: {
