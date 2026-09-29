@@ -507,6 +507,20 @@ faqs
 
 The database schema should evolve only when required by product functionality.
 
+### Approved public content source
+
+Phase 11 course, track, and instructor records use the existing validated repository source arrays.
+This keeps reviewed launch content server-rendered and avoids introducing a CMS, admin portal, or
+database migration before those capabilities are in scope. Non-production environment overrides
+remain reserved for synthetic automated-test fixtures and replace, rather than mix with, approved
+production records.
+
+Course records may include structured price data (`amount` plus an approved ISO currency), a
+truthful start-date label, and explicit track and instructor slugs. Delivery type is optional; the
+presentation layer must omit it when the product has not supplied a value. Track detail resolution
+includes a related course only when both the track's course-slug list and the course's `trackSlug`
+agree.
+
 ---
 
 ## 15. Initial Domain Relationships

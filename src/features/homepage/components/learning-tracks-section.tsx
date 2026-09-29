@@ -5,10 +5,14 @@ import { Container } from "@/components/layout/container";
 import { LearningTrackIcon } from "@/components/learning-track-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { documentedLearningTracks } from "@/config/learning-tracks";
+import { trackService } from "@/features/tracks/services/track.service";
 
 import { SectionHeading } from "./section-heading";
 
-export function LearningTracksSection() {
+export async function LearningTracksSection() {
+  const publishedTracks = await trackService.getPublishedTracks();
+  const publishedSlugs = new Set(publishedTracks.map((track) => track.slug));
+
   return (
     <section
       id="learning-tracks"
@@ -25,6 +29,7 @@ export function LearningTracksSection() {
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {documentedLearningTracks.map((track, index) => {
+            const isPublished = publishedSlugs.has(track.slug);
             return (
               <li key={track.name}>
                 <article className="group flex h-full min-h-44 flex-col rounded-xl border border-border bg-background p-5 transition-colors hover:border-primary/40 motion-reduce:transition-none">
@@ -37,9 +42,17 @@ export function LearningTracksSection() {
                     </span>
                   </div>
                   <h3 className="mt-auto pt-8 text-xl font-semibold tracking-tight text-foreground">
-                    {track.name}
+                    {isPublished ? (
+                      <Link href={`/tracks/${track.slug}`} className="rounded-sm hover:text-primary">
+                        {track.name}
+                      </Link>
+                    ) : (
+                      track.name
+                    )}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">Planned learning track</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {isPublished ? "Published learning track" : "Planned learning track"}
+                  </p>
                 </article>
               </li>
             );

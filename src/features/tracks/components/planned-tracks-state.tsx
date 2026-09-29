@@ -1,7 +1,17 @@
 import { documentedLearningTracks } from "@/config/learning-tracks";
 import { LearningTrackIcon } from "@/components/learning-track-icon";
 
-export function PlannedTracksState() {
+export function PlannedTracksState({
+  publishedTrackNames = [],
+}: {
+  publishedTrackNames?: readonly string[];
+}) {
+  const plannedTracks = documentedLearningTracks.filter(
+    (track) => !publishedTrackNames.includes(track.name),
+  );
+
+  if (!plannedTracks.length) return null;
+
   return (
     <section aria-labelledby="planned-tracks-title">
       <div className="max-w-3xl">
@@ -10,12 +20,12 @@ export function PlannedTracksState() {
           Track details are being prepared.
         </h2>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">
-          These eight technology directions are planned for Academy. Detailed goals, skills,
+          These technology directions remain planned for Academy. Detailed goals, skills,
           learning sequences, tools, and related courses will appear only after approval.
         </p>
       </div>
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {documentedLearningTracks.map((track, index) => (
+        {plannedTracks.map((track, index) => (
           <li key={track.name}>
             <article className="flex h-full min-h-44 flex-col rounded-xl border border-dashed border-primary/30 bg-primary/5 p-5">
               <div className="flex items-start justify-between gap-4">

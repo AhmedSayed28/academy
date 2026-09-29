@@ -22,7 +22,7 @@ export const faqItems = [
   {
     question: "How can I explore courses and learning tracks?",
     answer:
-      "The Courses page lists published course information, while the Tracks page introduces the technology directions Academy plans to support. A published course page is the source of truth for details specific to that course.",
+      "The Courses page lists published course information, while the Tracks page presents both published learning tracks and technology directions still being planned. A published course page is the source of truth for details specific to that course.",
     action: { label: "Browse courses", href: "/courses" },
   },
   {

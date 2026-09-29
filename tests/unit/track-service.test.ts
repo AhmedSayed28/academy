@@ -50,6 +50,21 @@ describe("track service", () => {
     expect(result?.relatedCourses.map(({ slug }) => slug)).toEqual(["synthetic-open-course"]);
   });
 
+  it("rejects a listed course whose track slug points elsewhere", async () => {
+    const mismatchedCourse = {
+      ...syntheticCourseRecords[0],
+      trackSlug: "different-track",
+    };
+    const mismatchedService = createTrackService(
+      createTrackRepository([publishedFixture]),
+      createCourseService(createCourseRepository([mismatchedCourse])),
+    );
+
+    await expect(
+      mismatchedService.getPublishedTrackDetail(publishedFixture.slug),
+    ).resolves.toMatchObject({ relatedCourses: [] });
+  });
+
   it("supports an empty approved dataset", async () => {
     const emptyService = createTrackService(
       createTrackRepository([]),

@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/metadata";
 export const metadata = createPageMetadata({
   title: "Technology Courses",
   description:
-    "Browse Academy's published technology courses, including level, delivery format, duration, and availability.",
+    "Browse Academy's published technology courses, including level, duration, price, start date, and availability when supplied.",
   path: "/courses",
 });
 
@@ -23,8 +23,8 @@ export default async function CoursesPage() {
             Build practical skills, one focused course at a time.
           </h1>
           <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">
-            Explore published Academy courses with clear information about level, format,
-            duration, and current availability.
+            Explore published Academy courses with clear information about level, duration,
+            pricing, start dates, and current availability when those details are supplied.
           </p>
         </Container>
       </section>

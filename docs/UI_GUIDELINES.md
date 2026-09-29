@@ -930,6 +930,10 @@ Course cards may display:
 
 Do not attempt to display the entire course curriculum inside the card.
 
+Optional facts such as delivery type, start date, and price should render only when approved data is
+present. Never fill an empty fact with a guessed delivery format. When a start date is intentionally
+unannounced, use the explicit wording `Start date: To be announced`.
+
 ---
 
 ## 29. Track Cards

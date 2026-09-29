@@ -32,7 +32,7 @@ test("serves production robots policy", async ({ request }) => {
   expect(body).toContain(`Host: ${productionUrl}`);
 });
 
-test("serves only implemented static routes in the approved empty-data sitemap", async ({
+test("serves static routes and approved published detail routes in the sitemap", async ({
   request,
 }) => {
   const response = await request.get("/sitemap.xml");
@@ -48,6 +48,8 @@ test("serves only implemented static routes in the approved empty-data sitemap",
     "/contact",
     "/faq",
     "/register-interest",
+    "/courses/software-testing-fundamentals",
+    "/tracks/software-testing",
   ]) {
     expect(body).toContain(`<loc>${productionUrl}${path}</loc>`);
   }

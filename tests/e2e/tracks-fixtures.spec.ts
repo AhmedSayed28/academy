@@ -3,7 +3,9 @@ import { expect, test } from "@playwright/test";
 test("listing exposes published fixtures and filters unpublished track records", async ({ page }) => {
   await page.goto("/tracks");
 
-  await expect(page.getByRole("main").locator("article")).toHaveCount(1);
+  await expect(
+    page.locator('section[aria-labelledby="published-tracks-title"]').locator("article"),
+  ).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Software Testing" })).toBeVisible();
   await expect(page.getByRole("link", { name: "View learning track" })).toHaveAttribute(
     "href",

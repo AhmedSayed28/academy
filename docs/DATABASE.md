@@ -4,6 +4,13 @@ Academy uses PostgreSQL through Supabase. Database changes are stored as ordered
 `supabase/migrations`. The application must never report a lead or contact message as submitted
 unless Supabase has accepted the write.
 
+## Public catalog content
+
+Phase 11 approved course, track, and instructor content is not database-backed. It follows the
+existing validated repository-source convention so launch content can be reviewed in source control.
+Synthetic environment-driven fixtures remain isolated from those production records. No catalog
+content migration, CMS, or admin data model is introduced by this phase.
+
 ## Lead persistence setup
 
 1. Install or run the Supabase CLI and authenticate with `supabase login`.

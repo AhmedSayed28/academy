@@ -23,7 +23,17 @@ export function CourseCard({ course }: { course: Course }) {
       </div>
       {course.instructor ? (
         <p className="mt-5 text-sm text-muted-foreground">
-          Instructor: <span className="font-semibold text-foreground">{course.instructor.name}</span>
+          Instructor:{" "}
+          {course.instructor.slug ? (
+            <Link
+              href={`/instructors#${course.instructor.slug}`}
+              className="font-semibold text-foreground hover:text-primary"
+            >
+              {course.instructor.name}
+            </Link>
+          ) : (
+            <span className="font-semibold text-foreground">{course.instructor.name}</span>
+          )}
         </p>
       ) : null}
       <Link
