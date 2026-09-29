@@ -6,5 +6,8 @@ export default defineConfig({
   resolve: {
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
-  test: { include: ["tests/unit/**/*.test.ts", "tests/unit/**/*.test.tsx"] },
+  test: {
+    include: ["tests/unit/**/*.test.ts", "tests/unit/**/*.test.tsx"],
+    env: { NEXT_PUBLIC_APP_URL: "https://e2eacademy.vercel.app" },
+  },
 });

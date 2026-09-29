@@ -22,6 +22,7 @@ export default defineConfig({
     reuseExistingServer: false,
     env: {
       ...process.env,
+      NEXT_PUBLIC_APP_URL: "https://e2eacademy.vercel.app",
       ACADEMY_TEST_COURSE_RECORDS: JSON.stringify(syntheticCourseRecords),
       ACADEMY_TEST_INSTRUCTOR_RECORDS: JSON.stringify(syntheticInstructorRecords),
       ACADEMY_TEST_TRACK_RECORDS: JSON.stringify(syntheticTrackRecords),

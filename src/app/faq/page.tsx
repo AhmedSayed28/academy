@@ -1,17 +1,18 @@
 import { ArrowRight, MessageCircleQuestion } from "lucide-react";
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 import { FaqList } from "@/features/faq/components/faq-list";
 import { faqItems } from "@/features/faq/content";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Frequently Asked Questions",
   description:
     "Find answers about Academy, its practical learning approach, course and track discovery, registering interest, and contacting the team.",
-};
+  path: "/faq",
+});
 
 export default function FaqPage() {
   return (

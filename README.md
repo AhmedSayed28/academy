@@ -11,7 +11,12 @@ pnpm install
 pnpm dev
 ```
 
-Open <http://localhost:3000>. The public content pages need no credentials. Lead submission requires server-only Supabase configuration and the database migration described in [`docs/DATABASE.md`](docs/DATABASE.md). Copy `.env.example` to `.env.local` and never commit real credentials.
+Copy `.env.example` to `.env.local`, keep `NEXT_PUBLIC_APP_URL` set to the canonical production
+origin, and never commit real credentials. Open <http://localhost:3000>. The public content pages
+need no Supabase credentials. Lead and contact submission require the server-only Supabase
+configuration and database migrations described in [`docs/DATABASE.md`](docs/DATABASE.md).
+Deployment environment scope and verification are documented in
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Checks
 

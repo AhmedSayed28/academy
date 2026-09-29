@@ -2,29 +2,36 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CourseDetail } from "@/features/courses/components/course-detail";
-import { courseService } from "@/features/courses/services/course.service";
+import {
+  courseService,
+  type CourseService,
+} from "@/features/courses/services/course.service";
+import { createPageMetadata } from "@/lib/metadata";
 
 type CoursePageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const course = await courseService.getPublishedCourseBySlug(slug);
+export async function createCourseMetadata(
+  slug: string,
+  courses: Pick<CourseService, "getPublishedCourseBySlug"> = courseService,
+): Promise<Metadata> {
+  const course = await courses.getPublishedCourseBySlug(slug);
 
   if (!course) {
     return { title: "Course not found", robots: { index: false, follow: false } };
   }
 
-  return {
+  return createPageMetadata({
     title: course.title,
     description: course.shortDescription,
-    openGraph: {
-      title: `${course.title} | Academy`,
-      description: course.shortDescription,
-      type: "website",
-    },
-  };
+    path: `/courses/${course.slug}`,
+  });
+}
+
+export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  return createCourseMetadata(slug);
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {

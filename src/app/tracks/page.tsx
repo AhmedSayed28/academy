@@ -1,21 +1,15 @@
-import type { Metadata } from "next";
-
 import { Container } from "@/components/layout/container";
 import { PlannedTracksState } from "@/features/tracks/components/planned-tracks-state";
 import { TrackCard } from "@/features/tracks/components/track-card";
 import { trackService } from "@/features/tracks/services/track.service";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Technology Learning Tracks",
   description:
     "Explore Academy's documented technology learning directions and published structured learning tracks.",
-  openGraph: {
-    title: "Technology Learning Tracks | Academy",
-    description:
-      "Explore Academy's documented technology directions and published structured learning tracks.",
-    type: "website",
-  },
-};
+  path: "/tracks",
+});
 
 export default async function TracksPage() {
   const tracks = await trackService.getPublishedTracks();

@@ -1,21 +1,15 @@
-import type { Metadata } from "next";
-
 import { Container } from "@/components/layout/container";
 import { CourseCard } from "@/features/courses/components/course-card";
 import { CoursesEmptyState } from "@/features/courses/components/courses-empty-state";
 import { courseService } from "@/features/courses/services/course.service";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Technology Courses",
   description:
     "Browse Academy's published technology courses, including level, delivery format, duration, and availability.",
-  openGraph: {
-    title: "Technology Courses | Academy",
-    description:
-      "Browse Academy's published technology courses and find the right next step for your learning goals.",
-    type: "website",
-  },
-};
+  path: "/courses",
+});
 
 export default async function CoursesPage() {
   const courses = await courseService.getPublishedCourses();
