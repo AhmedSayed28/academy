@@ -1,5 +1,4 @@
 import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Layers3, Target } from "lucide-react";
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
@@ -11,12 +10,14 @@ import {
   teachingPrinciples,
 } from "@/features/about/content";
 import { cn } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About Academy",
   description:
     "Learn how Academy connects technology fundamentals, practical experience, real-world projects, and career-oriented learning paths.",
-};
+  path: "/about",
+});
 
 const purposeIcons = [Target, BriefcaseBusiness] as const;
 const principleIcons = [BookOpenCheck, Layers3, BriefcaseBusiness] as const;

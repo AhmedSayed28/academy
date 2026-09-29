@@ -1030,6 +1030,13 @@ Important public pages should define:
 - Track pages have relevant metadata.
 - Important pages do not share meaningless duplicate titles.
 
+### Implementation Status
+
+Implemented. The root layout defines the production metadata base and consistent title,
+description, Open Graph, and Twitter defaults. Every implemented public page has its own
+canonical URL. Course and track detail metadata is generated only after the published-content
+services resolve an approved record; unknown and unpublished slugs remain non-indexable.
+
 ---
 
 ## FEAT-101 — Sitemap
@@ -1058,6 +1065,12 @@ Potential URLs:
 - Private or admin pages are not included.
 - Unpublished content is not included.
 
+### Implementation Status
+
+Implemented with the Next.js metadata route at `/sitemap.xml`. It contains the implemented
+static public pages and detail URLs returned by the published course and track services. It does
+not invent modification dates.
+
 ---
 
 ## FEAT-102 — Robots Configuration
@@ -1070,6 +1083,12 @@ Should Have
 
 - Public content can be crawled appropriately.
 - Future private areas are not unintentionally exposed to search engines.
+
+### Implementation Status
+
+Implemented with the Next.js metadata route at `/robots.txt`. Production permits public pages,
+excludes API routes, and advertises the canonical sitemap. Preview deployments disallow crawling
+at the application layer and also receive Vercel's platform-level preview indexing protection.
 
 ---
 

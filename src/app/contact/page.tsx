@@ -1,15 +1,16 @@
 import { Mail, MessageCircle } from "lucide-react";
-import type { Metadata } from "next";
 
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { ContactForm } from "@/features/contact/components/contact-form";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contact Academy",
   description:
     "Send Academy a question about practical, career-oriented technology education.",
-};
+  path: "/contact",
+});
 
 function ContactMethods() {
   const hasContactMethods =

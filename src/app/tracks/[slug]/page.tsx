@@ -2,29 +2,33 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { TrackDetail } from "@/features/tracks/components/track-detail";
-import { trackService } from "@/features/tracks/services/track.service";
+import { trackService, type TrackService } from "@/features/tracks/services/track.service";
+import { createPageMetadata } from "@/lib/metadata";
 
 type TrackPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: TrackPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const track = await trackService.getPublishedTrackBySlug(slug);
+export async function createTrackMetadata(
+  slug: string,
+  tracks: Pick<TrackService, "getPublishedTrackBySlug"> = trackService,
+): Promise<Metadata> {
+  const track = await tracks.getPublishedTrackBySlug(slug);
 
   if (!track) {
     return { title: "Learning track not found", robots: { index: false, follow: false } };
   }
 
-  return {
+  return createPageMetadata({
     title: `${track.name} Learning Track`,
     description: track.shortDescription,
-    openGraph: {
-      title: `${track.name} Learning Track | Academy`,
-      description: track.shortDescription,
-      type: "website",
-    },
-  };
+    path: `/tracks/${track.slug}`,
+  });
+}
+
+export async function generateMetadata({ params }: TrackPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  return createTrackMetadata(slug);
 }
 
 export default async function TrackPage({ params }: TrackPageProps) {

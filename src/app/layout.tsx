@@ -2,16 +2,33 @@ import type { Metadata } from "next";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/config/site";
+import { isPreviewDeployment, siteConfig } from "@/config/site";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: siteConfig.url,
   title: {
-    default: siteConfig.name,
+    default: siteConfig.defaultTitle,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  openGraph: {
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+    url: "/",
+    siteName: siteConfig.name,
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+  },
+  robots: isPreviewDeployment()
+    ? { index: false, follow: false, nocache: true }
+    : { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

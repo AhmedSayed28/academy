@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-
 import { Container } from "@/components/layout/container";
 import { RegisterInterestForm } from "@/features/leads/components/register-interest-form";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Register Interest",
   description:
     "Tell Academy what you would like to learn so the team can follow up when relevant opportunities are available.",
-};
+  path: "/register-interest",
+});
 
 export default function RegisterInterestPage() {
   return (

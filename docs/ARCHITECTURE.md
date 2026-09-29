@@ -963,6 +963,16 @@ twitter
 
 Dynamic course pages should generate metadata using course content where appropriate.
 
+`NEXT_PUBLIC_APP_URL` is the single validated canonical origin. It must be the production origin
+in both Vercel Production and Preview so preview pages never declare themselves canonical.
+Static metadata uses a shared metadata factory; dynamic course and track metadata continues to
+cross the published-content service boundary before exposing a canonical URL.
+
+Next.js metadata routes provide `/sitemap.xml` and `/robots.txt`. The sitemap consumes published
+course and track services and does not infer timestamps. Preview deployments use `VERCEL_ENV` to
+emit a site-wide no-index policy in both root metadata and `robots.txt`; Vercel supplies an
+additional `X-Robots-Tag: noindex` policy for preview deployment responses.
+
 ---
 
 ## 32. Performance Strategy
@@ -1207,6 +1217,9 @@ Production
 ```
 
 Do not create unnecessary environment complexity during early development.
+
+The current environment requirements and deployment verification procedure are documented in
+[`DEPLOYMENT.md`](DEPLOYMENT.md).
 
 ---
 

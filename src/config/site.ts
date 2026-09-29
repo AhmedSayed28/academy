@@ -9,6 +9,36 @@ export interface SocialLink {
   href: string;
 }
 
+export function parseAppUrl(value: string | undefined): URL {
+  if (!value) {
+    throw new Error("NEXT_PUBLIC_APP_URL is required.");
+  }
+
+  let url: URL;
+
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error("NEXT_PUBLIC_APP_URL must be a valid absolute URL.");
+  }
+
+  const isSupportedProtocol = url.protocol === "https:" || url.protocol === "http:";
+  const isOriginOnly =
+    url.pathname === "/" && !url.search && !url.hash && !url.username && !url.password;
+
+  if (!isSupportedProtocol || !isOriginOnly) {
+    throw new Error("NEXT_PUBLIC_APP_URL must contain only an HTTP or HTTPS origin.");
+  }
+
+  return new URL(url.origin);
+}
+
+export function isPreviewDeployment(
+  environment: Readonly<Record<string, string | undefined>> = process.env,
+) {
+  return environment.VERCEL_ENV === "preview";
+}
+
 const navigation = [
   { label: "Home", href: "/", available: true },
   { label: "Courses", href: "/courses", available: true },
@@ -24,8 +54,9 @@ const footerNavigation = [
 
 export const siteConfig = {
   name: "Academy",
+  defaultTitle: "Academy | Practical Technology Education",
   description: "Practical, career-oriented technology education.",
-  url: null as string | null,
+  url: parseAppUrl(process.env.NEXT_PUBLIC_APP_URL),
   navigation,
   footerNavigation,
   primaryAction: {

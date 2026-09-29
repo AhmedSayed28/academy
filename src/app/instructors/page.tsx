@@ -1,21 +1,15 @@
-import type { Metadata } from "next";
-
 import { Container } from "@/components/layout/container";
 import { InstructorCard } from "@/features/instructors/components/instructor-card";
 import { InstructorsEmptyState } from "@/features/instructors/components/instructors-empty-state";
 import { instructorService } from "@/features/instructors/services/instructor.service";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Technology Instructors",
   description:
     "Meet Academy's published technology instructors and explore their approved expertise and professional backgrounds.",
-  openGraph: {
-    title: "Technology Instructors | Academy",
-    description:
-      "Meet Academy's published technology instructors and explore their approved expertise.",
-    type: "website",
-  },
-};
+  path: "/instructors",
+});
 
 export default async function InstructorsPage() {
   const instructors = await instructorService.getPublishedInstructors();
