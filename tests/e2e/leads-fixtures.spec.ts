@@ -79,3 +79,56 @@ test("keeps entered details and shows safe feedback after persistence failure", 
   await expect(page.getByLabel("Full name")).toHaveValue("Test Learner");
   await expect(page.getByText("Safe server message")).toHaveCount(0);
 });
+
+test("an edited retry persists the latest payload instead of accepting stale data", async ({
+  page,
+}) => {
+  const storedLeads = new Map<string, Record<string, unknown>>();
+  const submissionIds: string[] = [];
+  let requestCount = 0;
+
+  await page.route("**/api/leads", async (route) => {
+    requestCount += 1;
+    const payload = route.request().postDataJSON() as Record<string, unknown>;
+    const id = String(payload.submissionId);
+    submissionIds.push(id);
+    storedLeads.set(id, payload);
+
+    if (requestCount === 1) {
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({
+          success: false,
+          error: { code: "PERSISTENCE_ERROR", message: "Uncertain test response" },
+        }),
+      });
+      return;
+    }
+
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true, data: { submitted: true } }),
+    });
+  });
+
+  await page.goto("/register-interest");
+  await completeForm(page);
+  await page.getByRole("button", { name: "Register interest" }).click();
+  await expect(
+    page.getByRole("alert").filter({ hasText: "couldn't register your interest" }),
+  ).toBeVisible();
+
+  await page
+    .getByLabel("What would you like to learn?")
+    .fill("Edited practical engineering interest");
+  await page.getByRole("button", { name: "Register interest" }).click();
+
+  await expect(page.getByRole("status")).toContainText("interest has been registered");
+  expect(submissionIds[1]).toBe(submissionIds[0]);
+  expect(storedLeads.size).toBe(1);
+  expect(storedLeads.get(submissionIds[0])).toMatchObject({
+    message: "Edited practical engineering interest",
+  });
+});
