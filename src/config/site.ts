@@ -15,7 +15,7 @@ const navigation = [
   { label: "Tracks", href: "/tracks", available: true },
   { label: "Instructors", href: "/instructors", available: true },
   { label: "About", href: "/about", available: false },
-  { label: "Contact", href: "/contact", available: false },
+  { label: "Contact", href: "/contact", available: true },
 ] satisfies NavigationItem[];
 
 export const siteConfig = {
@@ -32,5 +32,5 @@ export const siteConfig = {
     email: null as string | null,
     whatsappNumber: null as string | null,
   },
-  socialLinks: [] satisfies SocialLink[],
+  socialLinks: [] as SocialLink[],
 } as const;

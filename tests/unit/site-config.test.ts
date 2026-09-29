@@ -18,7 +18,7 @@ describe("site configuration", () => {
   it("only marks routes implemented in this phase as available", () => {
     expect(
       siteConfig.navigation.filter(({ available }) => available).map(({ href }) => href),
-    ).toEqual(["/", "/courses", "/tracks", "/instructors"]);
+    ).toEqual(["/", "/courses", "/tracks", "/instructors", "/contact"]);
     expect(siteConfig.primaryAction).toMatchObject({
       label: "Register Interest",
       href: "/register-interest",

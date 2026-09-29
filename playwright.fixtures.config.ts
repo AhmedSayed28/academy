@@ -12,6 +12,7 @@ export default defineConfig({
     "tracks-fixtures.spec.ts",
     "instructors-fixtures.spec.ts",
     "leads-fixtures.spec.ts",
+    "contact-fixtures.spec.ts",
   ],
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   use: { baseURL: "http://localhost:3000" },

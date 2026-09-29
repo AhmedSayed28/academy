@@ -655,6 +655,12 @@ POST /api/leads
 POST /api/contact
 ```
 
+`POST /api/contact` follows the presentation → contact service → contact repository → Supabase
+boundary. The route validates the shared Zod request schema, the service coordinates submission,
+and the repository performs an idempotent upsert to `public.contact_messages` using the server-only
+Supabase configuration. Database and configuration failures are mapped to a safe
+`PERSISTENCE_ERROR` response.
+
 ---
 
 ## 20. API Response Convention
