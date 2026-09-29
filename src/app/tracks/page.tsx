@@ -23,23 +23,26 @@ export default async function TracksPage() {
             Choose a technology direction and follow a structured path.
           </h1>
           <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">
-            Academy is planning career-oriented learning tracks that connect focused study,
-            practical application, and approved courses.
+            Explore published learning tracks and the additional technology directions Academy
+            is planning for future development.
           </p>
         </Container>
       </section>
 
       <Container className="py-section">
-        {tracks.length ? (
-          <section aria-labelledby="published-tracks-title">
-            <h2 id="published-tracks-title" className="sr-only">Published learning tracks</h2>
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {tracks.map((track) => <TrackCard key={track.id} track={track} />)}
-            </div>
-          </section>
-        ) : (
-          <PlannedTracksState />
-        )}
+        <div className="space-y-16">
+          {tracks.length ? (
+            <section aria-labelledby="published-tracks-title">
+              <h2 id="published-tracks-title" className="text-heading-2 font-bold tracking-tight">
+                Published learning tracks
+              </h2>
+              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {tracks.map((track) => <TrackCard key={track.id} track={track} />)}
+              </div>
+            </section>
+          ) : null}
+          <PlannedTracksState publishedTrackNames={tracks.map((track) => track.name)} />
+        </div>
       </Container>
     </>
   );

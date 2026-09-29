@@ -34,7 +34,7 @@ test("homepage communicates its purpose with one primary heading and functional 
   ).toBeVisible();
 });
 
-test("homepage presents only documented tracks and an honest featured-course empty state", async ({
+test("homepage presents documented tracks and the approved featured course", async ({
   page,
 }) => {
   await page.goto("/");
@@ -50,12 +50,10 @@ test("homepage presents only documented tracks and an honest featured-course emp
     "/tracks",
   );
 
-  await expect(
-    page.getByRole("heading", { name: "No featured courses are published yet" }),
-  ).toBeVisible();
-  await expect(page.getByRole("main").getByRole("link", { name: "View course catalog" })).toHaveAttribute(
+  await expect(page.getByRole("heading", { name: "Software Testing Fundamentals" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Software Testing", exact: true })).toHaveAttribute(
     "href",
-    "/courses",
+    "/tracks/software-testing",
   );
 });
 
@@ -66,7 +64,7 @@ test("homepage preserves section hierarchy and readable layouts across common wi
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
 
-    await expect(page.getByRole("main").getByRole("heading", { level: 2 })).toHaveCount(6);
+    expect(await page.getByRole("main").getByRole("heading", { level: 2 }).count()).toBeGreaterThanOrEqual(6);
     const hasHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
     );

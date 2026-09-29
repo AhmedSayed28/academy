@@ -1,15 +1,19 @@
 import { expect, test } from "@playwright/test";
 
-test("instructor listing provides an honest empty state without invented profiles", async ({ page }) => {
+test("instructor listing presents the approved image-free profile", async ({ page }) => {
   const response = await page.goto("/instructors");
 
   expect(response?.status()).toBe(200);
   await expect(page).toHaveTitle("Technology Instructors | Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-  await expect(page.getByRole("heading", { name: "Instructor profiles are being prepared." })).toBeVisible();
-  await expect(page.getByRole("main").locator("article")).toHaveCount(0);
-  await expect(page.getByRole("main").getByRole("link", { name: "Browse courses" })).toHaveAttribute("href", "/courses");
-  await expect(page.getByRole("main").getByRole("link", { name: "Explore learning tracks" })).toHaveAttribute("href", "/tracks");
+  await expect(page.getByRole("main").locator("article")).toHaveCount(1);
+  await expect(page.getByRole("heading", { name: "Ahmed Sayed Ahmed" })).toBeVisible();
+  await expect(page.getByText("Software Testing Lead", { exact: true })).toBeVisible();
+  await expect(page.getByText("Profile image not available")).toBeVisible();
+  await expect(page.getByRole("link", { name: /LinkedIn for Ahmed Sayed Ahmed/ })).toHaveAttribute(
+    "href",
+    "https://www.linkedin.com/in/ahmed-sayed-a2039821a/",
+  );
 });
 
 test("the homepage defers its instructor preview while no profiles are approved", async ({ page }) => {

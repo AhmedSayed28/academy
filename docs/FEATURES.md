@@ -223,6 +223,11 @@ Primary action:
 - Missing optional information does not break layout.
 - Cards are responsive.
 
+### Phase 11 implementation
+
+The homepage features the published `Software Testing Fundamentals` course. It is one four-month
+diploma with four curriculum modules, not four separate courses.
+
 ---
 
 ## FEAT-005 — Why Academy Section
@@ -470,6 +475,12 @@ Each course may expose:
 - Empty state exists when no courses are available.
 - Course titles use semantic heading hierarchy.
 
+### Phase 11 implementation
+
+The production catalog publishes `Software Testing Fundamentals` as an upcoming, featured beginner
+course. Its approved price and "To be announced" start-date wording appear consistently. Delivery
+type remains optional and is omitted from the interface when no approved value exists.
+
 ---
 
 ## FEAT-021 — Course Detail Page
@@ -515,6 +526,9 @@ Potential sections:
 - Missing optional content does not leave empty sections.
 - Page works on mobile and desktop.
 
+The upcoming-course CTA is `Register Interest` and links to `/register-interest`. It does not imply
+confirmed enrollment, payment, or a reserved place.
+
 ---
 
 ## FEAT-022 — Course Level
@@ -555,6 +569,7 @@ Potential values:
 
 - Delivery type is displayed consistently.
 - Internal implementation should avoid uncontrolled free-text duplication where practical.
+- Courses without an approved delivery type omit the field instead of inventing a format.
 
 ---
 
@@ -602,6 +617,11 @@ Users should be able to browse career-oriented learning tracks.
 - Each track communicates its purpose.
 - Track cards link to corresponding detail pages.
 - Layout is responsive.
+
+### Phase 11 implementation
+
+`Software Testing` is the first published track. The other seven documented technology directions
+remain visibly planned and do not expose unapproved detail routes.
 
 ---
 
@@ -680,6 +700,11 @@ Potential fields:
 - Published instructors are displayed.
 - Instructor card layout is responsive.
 - Missing social links do not create empty UI controls.
+
+### Phase 11 implementation
+
+The instructor listing publishes the approved image-free profile for Ahmed Sayed Ahmed. The existing
+image-free presentation is retained until an authentic photograph is approved.
 
 ---
 
@@ -1366,9 +1391,12 @@ title
 shortDescription
 description
 track
+trackSlug
 level
 duration
 deliveryType
+startDate
+price
 status
 instructor
 learningOutcomes

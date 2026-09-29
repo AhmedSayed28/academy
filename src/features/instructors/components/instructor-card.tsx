@@ -5,7 +5,10 @@ import type { Instructor } from "@/features/instructors/types/instructor.types";
 
 export function InstructorCard({ instructor }: { instructor: Instructor }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+    <article
+      id={instructor.slug}
+      className="flex h-full scroll-mt-24 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm"
+    >
       <div className="relative aspect-[4/3] bg-primary/5">
         {instructor.image ? (
           <Image

@@ -43,7 +43,7 @@ export function createTrackService(
       const coursesBySlug = new Map(publishedCourses.map((course) => [course.slug, course]));
       const relatedCourses = relatedSlugs.flatMap((courseSlug) => {
         const course = coursesBySlug.get(courseSlug);
-        return course ? [course] : [];
+        return course?.trackSlug === track.slug ? [course] : [];
       });
 
       return { track, relatedCourses };

@@ -29,12 +29,14 @@ function ListSection({ id, title, items }: { id: string; title: string; items?: 
 }
 
 function RegistrationPanel({ course }: { course: Course }) {
-  const isOpenWithDestination = course.availability === "Open" && course.registrationUrl;
+  const registrationUrl =
+    course.availability !== "Closed" ? course.registrationUrl : undefined;
+  const isInterestRegistration = course.availability === "Upcoming";
   const message =
     course.availability === "Closed"
       ? "Registration for this course is closed."
       : course.availability === "Upcoming"
-        ? "Registration has not opened yet."
+        ? "This course is ready to be delivered. Start dates and enrollment arrangements have not been announced. Register interest to hear when details are available; this does not confirm enrollment or payment."
         : "Registration details are being prepared.";
 
   return (
@@ -43,17 +45,19 @@ function RegistrationPanel({ course }: { course: Course }) {
       <h2 id="registration-title" className="mt-4 text-2xl font-bold tracking-tight">
         Registration
       </h2>
-      {isOpenWithDestination ? (
+      {registrationUrl ? (
         <>
           <p className="mt-3 leading-7 text-dark-muted">
-            Registration is currently open through the approved course destination.
+            {isInterestRegistration
+              ? message
+              : "Registration is currently open through the approved course destination."}
           </p>
-          <a
-            href={course.registrationUrl}
+          <Link
+            href={registrationUrl}
             className={cn(buttonVariants({ variant: "primary", size: "large" }), "mt-6 w-full")}
           >
-            Register for this course
-          </a>
+            {isInterestRegistration ? "Register Interest" : "Register for this course"}
+          </Link>
         </>
       ) : (
         <>
@@ -84,7 +88,12 @@ export function CourseDetail({ course }: { course: Course }) {
           </Link>
           <div className="mt-5 max-w-4xl">
             <div className="flex flex-wrap items-center gap-3">
-              <p className="font-semibold text-primary">{course.track}</p>
+              <Link
+                href={`/tracks/${course.trackSlug}`}
+                className="rounded-sm font-semibold text-primary hover:text-primary/80"
+              >
+                {course.track}
+              </Link>
               <AvailabilityBadge availability={course.availability} />
             </div>
             <h1 className="mt-5 text-heading-1 font-bold tracking-tight text-dark">{course.title}</h1>
@@ -114,12 +123,9 @@ export function CourseDetail({ course }: { course: Course }) {
                   Curriculum
                 </h2>
                 <ol className="mt-5 space-y-4">
-                  {course.curriculum.map((section, index) => (
+                  {course.curriculum.map((section) => (
                     <li key={section.title} className="rounded-lg bg-muted p-4 sm:p-5">
-                      <h3 className="font-bold text-foreground">
-                        <span className="me-2 text-primary">{String(index + 1).padStart(2, "0")}</span>
-                        {section.title}
-                      </h3>
+                      <h3 className="font-bold text-foreground">{section.title}</h3>
                       {section.topics?.length ? (
                         <ul className="mt-3 list-disc space-y-1 ps-9 text-sm leading-6 text-muted-foreground">
                           {section.topics.map((topic) => <li key={topic}>{topic}</li>)}
@@ -133,7 +139,18 @@ export function CourseDetail({ course }: { course: Course }) {
             {course.instructor ? (
               <section aria-labelledby="instructor-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
                 <h2 id="instructor-title" className="text-2xl font-bold tracking-tight">Instructor</h2>
-                <p className="mt-4 font-bold text-foreground">{course.instructor.name}</p>
+                <p className="mt-4 font-bold text-foreground">
+                  {course.instructor.slug ? (
+                    <Link
+                      href={`/instructors#${course.instructor.slug}`}
+                      className="rounded-sm hover:text-primary"
+                    >
+                      {course.instructor.name}
+                    </Link>
+                  ) : (
+                    course.instructor.name
+                  )}
+                </p>
                 {course.instructor.title ? <p className="mt-1 text-muted-foreground">{course.instructor.title}</p> : null}
               </section>
             ) : null}

@@ -11,20 +11,24 @@ const documentedTrackNames = [
   "Mobile Development",
 ];
 
-test("track listing presents the eight documented directions without invented details", async ({ page }) => {
+test("track listing publishes Software Testing and keeps seven directions planned", async ({ page }) => {
   const response = await page.goto("/tracks");
 
   expect(response?.status()).toBe(200);
   await expect(page).toHaveTitle("Technology Learning Tracks | Academy");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Choose a technology direction");
-  await expect(page.getByRole("heading", { name: "Track details are being prepared." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Published learning tracks" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "View learning track" })).toHaveAttribute(
+    "href",
+    "/tracks/software-testing",
+  );
 
   const plannedSection = page.locator('section[aria-labelledby="planned-tracks-title"]');
-  await expect(plannedSection.getByRole("listitem")).toHaveCount(8);
-  for (const name of documentedTrackNames) {
+  await expect(plannedSection.getByRole("listitem")).toHaveCount(7);
+  for (const name of documentedTrackNames.filter((name) => name !== "Software Testing")) {
     await expect(plannedSection.getByRole("heading", { name })).toBeVisible();
   }
-  await expect(page.locator('a[href^="/tracks/"]')).toHaveCount(0);
+  await expect(plannedSection.getByRole("heading", { name: "Software Testing" })).toHaveCount(0);
 });
 
 test("unknown track slugs return a real 404", async ({ page }) => {
@@ -62,5 +66,13 @@ for (const width of [390, 768, 1280]) {
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
     );
     expect(hasHorizontalOverflow).toBe(false);
+
+    await page.goto("/tracks/software-testing");
+    await expect(page.getByRole("heading", { level: 1, name: "Software Testing" })).toBeVisible();
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+      ),
+    ).toBe(false);
   });
 }
