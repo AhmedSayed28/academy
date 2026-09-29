@@ -829,6 +829,12 @@ Potential content:
 - Page works on mobile and desktop.
 - Contact form contains accessible labels.
 
+### Implementation
+
+Implemented at `/contact`. Direct contact methods render only when they are genuinely configured;
+the current configuration does not publish an email address, phone number, WhatsApp number, or
+social link.
+
 ---
 
 ## FEAT-061 — Contact Form
@@ -853,6 +859,12 @@ Must Have
 - Duplicate submissions are prevented.
 - Success and error states exist.
 
+### Implementation
+
+The form uses shared React Hook Form and Zod validation, preserves values after a failed request,
+and reuses a unique submission ID for an edited retry so persistence replaces an uncertain earlier
+payload instead of creating a duplicate.
+
 ---
 
 ## FEAT-062 — Contact API
@@ -875,6 +887,12 @@ POST /api/contact
 - Valid contact messages are persisted or passed to the approved communication mechanism.
 
 The exact communication provider may be selected later.
+
+### Implementation
+
+`POST /api/contact` validates and normalizes input on the server, then persists through the contact
+service and repository to `public.contact_messages`. It returns success only after Supabase accepts
+the write. No email provider or notification integration is configured.
 
 ---
 
