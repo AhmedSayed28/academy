@@ -754,6 +754,12 @@ PostgreSQL
 
 The API returns a predictable response to the UI.
 
+The initial general-interest flow collects full name and email plus optional phone and message.
+It intentionally does not require a course or track until approved records can be offered. The
+lead repository writes to Supabase's PostgreSQL-backed REST endpoint with a server-only service
+role. Configuration and migration steps are documented in `docs/DATABASE.md`; there is no
+in-memory production fallback.
+
 ---
 
 ## 23. Authentication

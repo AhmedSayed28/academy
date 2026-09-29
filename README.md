@@ -1,6 +1,6 @@
 # Academy
 
-Academy is a practical technology education platform. The public experience includes the homepage, course catalog, documented learning-track directions, and an instructor directory ready for approved profiles.
+Academy is a practical technology education platform. The public experience includes the homepage, course catalog, documented learning-track directions, an instructor directory ready for approved profiles, and a general-interest form backed by Supabase.
 
 ## Local development
 
@@ -11,7 +11,7 @@ pnpm install
 pnpm dev
 ```
 
-Open <http://localhost:3000>. Copy `.env.example` to `.env.local` when an integration requires configuration; no credentials are needed for the current scaffold.
+Open <http://localhost:3000>. The public content pages need no credentials. Lead submission requires server-only Supabase configuration and the database migration described in [`docs/DATABASE.md`](docs/DATABASE.md). Copy `.env.example` to `.env.local` and never commit real credentials.
 
 ## Checks
 
@@ -21,4 +21,4 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test:e2e` validates the global responsive layout, navigation behavior, homepage, course, learning-track, and instructor experiences. See `AGENTS.md` and `docs/` for engineering and product requirements.
+`pnpm test:e2e` validates the global responsive layout, navigation behavior, homepage, course, learning-track, instructor, and register-interest experiences. See `AGENTS.md` and `docs/` for engineering and product requirements.
