@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
-  leadFormSchema,
+  createLeadFormSchema,
   type LeadFormValues,
 } from "@/features/leads/schemas/lead.schema";
+import type { Dictionary } from "@/i18n/translations";
 
 type SubmissionFeedback =
   | { state: "idle" }
@@ -33,7 +34,15 @@ function isSuccessfulResponse(value: unknown): value is {
   return (response.data as { submitted?: unknown }).submitted === true;
 }
 
-export function RegisterInterestForm() {
+function getApiErrorCode(value: unknown): string | undefined {
+  if (typeof value !== "object" || value === null) return undefined;
+  const error = (value as { error?: unknown }).error;
+  if (typeof error !== "object" || error === null) return undefined;
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" ? code : undefined;
+}
+
+export function RegisterInterestForm({ copy }: { copy: Dictionary["interest"]["form"] }) {
   const [feedback, setFeedback] = useState<SubmissionFeedback>({ state: "idle" });
   const submissionLock = useRef(false);
   const submissionId = useRef<string | null>(null);
@@ -43,7 +52,7 @@ export function RegisterInterestForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<LeadFormValues>({
-    resolver: zodResolver(leadFormSchema),
+    resolver: zodResolver(createLeadFormSchema(copy.validation)),
     defaultValues: { fullName: "", email: "", phone: "", message: "" },
   });
 
@@ -63,19 +72,22 @@ export function RegisterInterestForm() {
       const body: unknown = await response.json();
 
       if (!response.ok || !isSuccessfulResponse(body)) {
-        throw new Error("Submission failed");
+        throw new Error(getApiErrorCode(body) ?? "SUBMISSION_FAILED");
       }
 
       reset();
       submissionId.current = null;
       setFeedback({
         state: "success",
-        message: "Your interest has been registered. We'll use your details to follow up.",
+        message: copy.success,
       });
-    } catch {
+    } catch (error) {
       setFeedback({
         state: "error",
-        message: "We couldn't register your interest right now. Please try again.",
+        message:
+          error instanceof Error && error.message === "VALIDATION_ERROR"
+            ? copy.validationFailure
+            : copy.failure,
       });
     } finally {
       submissionLock.current = false;
@@ -93,7 +105,7 @@ export function RegisterInterestForm() {
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="fullName" className="text-sm font-semibold text-foreground">
-            Full name <span aria-hidden="true" className="text-destructive">*</span>
+            {copy.fullName} <span aria-hidden="true" className="text-destructive">*</span>
           </label>
           <input
             id="fullName"
@@ -114,7 +126,7 @@ export function RegisterInterestForm() {
 
         <div>
           <label htmlFor="email" className="text-sm font-semibold text-foreground">
-            Email address <span aria-hidden="true" className="text-destructive">*</span>
+            {copy.email} <span aria-hidden="true" className="text-destructive">*</span>
           </label>
           <input
             id="email"
@@ -137,7 +149,7 @@ export function RegisterInterestForm() {
 
       <div>
         <label htmlFor="phone" className="text-sm font-semibold text-foreground">
-          Phone number <span className="font-normal text-muted-foreground">(optional)</span>
+          {copy.phone} <span className="font-normal text-muted-foreground">({copy.optional})</span>
         </label>
         <input
           id="phone"
@@ -159,8 +171,8 @@ export function RegisterInterestForm() {
 
       <div>
         <label htmlFor="message" className="text-sm font-semibold text-foreground">
-          What would you like to learn?{" "}
-          <span className="font-normal text-muted-foreground">(optional)</span>
+          {copy.message}{" "}
+          <span className="font-normal text-muted-foreground">({copy.optional})</span>
         </label>
         <textarea
           id="message"
@@ -177,14 +189,13 @@ export function RegisterInterestForm() {
           </p>
         ) : (
           <p id="message-help" className="mt-2 text-sm text-muted-foreground">
-            Share a general area of interest; no course or schedule is being promised.
+            {copy.messageHelp}
           </p>
         )}
       </div>
 
       <p className="text-sm leading-6 text-muted-foreground">
-        Fields marked with an asterisk are required. We only use these details to respond to
-        your interest.
+        {copy.requiredHelp}
       </p>
 
       {feedback.state !== "idle" ? (
@@ -209,10 +220,10 @@ export function RegisterInterestForm() {
         {isSubmitting ? (
           <>
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin motion-reduce:animate-none" />
-            Registering interest…
+            {copy.submitting}
           </>
         ) : (
-          "Register interest"
+          copy.submit
         )}
       </Button>
     </form>

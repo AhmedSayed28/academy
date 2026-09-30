@@ -2,8 +2,10 @@ import { BookOpen, Route, UsersRound } from "lucide-react";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 
-export function InstructorsEmptyState() {
+export function InstructorsEmptyState({ locale, copy }: { locale: Locale; copy: Dictionary["instructors"] }) {
   return (
     <section
       aria-labelledby="instructors-empty-title"
@@ -13,20 +15,19 @@ export function InstructorsEmptyState() {
         <UsersRound aria-hidden="true" className="size-7" />
       </span>
       <h2 id="instructors-empty-title" className="mt-6 text-heading-2 font-bold tracking-tight">
-        Instructor profiles are being prepared.
+        {copy.emptyTitle}
       </h2>
       <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-muted-foreground">
-        Academy will introduce instructors here after their biographies, expertise, images, and
-        professional details have been reviewed and approved.
+        {copy.emptyDescription}
       </p>
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <Link href="/courses" className={buttonVariants({ variant: "primary", size: "large" })}>
+        <Link href={localizePath(locale, "/courses")} className={buttonVariants({ variant: "primary", size: "large" })}>
           <BookOpen aria-hidden="true" className="size-5" />
-          Browse courses
+          {copy.browseCourses}
         </Link>
-        <Link href="/tracks" className={buttonVariants({ variant: "secondary", size: "large" })}>
+        <Link href={localizePath(locale, "/tracks")} className={buttonVariants({ variant: "secondary", size: "large" })}>
           <Route aria-hidden="true" className="size-5" />
-          Explore learning tracks
+          {copy.exploreTracks}
         </Link>
       </div>
     </section>

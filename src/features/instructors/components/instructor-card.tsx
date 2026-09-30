@@ -2,8 +2,11 @@ import { ExternalLink, UserRound } from "lucide-react";
 import Image from "next/image";
 
 import type { Instructor } from "@/features/instructors/types/instructor.types";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/translations";
 
-export function InstructorCard({ instructor }: { instructor: Instructor }) {
+export function InstructorCard({ instructor, locale }: { instructor: Instructor; locale: Locale }) {
+  const copy = getDictionary(locale).common;
   return (
     <article
       id={instructor.slug}
@@ -23,7 +26,7 @@ export function InstructorCard({ instructor }: { instructor: Instructor }) {
             <div className="text-center">
               <UserRound aria-hidden="true" className="mx-auto size-14" strokeWidth={1.5} />
               <p className="mt-3 text-sm font-medium text-muted-foreground">
-                Profile image not available
+                {copy.profileImageUnavailable}
               </p>
             </div>
           </div>
@@ -39,7 +42,7 @@ export function InstructorCard({ instructor }: { instructor: Instructor }) {
 
         <div className="mt-6">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-            Expertise
+            {copy.expertise}
           </h3>
           <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${instructor.name} expertise`}>
             {instructor.expertise.map((item) => (
@@ -58,7 +61,7 @@ export function InstructorCard({ instructor }: { instructor: Instructor }) {
                   href={link.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  aria-label={`${link.label} for ${instructor.name} (opens in a new tab)`}
+                  aria-label={`${link.label} ${instructor.name} (${copy.externalLink})`}
                   className="inline-flex min-h-11 items-center gap-2 rounded-md font-semibold text-primary hover:text-primary/80"
                 >
                   {link.label}

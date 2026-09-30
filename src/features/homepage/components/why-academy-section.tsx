@@ -1,26 +1,26 @@
 import { BriefcaseBusiness, Route, Wrench } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
-import { academyDifferentiators } from "@/features/homepage/content";
+import type { Dictionary } from "@/i18n/translations";
 
 import { SectionHeading } from "./section-heading";
 
 const differentiatorIcons = [Wrench, Route, BriefcaseBusiness] as const;
 
-export function WhyAcademySection() {
+export function WhyAcademySection({ copy }: { copy: Dictionary["home"]["why"] }) {
   return (
     <section aria-labelledby="why-academy-title" className="bg-surface py-section">
       <Container>
         <SectionHeading
-          eyebrow="Why Academy"
-          title="Learning designed to lead to application."
-          description="Academy is built around the documented principles of practical learning, structured career direction, and industry-oriented development."
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          description={copy.description}
           titleId="why-academy-title"
           centered
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {academyDifferentiators.map((item, index) => {
+          {copy.items.map((item, index) => {
             const Icon = differentiatorIcons[index];
 
             return (

@@ -14,7 +14,7 @@ const documentedTrackNames = [
 test("homepage communicates its purpose with one primary heading and functional actions", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
@@ -37,7 +37,7 @@ test("homepage communicates its purpose with one primary heading and functional 
 test("homepage presents documented tracks and the approved featured course", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   const tracksSection = page.locator('section[aria-labelledby="learning-tracks-title"]');
   await expect(tracksSection.getByRole("listitem")).toHaveCount(8);
@@ -47,13 +47,13 @@ test("homepage presents documented tracks and the approved featured course", asy
   }
   await expect(tracksSection.getByRole("link", { name: "View all learning tracks" })).toHaveAttribute(
     "href",
-    "/tracks",
+    "/en/tracks",
   );
 
   await expect(page.getByRole("heading", { name: "Software Testing Fundamentals" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Software Testing", exact: true })).toHaveAttribute(
     "href",
-    "/tracks/software-testing",
+    "/en/tracks/software-testing",
   );
 });
 
@@ -62,7 +62,7 @@ test("homepage preserves section hierarchy and readable layouts across common wi
 }) => {
   for (const width of [390, 768, 1280]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
+    await page.goto("/en");
 
     expect(await page.getByRole("main").getByRole("heading", { level: 2 }).count()).toBeGreaterThanOrEqual(6);
     const hasHorizontalOverflow = await page.evaluate(

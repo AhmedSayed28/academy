@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("instructor listing presents the approved image-free profile", async ({ page }) => {
-  const response = await page.goto("/instructors");
+  const response = await page.goto("/en/instructors");
 
   expect(response?.status()).toBe(200);
   await expect(page).toHaveTitle("Technology Instructors | Academy");
@@ -10,14 +10,14 @@ test("instructor listing presents the approved image-free profile", async ({ pag
   await expect(page.getByRole("heading", { name: "Ahmed Sayed Ahmed" })).toBeVisible();
   await expect(page.getByText("Software Testing Lead", { exact: true })).toBeVisible();
   await expect(page.getByText("Profile image not available")).toBeVisible();
-  await expect(page.getByRole("link", { name: /LinkedIn for Ahmed Sayed Ahmed/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /LinkedIn Ahmed Sayed Ahmed/ })).toHaveAttribute(
     "href",
     "https://www.linkedin.com/in/ahmed-sayed-a2039821a/",
   );
 });
 
 test("the homepage defers its instructor preview while no profiles are approved", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   await expect(page.getByRole("main").getByText("Synthetic Published Instructor")).toHaveCount(0);
   await expect(page.getByRole("main").getByRole("heading", { name: /instructors/i })).toHaveCount(0);
@@ -26,7 +26,7 @@ test("the homepage defers its instructor preview while no profiles are approved"
 for (const width of [390, 768, 1280]) {
   test(`instructor listing and navigation remain usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/instructors");
+    await page.goto("/en/instructors");
 
     if (width < 1024) {
       await page.getByRole("button", { name: "Open navigation menu" }).click();

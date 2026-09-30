@@ -1843,3 +1843,11 @@ Every major product decision in v1 should support this journey.
 Academy v1 should prove the product and brand before building the full learning platform.
 
 The first version succeeds when visitors can confidently understand the Academy, discover suitable technology education, and take a clear next step.
+
+---
+
+# 28. Arabic and English Localization
+
+All public pages are available under explicit `/ar/...` and `/en/...` routes with the same page coverage. Arabic is the default: `/` and supported legacy unprefixed public URLs redirect permanently to Arabic. Visitors can switch language from desktop or mobile navigation without losing the equivalent page or stable course/track slug.
+
+Public navigation, approved content, curriculum, forms, feedback states, FAQs, empty states, metadata, and 404 content are localized. Arabic uses clear, respectful Egyptian wording while technical product names remain in English. The shared form protections, persistence behavior, duplicate prevention, retry behavior, prices, record relationships, and API error codes do not vary by language.

@@ -13,7 +13,7 @@ test("validates fields in the browser without sending invalid data", async ({ pa
     requestCount += 1;
     await route.abort();
   });
-  await page.goto("/register-interest");
+  await page.goto("/en/register-interest");
 
   await page.getByRole("button", { name: "Register interest" }).click();
 
@@ -35,7 +35,7 @@ test("stores one submission when the form is accidentally submitted twice", asyn
       body: JSON.stringify({ success: true, data: { submitted: true } }),
     });
   });
-  await page.goto("/register-interest");
+  await page.goto("/en/register-interest");
   await completeForm(page);
 
   await page.locator("form").evaluate((form) => {
@@ -68,13 +68,13 @@ test("keeps entered details and shows safe feedback after persistence failure", 
       }),
     });
   });
-  await page.goto("/register-interest");
+  await page.goto("/en/register-interest");
   await completeForm(page);
 
   await page.getByRole("button", { name: "Register interest" }).click();
 
   await expect(
-    page.getByRole("alert").filter({ hasText: "couldn't register your interest" }),
+    page.getByRole("alert").filter({ hasText: "couldn't save your interest" }),
   ).toBeVisible();
   await expect(page.getByLabel("Full name")).toHaveValue("Test Learner");
   await expect(page.getByText("Safe server message")).toHaveCount(0);
@@ -113,11 +113,11 @@ test("an edited retry persists the latest payload instead of accepting stale dat
     });
   });
 
-  await page.goto("/register-interest");
+  await page.goto("/en/register-interest");
   await completeForm(page);
   await page.getByRole("button", { name: "Register interest" }).click();
   await expect(
-    page.getByRole("alert").filter({ hasText: "couldn't register your interest" }),
+    page.getByRole("alert").filter({ hasText: "couldn't save your interest" }),
   ).toBeVisible();
 
   await page
@@ -131,4 +131,49 @@ test("an edited retry persists the latest payload instead of accepting stale dat
   expect(storedLeads.get(submissionIds[0])).toMatchObject({
     message: "Edited practical engineering interest",
   });
+});
+
+test("Arabic interest flow localizes validation, success, and safe failure feedback", async ({
+  page,
+}) => {
+  let requestCount = 0;
+  await page.route("**/api/leads", async (route) => {
+    requestCount += 1;
+    if (requestCount === 1) {
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({
+          success: false,
+          error: { code: "PERSISTENCE_ERROR", message: "Raw persistence detail" },
+        }),
+      });
+      return;
+    }
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true, data: { submitted: true } }),
+    });
+  });
+  await page.goto("/ar/register-interest");
+
+  await page.getByRole("button", { name: "سجّل اهتمامك" }).click();
+  await expect(page.getByText("اكتب اسمك بالكامل.")).toBeVisible();
+  await expect(page.getByText("اكتب بريدك الإلكتروني.")).toBeVisible();
+  expect(requestCount).toBe(0);
+
+  await page.getByLabel("الاسم بالكامل").fill("متعلم تجريبي");
+  await page.getByLabel("البريد الإلكتروني").fill("learner@example.com");
+  await page.getByLabel("حابب تتعلم إيه؟").fill("مهارات Software Testing عملية");
+  await page.getByRole("button", { name: "سجّل اهتمامك" }).click();
+  await expect(
+    page.getByRole("alert").filter({ hasText: "مقدرناش نحفظ بياناتك دلوقتي" }),
+  ).toBeVisible();
+  await expect(page.getByText("Raw persistence detail")).toHaveCount(0);
+
+  await page.getByRole("button", { name: "سجّل اهتمامك" }).click();
+  await expect(page.getByRole("status")).toContainText(
+    "سجّلنا اهتمامك بنجاح. هنتواصل معاك لما التفاصيل تتحدد.",
+  );
 });

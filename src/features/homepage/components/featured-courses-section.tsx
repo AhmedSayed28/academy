@@ -5,23 +5,26 @@ import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 import { CourseCard } from "@/features/courses/components/course-card";
 import { courseService } from "@/features/courses/services/course.service";
+import { localizeCourse } from "@/i18n/content";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 import { cn } from "@/lib/utils";
 
 import { SectionHeading } from "./section-heading";
 
-export async function FeaturedCoursesSection() {
-  const courses = await courseService.getFeaturedCourses();
+export async function FeaturedCoursesSection({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["featured"] }) {
+  const courses = (await courseService.getFeaturedCourses()).map((course) => localizeCourse(course, locale));
 
   return (
     <section aria-labelledby="featured-courses-title" className="py-section">
       <Container>
         <SectionHeading
-          eyebrow="Featured courses"
-          title={courses.length ? "Start with an approved practical program." : "Course details are being prepared."}
+          eyebrow={copy.eyebrow}
+          title={courses.length ? copy.titlePublished : copy.titleEmpty}
           description={
             courses.length
-              ? "Explore featured Academy courses with published curriculum, instructor, pricing, and availability details."
-              : "Academy will feature approved courses here when titles, curricula, instructors, and availability are ready to publish."
+              ? copy.descriptionPublished
+              : copy.descriptionEmpty
           }
           titleId="featured-courses-title"
         />
@@ -29,7 +32,7 @@ export async function FeaturedCoursesSection() {
         {courses.length ? (
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
+              <CourseCard key={course.id} course={course} locale={locale} />
             ))}
           </div>
         ) : (
@@ -38,17 +41,17 @@ export async function FeaturedCoursesSection() {
               <BookOpen aria-hidden="true" className="size-6" />
             </span>
             <h3 className="mt-5 text-xl font-semibold text-foreground">
-              No featured courses are published yet
+              {copy.emptyTitle}
             </h3>
             <p className="mx-auto mt-3 max-w-xl leading-7 text-muted-foreground">
-              Start with the documented learning tracks while the course catalog is finalized.
+              {copy.emptyDescription}
             </p>
             <Link
-              href="/courses"
+              href={localizePath(locale, "/courses")}
               className={cn(buttonVariants({ variant: "secondary" }), "mt-6")}
             >
               <Compass aria-hidden="true" className="size-4" />
-              View course catalog
+              {copy.emptyCta}
             </Link>
           </div>
         )}

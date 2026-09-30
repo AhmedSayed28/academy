@@ -2,6 +2,8 @@ import { Banknote, CalendarDays, Clock, Gauge, Laptop, Layers3 } from "lucide-re
 
 import type { Course } from "@/features/courses/types/course.types";
 import { formatCoursePrice } from "@/features/courses/utils/format-course-price";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/translations";
 
 interface CourseFactsProps {
   course: Pick<
@@ -9,21 +11,26 @@ interface CourseFactsProps {
     "track" | "level" | "duration" | "deliveryType" | "startDate" | "price"
   >;
   compact?: boolean;
+  locale: Locale;
 }
 
-export function CourseFacts({ course, compact = false }: CourseFactsProps) {
+export function CourseFacts({ course, compact = false, locale }: CourseFactsProps) {
+  const copy = getDictionary(locale).courses.facts;
+  const level = locale === "ar" && course.level === "Beginner" ? "مبتدئ" : course.level;
+  const duration = locale === "ar" && course.duration === "4 months" ? "4 شهور" : course.duration;
+  const startDate = locale === "ar" && course.startDate === "To be announced" ? "هيتحدد قريب" : course.startDate;
   const facts = [
-    { label: "Track", value: course.track, icon: Layers3 },
-    { label: "Level", value: course.level, icon: Gauge },
-    { label: "Duration", value: course.duration, icon: Clock },
+    { label: copy.track, value: course.track, icon: Layers3 },
+    { label: copy.level, value: level, icon: Gauge },
+    { label: copy.duration, value: duration, icon: Clock },
     ...(course.startDate
-      ? [{ label: "Start date:", value: course.startDate, icon: CalendarDays }]
+      ? [{ label: copy.startDate, value: startDate, icon: CalendarDays }]
       : []),
     ...(course.price
-      ? [{ label: "Price", value: formatCoursePrice(course.price), icon: Banknote }]
+      ? [{ label: copy.price, value: formatCoursePrice(course.price, locale), icon: Banknote }]
       : []),
     ...(course.deliveryType
-      ? [{ label: "Delivery", value: course.deliveryType, icon: Laptop }]
+      ? [{ label: copy.delivery, value: course.deliveryType, icon: Laptop }]
       : []),
   ];
 

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("listing exposes published fixtures and filters unpublished track records", async ({ page }) => {
-  await page.goto("/tracks");
+  await page.goto("/en/tracks");
 
   await expect(
     page.locator('section[aria-labelledby="published-tracks-title"]').locator("article"),
@@ -9,13 +9,13 @@ test("listing exposes published fixtures and filters unpublished track records",
   await expect(page.getByRole("heading", { name: "Software Testing" })).toBeVisible();
   await expect(page.getByRole("link", { name: "View learning track" })).toHaveAttribute(
     "href",
-    "/tracks/synthetic-software-testing-track",
+    "/en/tracks/synthetic-software-testing-track",
   );
   await expect(page.getByText("A synthetic unpublished record")).toHaveCount(0);
 });
 
 test("a published track renders server content, metadata, and approved relationships", async ({ page }) => {
-  const response = await page.goto("/tracks/synthetic-software-testing-track");
+  const response = await page.goto("/en/tracks/synthetic-software-testing-track");
 
   expect(response?.status()).toBe(200);
   expect(await response?.text()).toContain("Synthetic first step");
@@ -31,7 +31,7 @@ test("a published track renders server content, metadata, and approved relations
 });
 
 test("an unpublished track slug returns 404 even when its record exists", async ({ page }) => {
-  const response = await page.goto("/tracks/synthetic-backend-track");
+  const response = await page.goto("/en/tracks/synthetic-backend-track");
 
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();

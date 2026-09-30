@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 
-export function FinalCtaSection() {
+export function FinalCtaSection({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["finalCta"] }) {
   return (
     <section aria-labelledby="final-cta-title" className="bg-surface py-section">
       <Container>
@@ -16,31 +18,30 @@ export function FinalCtaSection() {
           />
           <div className="relative mx-auto max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-              Find your direction
+              {copy.eyebrow}
             </p>
             <h2 id="final-cta-title" className="mt-3 text-heading-2 font-bold tracking-tight">
-              Start with the technology path you want to grow into.
+              {copy.title}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-7 text-dark-muted">
-              Review the planned learning tracks and see how Academy connects knowledge,
-              practice, and project-based development.
+              {copy.description}
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
-                href="/tracks"
+                href={localizePath(locale, "/tracks")}
                 className={buttonVariants({ variant: "primary", size: "large" })}
               >
-                Explore learning tracks
-                <ArrowRight aria-hidden="true" className="size-4" />
+                {copy.primary}
+                <ArrowRight aria-hidden="true" className="directional-icon size-4" />
               </Link>
               <Link
-                href="/register-interest"
+                href={localizePath(locale, "/register-interest")}
                 className={cn(
                   buttonVariants({ variant: "secondary", size: "large" }),
                   "border-dark-border bg-dark-foreground/5 text-dark-foreground hover:border-accent/50 hover:bg-dark-foreground/10",
                 )}
               >
-                Register general interest
+                {copy.secondary}
               </Link>
             </div>
           </div>

@@ -3,8 +3,10 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 
-export function CoursesEmptyState() {
+export function CoursesEmptyState({ locale, copy }: { locale: Locale; copy: Dictionary["courses"]["empty"] }) {
   return (
     <section
       aria-labelledby="courses-empty-title"
@@ -14,18 +16,17 @@ export function CoursesEmptyState() {
         <BookOpen aria-hidden="true" className="size-6" />
       </span>
       <h2 id="courses-empty-title" className="mt-5 text-2xl font-bold tracking-tight">
-        No courses are published yet
+        {copy.title}
       </h2>
       <p className="mx-auto mt-3 max-w-xl leading-7 text-muted-foreground">
-        Approved course details will appear here when they are ready. In the meantime, explore
-        the learning directions Academy plans to support.
+        {copy.description}
       </p>
       <Link
-        href="/#learning-tracks"
+        href={`${localizePath(locale, "/")}#learning-tracks`}
         className={cn(buttonVariants({ variant: "secondary" }), "mt-6")}
       >
         <Compass aria-hidden="true" className="size-4" />
-        Explore learning tracks
+        {copy.cta}
       </Link>
     </section>
   );

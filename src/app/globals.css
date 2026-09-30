@@ -38,7 +38,7 @@
 
 @theme inline {
   --font-sans:
-    "Segoe UI", "Noto Sans Arabic", Tahoma, Arial, ui-sans-serif, system-ui,
+    var(--font-latin), "Segoe UI", Tahoma, Arial, ui-sans-serif, system-ui,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --text-display: clamp(2.25rem, 7vw, 4rem);
   --text-display--line-height: 1.1;
@@ -94,6 +94,10 @@
     color-scheme: dark;
   }
 
+  html[dir="rtl"] {
+    --font-sans: var(--font-arabic), Tahoma, Arial, sans-serif;
+  }
+
   body {
     @apply min-h-screen bg-background font-sans text-foreground antialiased;
     background-image:
@@ -111,6 +115,12 @@
       transform;
     transition-duration: 180ms;
     transition-timing-function: ease-out;
+  }
+
+  :where(input[type="email"], input[type="tel"], input[type="url"], .bidi-ltr) {
+    direction: ltr;
+    text-align: start;
+    unicode-bidi: isolate;
   }
 
   input,
@@ -176,6 +186,10 @@
     border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
     box-shadow: 0 1.25rem 3.5rem rgb(0 0 0 / 0.24);
     transform: translateY(-0.2rem);
+  }
+
+  [dir="rtl"] .directional-icon {
+    transform: rotate(180deg);
   }
 }
 

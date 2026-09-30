@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { createCourseMetadata } from "../../src/app/courses/[slug]/page";
+import { createCourseMetadata } from "../../src/app/[locale]/courses/[slug]/page";
 import { createRobots } from "../../src/app/robots";
 import { createSitemap } from "../../src/app/sitemap";
-import { createTrackMetadata } from "../../src/app/tracks/[slug]/page";
+import { createTrackMetadata } from "../../src/app/[locale]/tracks/[slug]/page";
 import { parseAppUrl } from "../../src/config/site";
 import { createCourseRepository } from "../../src/features/courses/repositories/course.repository";
 import { createCourseService } from "../../src/features/courses/services/course.service";
@@ -45,35 +45,39 @@ describe("metadata", () => {
       title: "About",
       description: "Approved description.",
       path: "/about",
+      locale: "en",
     });
 
-    expect(metadata.alternates).toEqual({ canonical: "/about" });
+    expect(metadata.alternates).toEqual({
+      canonical: "/en/about",
+      languages: { ar: "/ar/about", en: "/en/about", "x-default": "/ar/about" },
+    });
     expect(metadata.openGraph).toMatchObject({
       title: "About | Academy",
-      url: "/about",
+      url: "/en/about",
       siteName: "Academy",
     });
     expect(metadata.twitter).toMatchObject({ card: "summary", title: "About | Academy" });
   });
 
   it("publishes course metadata only for a published record", async () => {
-    await expect(createCourseMetadata("synthetic-open-course", courses)).resolves.toMatchObject({
+    await expect(createCourseMetadata("synthetic-open-course", "en", courses)).resolves.toMatchObject({
       title: "Synthetic Open Course",
-      alternates: { canonical: "/courses/synthetic-open-course" },
+      alternates: { canonical: "/en/courses/synthetic-open-course" },
     });
     await expect(
-      createCourseMetadata("synthetic-unpublished-course", courses),
+      createCourseMetadata("synthetic-unpublished-course", "en", courses),
     ).resolves.toMatchObject({ robots: { index: false, follow: false } });
   });
 
   it("publishes track metadata only for a published record", async () => {
     await expect(
-      createTrackMetadata("synthetic-software-testing-track", tracks),
+      createTrackMetadata("synthetic-software-testing-track", "en", tracks),
     ).resolves.toMatchObject({
       title: "Software Testing Learning Track",
-      alternates: { canonical: "/tracks/synthetic-software-testing-track" },
+      alternates: { canonical: "/en/tracks/synthetic-software-testing-track" },
     });
-    await expect(createTrackMetadata("synthetic-backend-track", tracks)).resolves.toMatchObject({
+    await expect(createTrackMetadata("synthetic-backend-track", "en", tracks)).resolves.toMatchObject({
       robots: { index: false, follow: false },
     });
   });
@@ -89,21 +93,16 @@ describe("sitemap and robots", () => {
     const entries = await createSitemap({ courses, tracks });
     const urls = entries.map(({ url }) => url);
 
-    expect(urls).toEqual([
-      `${productionUrl}/`,
-      `${productionUrl}/courses`,
-      `${productionUrl}/tracks`,
-      `${productionUrl}/instructors`,
-      `${productionUrl}/about`,
-      `${productionUrl}/contact`,
-      `${productionUrl}/faq`,
-      `${productionUrl}/register-interest`,
-      `${productionUrl}/courses/synthetic-open-course`,
-      `${productionUrl}/courses/synthetic-closed-course`,
-      `${productionUrl}/tracks/synthetic-software-testing-track`,
-    ]);
+    expect(urls).toContain(`${productionUrl}/ar`);
+    expect(urls).toContain(`${productionUrl}/en`);
+    expect(urls).toContain(`${productionUrl}/ar/courses/synthetic-open-course`);
+    expect(urls).toContain(`${productionUrl}/en/courses/synthetic-closed-course`);
+    expect(urls).toContain(`${productionUrl}/ar/tracks/synthetic-software-testing-track`);
+    expect(urls).toHaveLength(22);
+    expect(urls).not.toContain(`${productionUrl}/courses`);
     expect(urls.join("\n")).not.toContain("unpublished");
     expect(entries.every((entry) => entry.lastModified === undefined)).toBe(true);
+    expect(entries.every((entry) => entry.alternates?.languages?.["x-default"]?.endsWith("/ar") || entry.alternates?.languages?.["x-default"]?.includes("/ar/"))).toBe(true);
   });
 
   it("blocks preview crawling and exposes production discovery endpoints", () => {

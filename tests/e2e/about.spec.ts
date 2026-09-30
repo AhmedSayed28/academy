@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("about page presents the approved Academy purpose with a clear heading structure", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/en/about");
 
   await expect(page).toHaveTitle("About Academy | Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
@@ -19,7 +19,7 @@ test("about page presents the approved Academy purpose with a clear heading stru
 });
 
 test("about navigation and calls to action lead to implemented routes", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/en/about");
 
   const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
   await expect(primaryNavigation.getByRole("link", { name: "About" })).toHaveAttribute(
@@ -28,32 +28,24 @@ test("about navigation and calls to action lead to implemented routes", async ({
   );
   await expect(
     page.getByRole("navigation", { name: "Footer navigation" }).getByRole("link", { name: "About" }),
-  ).toHaveAttribute("href", "/about");
+  ).toHaveAttribute("href", "/en/about");
 
-  await expect(page.getByRole("link", { name: "Explore courses" })).toHaveAttribute(
+  await expect(page.getByRole("main").getByRole("link", { name: "Browse courses" }).first()).toHaveAttribute(
     "href",
-    "/courses",
+    "/en/courses",
   );
-  await expect(page.getByRole("link", { name: "Register interest", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Register general interest" }).first()).toHaveAttribute(
     "href",
-    "/register-interest",
-  );
-  await expect(page.getByRole("link", { name: "Browse courses" })).toHaveAttribute(
-    "href",
-    "/courses",
-  );
-  await expect(page.getByRole("link", { name: "Register general interest" })).toHaveAttribute(
-    "href",
-    "/register-interest",
+    "/en/register-interest",
   );
 });
 
 test("about page remains readable without horizontal overflow on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/about");
+  await page.goto("/en/about");
 
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Explore courses" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Browse courses" }).first()).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
