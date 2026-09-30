@@ -9,7 +9,7 @@ export function TrackCard({ track }: { track: Track }) {
   const documentedTrack = documentedLearningTracks.find(({ name }) => name === track.name);
 
   return (
-    <article className="flex h-full flex-col rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6">
+    <article className="card-interactive flex h-full flex-col rounded-xl border border-border bg-card p-5 sm:p-6">
       <span className="grid size-12 place-items-center rounded-lg bg-primary/10 text-primary">
         {documentedTrack ? <LearningTrackIcon name={documentedTrack.icon} className="size-6" /> : null}
       </span>

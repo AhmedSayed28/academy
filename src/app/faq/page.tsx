@@ -17,8 +17,8 @@ export const metadata = createPageMetadata({
 export default function FaqPage() {
   return (
     <>
-      <section className="bg-dark py-section text-dark-foreground">
-        <Container className="max-w-5xl text-center">
+      <section className="hero-grid bg-dark py-section text-dark-foreground">
+        <Container className="reveal max-w-5xl text-center">
           <span className="mx-auto grid size-12 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
             <MessageCircleQuestion aria-hidden="true" className="size-6" />
           </span>
@@ -41,7 +41,7 @@ export default function FaqPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               Common questions
             </p>
-            <h2 id="faq-list-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-dark">
+            <h2 id="faq-list-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-foreground">
               What would you like to know?
             </h2>
             <p className="mt-4 text-body-lg text-muted-foreground">
@@ -57,7 +57,7 @@ export default function FaqPage() {
 
       <section aria-labelledby="faq-contact-heading" className="bg-surface py-section">
         <Container>
-          <div className="mx-auto max-w-4xl rounded-xl bg-dark px-5 py-12 text-center text-dark-foreground sm:px-10 sm:py-14">
+          <div className="mx-auto max-w-4xl rounded-xl border border-border bg-card px-5 py-12 text-center text-dark-foreground shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:px-10 sm:py-14">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent">
               Still have a question?
             </p>

@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
 export default function NotFound() {
   return (
     <Container className="grid min-h-[60vh] place-items-center py-section text-center">
-      <div className="max-w-xl">
+      <div className="reveal max-w-xl rounded-xl border border-border bg-card p-7 shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:p-10">
         <span className="mx-auto grid size-14 place-items-center rounded-xl bg-primary/10 text-primary">
           <BookOpen aria-hidden="true" className="size-7" />
         </span>
         <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-primary">404</p>
-        <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-dark">Page not found</h1>
+        <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-foreground">Page not found</h1>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">
           The requested content may not exist or may not be available for public viewing.
         </p>

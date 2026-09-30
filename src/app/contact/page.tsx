@@ -22,7 +22,7 @@ function ContactMethods() {
 
   return (
     <section aria-labelledby="direct-contact-heading" className="mt-10">
-      <h2 id="direct-contact-heading" className="text-heading-3 font-bold tracking-tight text-dark">
+      <h2 id="direct-contact-heading" className="text-heading-3 font-bold tracking-tight text-foreground">
         Other ways to contact us
       </h2>
       <ul className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -67,11 +67,11 @@ export default function ContactPage() {
   return (
     <section className="bg-background py-section">
       <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(30rem,1.2fr)] lg:gap-16">
-        <div className="max-w-xl">
+        <div className="reveal max-w-xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Contact Academy
           </p>
-          <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-dark">
+          <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-foreground">
             How can we help?
           </h1>
           <p className="mt-5 text-body-lg text-muted-foreground">
@@ -83,9 +83,9 @@ export default function ContactPage() {
 
         <section
           aria-labelledby="contact-form-heading"
-          className="rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-8"
+          className="reveal reveal-delay-1 rounded-xl border border-border bg-card p-5 shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:p-8"
         >
-          <h2 id="contact-form-heading" className="text-heading-3 font-bold tracking-tight text-dark">
+          <h2 id="contact-form-heading" className="text-heading-3 font-bold tracking-tight text-foreground">
             Send a message
           </h2>
           <p className="mt-2 mb-8 text-muted-foreground">

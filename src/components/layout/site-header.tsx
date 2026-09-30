@@ -26,7 +26,7 @@ function NavigationEntry({
   linkRef?: React.Ref<HTMLAnchorElement>;
 }) {
   const className = cn(
-    "inline-flex min-h-11 items-center rounded-md px-3 text-sm font-medium transition-colors motion-reduce:transition-none",
+    "inline-flex min-h-11 items-center rounded-md px-3 text-sm font-medium motion-reduce:transition-none",
     mobile && "w-full justify-between px-4",
   );
 
@@ -133,12 +133,12 @@ export function SiteHeader() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <Container className="flex min-h-16 items-center justify-between gap-4">
         <Link
           href="/"
           aria-label={`${siteConfig.name} home`}
-          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-md font-bold tracking-tight text-dark"
+          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-md font-bold tracking-tight text-foreground hover:text-primary"
           onClick={closeMenu}
         >
           <span
@@ -181,7 +181,7 @@ export function SiteHeader() {
         <nav
           id="mobile-navigation"
           aria-label="Mobile navigation"
-          className="border-t border-border bg-surface lg:hidden"
+          className="border-t border-border bg-background lg:hidden"
         >
           <Container className="py-4">
             <ul className="flex flex-col gap-1">

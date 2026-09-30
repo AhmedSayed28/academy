@@ -7,7 +7,7 @@ export function InstructorCard({ instructor }: { instructor: Instructor }) {
   return (
     <article
       id={instructor.slug}
-      className="flex h-full scroll-mt-24 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm"
+      className="card-interactive flex h-full scroll-mt-24 flex-col overflow-hidden rounded-xl border border-border bg-card"
     >
       <div className="relative aspect-[4/3] bg-primary/5">
         {instructor.image ? (

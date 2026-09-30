@@ -14,7 +14,7 @@ function ListSection({ id, title, items }: { id: string; title: string; items?: 
   if (!items?.length) return null;
 
   return (
-    <section aria-labelledby={id} className="rounded-xl border border-border bg-card p-5 sm:p-7">
+    <section aria-labelledby={id} className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
       <h2 id={id} className="text-2xl font-bold tracking-tight">{title}</h2>
       <ul className="mt-5 grid gap-3 sm:grid-cols-2">
         {items.map((item) => (
@@ -33,8 +33,8 @@ export function TrackDetail({ track, relatedCourses }: { track: Track; relatedCo
 
   return (
     <>
-      <section className="border-b border-border bg-surface py-10 sm:py-14 lg:py-20">
-        <Container>
+      <section className="hero-grid border-b border-border bg-surface py-10 sm:py-14 lg:py-20">
+        <Container className="reveal">
           <Link
             href="/tracks"
             className="inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary hover:text-primary/80"
@@ -50,7 +50,7 @@ export function TrackDetail({ track, relatedCourses }: { track: Track; relatedCo
             ) : null}
             <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-primary">Learning track</p>
-              <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-dark">{track.name}</h1>
+              <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-foreground">{track.name}</h1>
               <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">{track.shortDescription}</p>
             </div>
           </div>
@@ -59,13 +59,13 @@ export function TrackDetail({ track, relatedCourses }: { track: Track; relatedCo
 
       <Container className="py-section">
         <div className="space-y-6">
-          <section aria-labelledby="track-overview-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
+          <section aria-labelledby="track-overview-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
             <h2 id="track-overview-title" className="text-2xl font-bold tracking-tight">Track overview</h2>
             <p className="mt-4 whitespace-pre-line leading-8 text-muted-foreground">{track.description}</p>
           </section>
 
           {track.careerGoal ? (
-            <section aria-labelledby="career-goal-title" className="rounded-xl bg-dark p-6 text-dark-foreground sm:p-8">
+            <section aria-labelledby="career-goal-title" className="rounded-xl border border-secondary/25 bg-surface p-6 text-dark-foreground sm:p-8">
               <p className="text-sm font-semibold uppercase tracking-widest text-accent">Career direction</p>
               <h2 id="career-goal-title" className="mt-3 text-2xl font-bold tracking-tight">Career goal</h2>
               <p className="mt-4 max-w-3xl leading-8 text-dark-muted">{track.careerGoal}</p>
@@ -75,7 +75,7 @@ export function TrackDetail({ track, relatedCourses }: { track: Track; relatedCo
           <ListSection id="track-skills-title" title="Skills you will build" items={track.skills} />
 
           {track.learningJourney?.length ? (
-            <section aria-labelledby="track-journey-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
+            <section aria-labelledby="track-journey-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
               <h2 id="track-journey-title" className="text-2xl font-bold tracking-tight">Learning journey</h2>
               <ol className="mt-6 grid gap-4 md:grid-cols-2">
                 {track.learningJourney.map((step, index) => (

@@ -17,7 +17,7 @@ type SubmissionFeedback =
   | { state: "error"; message: string };
 
 const inputClassName =
-  "mt-2 min-h-11 w-full rounded-lg border border-input bg-surface px-3 py-2 text-base text-foreground shadow-sm placeholder:text-muted-foreground/70 disabled:cursor-not-allowed disabled:bg-muted";
+  "mt-2 min-h-11 w-full rounded-lg border border-input bg-surface px-3 py-2 text-base text-foreground shadow-sm placeholder:text-muted-foreground/70 aria-invalid:border-destructive disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground";
 
 function isSuccessfulResponse(value: unknown): value is {
   success: true;
@@ -89,7 +89,7 @@ export function RegisterInterestForm() {
   const disabled = isSubmitting;
 
   return (
-    <form noValidate onSubmit={submitInterest} className="space-y-6">
+    <form noValidate onSubmit={submitInterest} className="space-y-6" aria-busy={disabled}>
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="fullName" className="text-sm font-semibold text-foreground">

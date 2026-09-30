@@ -25,7 +25,7 @@ const principleIcons = [BookOpenCheck, Layers3, BriefcaseBusiness] as const;
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-dark py-section text-dark-foreground">
+      <section className="hero-grid bg-dark py-section text-dark-foreground">
         <div
           aria-hidden="true"
           className="absolute -end-24 -top-24 size-80 rounded-full bg-secondary/20 blur-3xl"
@@ -35,7 +35,7 @@ export default function AboutPage() {
           className="absolute -bottom-32 -start-20 size-72 rounded-full bg-accent/10 blur-3xl"
         />
         <Container className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)] lg:gap-16">
-          <div className="max-w-3xl">
+          <div className="reveal max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent">
               {aboutIntroduction.eyebrow}
             </p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <aside className="rounded-xl border border-dark-border bg-dark-foreground/5 p-6 sm:p-8">
+          <aside className="reveal reveal-delay-1 rounded-xl border border-dark-border bg-card/80 p-6 shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:p-8">
             <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
               The learning approach
             </h2>
@@ -91,7 +91,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               Purpose
             </p>
-            <h2 id="purpose-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-dark">
+            <h2 id="purpose-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-foreground">
               A clear purpose for practical technology education.
             </h2>
           </div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary">
                     <Icon aria-hidden="true" className="size-5" />
                   </span>
-                  <h3 className="mt-5 text-heading-3 font-bold tracking-tight text-dark">
+                  <h3 className="mt-5 text-heading-3 font-bold tracking-tight text-foreground">
                     {item.title}
                   </h3>
                   <p className="mt-3 leading-7 text-muted-foreground">{item.description}</p>
@@ -122,7 +122,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               Teaching philosophy
             </p>
-            <h2 id="philosophy-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-dark">
+            <h2 id="philosophy-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-foreground">
               Understand, practice, then connect.
             </h2>
             <p className="mt-4 text-body-lg text-muted-foreground">
@@ -136,7 +136,7 @@ export default function AboutPage() {
               const Icon = principleIcons[index];
 
               return (
-                <article key={principle.title} className="rounded-xl border border-border bg-surface p-6">
+                <article key={principle.title} className="card-interactive rounded-xl border border-border bg-card p-6">
                   <span className="grid size-11 place-items-center rounded-lg bg-secondary/10 text-secondary">
                     <Icon aria-hidden="true" className="size-5" />
                   </span>
@@ -156,7 +156,7 @@ export default function AboutPage() {
               <p className="text-sm font-semibold uppercase tracking-widest text-primary">
                 Career-oriented learning
               </p>
-              <h2 id="career-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-dark">
+              <h2 id="career-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-foreground">
                 {careerApproach.title}
               </h2>
               <p className="mt-4 leading-7 text-muted-foreground">{careerApproach.description}</p>
@@ -181,7 +181,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               Explore Academy
             </p>
-            <h2 id="about-cta-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-dark">
+            <h2 id="about-cta-heading" className="mt-3 text-heading-2 font-bold tracking-tight text-foreground">
               See where practical learning can begin.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg leading-7 text-muted-foreground">

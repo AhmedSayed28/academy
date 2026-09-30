@@ -9,7 +9,7 @@ export function FinalCtaSection() {
   return (
     <section aria-labelledby="final-cta-title" className="bg-surface py-section">
       <Container>
-        <div className="relative overflow-hidden rounded-xl bg-dark px-5 py-12 text-center text-dark-foreground sm:px-10 sm:py-16">
+        <div className="relative overflow-hidden rounded-xl border border-border bg-card px-5 py-12 text-center text-dark-foreground shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:px-10 sm:py-16">
           <div
             aria-hidden="true"
             className="absolute -end-20 -top-20 size-64 rounded-full bg-secondary/25 blur-3xl"
