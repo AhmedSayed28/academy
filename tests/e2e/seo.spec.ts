@@ -3,16 +3,24 @@ import { expect, test } from "@playwright/test";
 const productionUrl = "https://e2eacademy.vercel.app";
 
 test("renders canonical and approved social metadata", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/en/about");
 
   await expect(page).toHaveTitle("About Academy | Academy");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    `${productionUrl}/about`,
+    `${productionUrl}/en/about`,
   );
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
     "content",
-    `${productionUrl}/about`,
+    `${productionUrl}/en/about`,
+  );
+  await expect(page.locator('link[rel="alternate"][hreflang="ar"]')).toHaveAttribute(
+    "href",
+    `${productionUrl}/ar/about`,
+  );
+  await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveAttribute(
+    "href",
+    `${productionUrl}/ar/about`,
   );
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
     "content",
@@ -40,7 +48,6 @@ test("serves static routes and approved published detail routes in the sitemap",
 
   expect(response.ok()).toBe(true);
   for (const path of [
-    "/",
     "/courses",
     "/tracks",
     "/instructors",
@@ -51,8 +58,11 @@ test("serves static routes and approved published detail routes in the sitemap",
     "/courses/software-testing-fundamentals",
     "/tracks/software-testing",
   ]) {
-    expect(body).toContain(`<loc>${productionUrl}${path}</loc>`);
+    expect(body).toContain(`<loc>${productionUrl}/ar${path === "/" ? "" : path}</loc>`);
+    expect(body).toContain(`<loc>${productionUrl}/en${path === "/" ? "" : path}</loc>`);
   }
+  expect(body).not.toContain(`<loc>${productionUrl}/courses</loc>`);
+  expect(body).toContain('hreflang="x-default"');
   expect(body).not.toContain("<lastmod>");
   expect(body).not.toContain("/api/");
 });

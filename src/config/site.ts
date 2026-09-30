@@ -1,5 +1,5 @@
 export interface NavigationItem {
-  label: string;
+  id: "home" | "courses" | "tracks" | "instructors" | "about" | "contact" | "faq" | "registerInterest";
   href: `/${string}`;
   available: boolean;
 }
@@ -40,27 +40,25 @@ export function isPreviewDeployment(
 }
 
 const navigation = [
-  { label: "Home", href: "/", available: true },
-  { label: "Courses", href: "/courses", available: true },
-  { label: "Tracks", href: "/tracks", available: true },
-  { label: "Instructors", href: "/instructors", available: true },
-  { label: "About", href: "/about", available: true },
-  { label: "Contact", href: "/contact", available: true },
+  { id: "home", href: "/", available: true },
+  { id: "courses", href: "/courses", available: true },
+  { id: "tracks", href: "/tracks", available: true },
+  { id: "instructors", href: "/instructors", available: true },
+  { id: "about", href: "/about", available: true },
+  { id: "contact", href: "/contact", available: true },
 ] satisfies NavigationItem[];
 
 const footerNavigation = [
-  { label: "FAQ", href: "/faq", available: true },
+  { id: "faq", href: "/faq", available: true },
 ] satisfies NavigationItem[];
 
 export const siteConfig = {
   name: "Academy",
-  defaultTitle: "Academy | Practical Technology Education",
-  description: "Practical, career-oriented technology education.",
   url: parseAppUrl(process.env.NEXT_PUBLIC_APP_URL),
   navigation,
   footerNavigation,
   primaryAction: {
-    label: "Register Interest",
+    id: "registerInterest",
     href: "/register-interest",
     available: true,
   } satisfies NavigationItem,

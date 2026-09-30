@@ -4,7 +4,7 @@ test("desktop layout exposes global navigation and footer without broken future 
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/");
+  await page.goto("/en");
 
   const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
   await expect(primaryNavigation.getByRole("link", { name: "Home" })).toHaveAttribute(
@@ -13,23 +13,23 @@ test("desktop layout exposes global navigation and footer without broken future 
   );
   await expect(primaryNavigation.getByRole("link", { name: "Courses" })).toHaveAttribute(
     "href",
-    "/courses",
+    "/en/courses",
   );
   await expect(primaryNavigation.getByRole("link", { name: "Tracks", exact: true })).toHaveAttribute(
     "href",
-    "/tracks",
+    "/en/tracks",
   );
   await expect(primaryNavigation.getByRole("link", { name: "Instructors" })).toHaveAttribute(
     "href",
-    "/instructors",
+    "/en/instructors",
   );
   await expect(primaryNavigation.getByRole("link", { name: "About" })).toHaveAttribute(
     "href",
-    "/about",
+    "/en/about",
   );
   await expect(
     primaryNavigation.getByRole("link", { name: "Register Interest" }),
-  ).toHaveAttribute("href", "/register-interest");
+  ).toHaveAttribute("href", "/en/register-interest");
   await expect(page.getByRole("contentinfo")).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
@@ -40,7 +40,7 @@ test("desktop layout exposes global navigation and footer without broken future 
 
 test("mobile menu supports disclosure, focus, escape, and touch-sized controls", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/en");
 
   const menuButton = page.getByRole("button", { name: "Open navigation menu" });
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
@@ -48,6 +48,9 @@ test("mobile menu supports disclosure, focus, escape, and touch-sized controls",
 
   const mobileNavigation = page.getByRole("navigation", { name: "Mobile navigation" });
   await expect(mobileNavigation).toBeVisible();
+  await expect(
+    mobileNavigation.getByRole("link", { name: "عرض الموقع بالعربية" }),
+  ).toHaveAttribute("href", "/ar");
   await expect(page.getByRole("button", { name: "Close navigation menu" })).toHaveAttribute(
     "aria-expanded",
     "true",
@@ -85,7 +88,7 @@ test("mobile menu supports disclosure, focus, escape, and touch-sized controls",
 for (const width of [390, 768, 1280]) {
   test(`global layout has no horizontal overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
+    await page.goto("/en");
 
     const hasHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

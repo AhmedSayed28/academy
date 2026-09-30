@@ -12,7 +12,7 @@ const documentedTrackNames = [
 ];
 
 test("track listing publishes Software Testing and keeps seven directions planned", async ({ page }) => {
-  const response = await page.goto("/tracks");
+  const response = await page.goto("/en/tracks");
 
   expect(response?.status()).toBe(200);
   await expect(page).toHaveTitle("Technology Learning Tracks | Academy");
@@ -20,7 +20,7 @@ test("track listing publishes Software Testing and keeps seven directions planne
   await expect(page.getByRole("heading", { name: "Published learning tracks" })).toBeVisible();
   await expect(page.getByRole("link", { name: "View learning track" })).toHaveAttribute(
     "href",
-    "/tracks/software-testing",
+    "/en/tracks/software-testing",
   );
 
   const plannedSection = page.locator('section[aria-labelledby="planned-tracks-title"]');
@@ -32,20 +32,20 @@ test("track listing publishes Software Testing and keeps seven directions planne
 });
 
 test("unknown track slugs return a real 404", async ({ page }) => {
-  const response = await page.goto("/tracks/not-an-approved-track");
+  const response = await page.goto("/en/tracks/not-an-approved-track");
 
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Explore learning tracks" })).toHaveAttribute(
     "href",
-    "/tracks",
+    "/en/tracks",
   );
 });
 
 for (const width of [390, 768, 1280]) {
   test(`track listing and navigation remain usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/tracks");
+    await page.goto("/en/tracks");
 
     if (width < 1024) {
       await page.getByRole("button", { name: "Open navigation menu" }).click();
@@ -67,7 +67,7 @@ for (const width of [390, 768, 1280]) {
     );
     expect(hasHorizontalOverflow).toBe(false);
 
-    await page.goto("/tracks/software-testing");
+    await page.goto("/en/tracks/software-testing");
     await expect(page.getByRole("heading", { level: 1, name: "Software Testing" })).toBeVisible();
     expect(
       await page.evaluate(

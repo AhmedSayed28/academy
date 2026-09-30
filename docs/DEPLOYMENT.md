@@ -82,3 +82,16 @@ is reviewed and merged, verify the deployed response independently.
 8. Verify an unknown path returns HTTP 404 and remains non-indexable.
 9. Verify a preview uses production canonicals and remains non-indexable, using an authorized
    request if Deployment Protection is enabled.
+
+## Localized route deployment checks
+
+After the localization release:
+
+1. Confirm `/` redirects permanently to `/ar` without inspecting browser language.
+2. Confirm every supported legacy unprefixed public path redirects to the equivalent Arabic path.
+3. Confirm `/ar` and `/en` pages render the correct `lang` and `dir` values and the language switch preserves the current page.
+4. Confirm `/api/leads` and `/api/contact` remain unprefixed and accept submissions from both locales.
+5. Confirm localized pages emit self-referencing production canonicals, reciprocal `ar` and `en` hreflang links, and an Arabic `x-default`.
+6. Confirm the sitemap contains only valid localized canonical URLs and excludes redirected legacy URLs.
+7. Confirm invalid locale prefixes and unknown localized content return HTTP 404.
+8. Confirm the bundled Arabic and Latin fonts load from application assets in the production build.

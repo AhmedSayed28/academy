@@ -4,10 +4,9 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { Dictionary } from "@/i18n/translations";
 
-const visualSteps = ["Learn fundamentals", "Practice skills", "Build projects"];
-
-export function HeroSection() {
+export function HeroSection({ copy }: { copy: Dictionary["home"]["hero"] }) {
   return (
     <section className="hero-grid bg-dark text-dark-foreground">
       <div
@@ -22,22 +21,20 @@ export function HeroSection() {
       <Container className="relative grid min-h-[calc(100svh-4rem)] items-center gap-12 py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(24rem,0.9fr)] lg:gap-16 lg:py-20">
         <div className="reveal max-w-3xl">
           <p className="mb-5 inline-flex rounded-full border border-dark-border bg-dark-foreground/5 px-3 py-1.5 text-sm font-medium text-accent">
-            Practical, career-oriented technology learning
+            {copy.eyebrow}
           </p>
           <h1 className="max-w-3xl text-display font-bold tracking-tight text-dark-foreground">
-            Build technology skills you can put into practice.
+            {copy.title}
           </h1>
           <p className="mt-6 max-w-2xl text-body-lg text-dark-muted">
-            Academy helps students, graduates, career switchers, junior engineers, and
-            technology professionals follow structured paths, apply what they learn, and grow
-            toward real professional work.
+            {copy.description}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="#learning-tracks"
               className={buttonVariants({ variant: "primary", size: "large" })}
             >
-              Explore learning tracks
+              {copy.primaryCta}
               <ArrowDown aria-hidden="true" className="size-4" />
             </Link>
             <Link
@@ -47,7 +44,7 @@ export function HeroSection() {
                 "border-dark-border bg-dark-foreground/5 text-dark-foreground hover:border-accent/50 hover:bg-dark-foreground/10",
               )}
             >
-              See how learning works
+              {copy.secondaryCta}
               <ArrowRight aria-hidden="true" className="size-4" />
             </Link>
           </div>
@@ -61,15 +58,15 @@ export function HeroSection() {
             <span className="size-2.5 rounded-full bg-destructive" />
             <span className="size-2.5 rounded-full bg-warning" />
             <span className="size-2.5 rounded-full bg-success" />
-            <span className="ms-2 text-xs text-dark-muted">academy / learning-path</span>
+            <span className="bidi-ltr ms-2 text-xs text-dark-muted">{copy.terminalLabel}</span>
           </div>
           <div className="py-6 sm:py-8">
-            <p className="text-sm font-medium text-accent">Structured learning journey</p>
+            <p className="text-sm font-medium text-accent">{copy.visualEyebrow}</p>
             <p className="mt-2 text-2xl font-semibold tracking-tight text-dark-foreground">
-              From concepts to practical application
+              {copy.visualTitle}
             </p>
             <div className="mt-6 space-y-3">
-              {visualSteps.map((step, index) => (
+              {copy.visualSteps.map((step, index) => (
                 <div
                   key={step}
                   className="flex items-center gap-3 rounded-lg border border-dark-border bg-dark/70 p-4"

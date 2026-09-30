@@ -8,18 +8,22 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/layout/container";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { siteConfig, type NavigationItem } from "@/config/site";
+import { localizePath, replacePathLocale, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 import { cn } from "@/lib/utils";
-
-const unavailableLabel = "Page coming in a later phase";
 
 function NavigationEntry({
   item,
+  locale,
+  copy,
   pathname,
   onNavigate,
   mobile = false,
   linkRef,
 }: {
   item: NavigationItem;
+  locale: Locale;
+  copy: Dictionary["site"]["navigation"];
   pathname: string;
   onNavigate?: () => void;
   mobile?: boolean;
@@ -35,23 +39,23 @@ function NavigationEntry({
       <span
         className={cn(className, "cursor-not-allowed text-muted-foreground")}
         aria-disabled="true"
-        title={unavailableLabel}
+        title={copy.pageSoon}
       >
-        {item.label}
+        {copy[item.id]}
         <span className="ms-2 text-[0.625rem] font-semibold uppercase tracking-wider text-muted-foreground">
-          Soon
+          {copy.soon}
         </span>
       </span>
     );
   }
 
-  const isCurrent =
-    pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+  const href = localizePath(locale, item.href);
+  const isCurrent = pathname === href || (item.href !== "/" && pathname.startsWith(`${href}/`));
 
   return (
     <Link
       ref={linkRef}
-      href={item.href}
+      href={href}
       aria-current={isCurrent ? "page" : undefined}
       onClick={onNavigate}
       className={cn(
@@ -61,15 +65,19 @@ function NavigationEntry({
           : "text-foreground hover:bg-muted hover:text-primary",
       )}
     >
-      {item.label}
+      {copy[item.id]}
     </Link>
   );
 }
 
 function PrimaryAction({
+  locale,
+  copy,
   mobile = false,
   onNavigate,
 }: {
+  locale: Locale;
+  copy: Dictionary["site"]["navigation"];
   mobile?: boolean;
   onNavigate?: () => void;
 }) {
@@ -79,16 +87,16 @@ function PrimaryAction({
     return (
       <span
         aria-disabled="true"
-        title={unavailableLabel}
+        title={copy.pageSoon}
         className={cn(
           buttonVariants({ variant: "primary", size: mobile ? "large" : "default" }),
           "cursor-not-allowed bg-primary/80",
           mobile && "w-full",
         )}
       >
-        {action.label}
+        {copy.registerInterest}
         <span className="rounded bg-primary-foreground/20 px-1.5 py-0.5 text-[0.625rem] uppercase tracking-wider">
-          Soon
+          {copy.soon}
         </span>
       </span>
     );
@@ -96,19 +104,25 @@ function PrimaryAction({
 
   return (
     <Link
-      href={action.href}
+      href={localizePath(locale, action.href)}
       onClick={onNavigate}
       className={cn(
         buttonVariants({ variant: "primary", size: mobile ? "large" : "default" }),
         mobile && "w-full",
       )}
     >
-      {action.label}
+      {copy.registerInterest}
     </Link>
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({
+  locale,
+  copy,
+}: {
+  locale: Locale;
+  copy: Dictionary["site"]["navigation"];
+}) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -131,13 +145,15 @@ export function SiteHeader() {
   }, [isMenuOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const alternateLocale: Locale = locale === "ar" ? "en" : "ar";
+  const alternateHref = replacePathLocale(pathname, alternateLocale);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <Container className="flex min-h-16 items-center justify-between gap-4">
         <Link
-          href="/"
-          aria-label={`${siteConfig.name} home`}
+          href={localizePath(locale, "/")}
+          aria-label={copy.homeLabel}
           className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-md font-bold tracking-tight text-foreground hover:text-primary"
           onClick={closeMenu}
         >
@@ -150,16 +166,25 @@ export function SiteHeader() {
           <span>{siteConfig.name}</span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label={copy.primaryNavigation} className="hidden items-center gap-1 lg:flex">
           <ul className="flex items-center gap-1">
             {siteConfig.navigation.map((item) => (
               <li key={item.href}>
-                <NavigationEntry item={item} pathname={pathname} />
+                <NavigationEntry item={item} locale={locale} copy={copy} pathname={pathname} />
               </li>
             ))}
           </ul>
-          <div className="ms-2">
-            <PrimaryAction />
+          <div className="ms-2 flex items-center gap-1">
+            <Link
+              href={alternateHref}
+              hrefLang={alternateLocale}
+              lang={alternateLocale}
+              aria-label={copy.switchLanguageLabel}
+              className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-semibold text-secondary hover:bg-muted"
+            >
+              {copy.switchLanguage}
+            </Link>
+            <PrimaryAction locale={locale} copy={copy} />
           </div>
         </nav>
 
@@ -170,7 +195,7 @@ export function SiteHeader() {
           className="lg:hidden"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
           onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -180,7 +205,7 @@ export function SiteHeader() {
       {isMenuOpen ? (
         <nav
           id="mobile-navigation"
-          aria-label="Mobile navigation"
+          aria-label={copy.mobileNavigation}
           className="border-t border-border bg-background lg:hidden"
         >
           <Container className="py-4">
@@ -189,6 +214,8 @@ export function SiteHeader() {
                 <li key={item.href}>
                   <NavigationEntry
                     item={item}
+                    locale={locale}
+                    copy={copy}
                     pathname={pathname}
                     onNavigate={closeMenu}
                     mobile
@@ -198,7 +225,17 @@ export function SiteHeader() {
               ))}
             </ul>
             <div className="mt-4 border-t border-border pt-4">
-              <PrimaryAction mobile onNavigate={closeMenu} />
+              <Link
+                href={alternateHref}
+                hrefLang={alternateLocale}
+                lang={alternateLocale}
+                aria-label={copy.switchLanguageLabel}
+                onClick={closeMenu}
+                className="mb-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-border bg-card px-4 font-semibold text-secondary hover:border-secondary/50 hover:bg-raised"
+              >
+                {copy.switchLanguage}
+              </Link>
+              <PrimaryAction locale={locale} copy={copy} mobile onNavigate={closeMenu} />
             </div>
           </Container>
         </nav>

@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
-  contactFormSchema,
+  createContactFormSchema,
   type ContactFormValues,
 } from "@/features/contact/schemas/contact.schema";
+import type { Dictionary } from "@/i18n/translations";
 
 type SubmissionFeedback =
   | { state: "idle" }
@@ -33,7 +34,15 @@ function isSuccessfulResponse(value: unknown): value is {
   return (response.data as { submitted?: unknown }).submitted === true;
 }
 
-export function ContactForm() {
+function getApiErrorCode(value: unknown): string | undefined {
+  if (typeof value !== "object" || value === null) return undefined;
+  const error = (value as { error?: unknown }).error;
+  if (typeof error !== "object" || error === null) return undefined;
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" ? code : undefined;
+}
+
+export function ContactForm({ copy }: { copy: Dictionary["contact"]["form"] }) {
   const [feedback, setFeedback] = useState<SubmissionFeedback>({ state: "idle" });
   const [isSending, setIsSending] = useState(false);
   const submissionLock = useRef(false);
@@ -44,7 +53,7 @@ export function ContactForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(createContactFormSchema(copy.validation)),
     defaultValues: { fullName: "", email: "", phone: "", subject: "", message: "" },
   });
 
@@ -65,19 +74,22 @@ export function ContactForm() {
       const body: unknown = await response.json();
 
       if (!response.ok || !isSuccessfulResponse(body)) {
-        throw new Error("Submission failed");
+        throw new Error(getApiErrorCode(body) ?? "SUBMISSION_FAILED");
       }
 
       reset();
       submissionId.current = null;
       setFeedback({
         state: "success",
-        message: "Your message has been sent. Thank you for contacting Academy.",
+        message: copy.success,
       });
-    } catch {
+    } catch (error) {
       setFeedback({
         state: "error",
-        message: "We couldn't send your message right now. Your details are still here so you can try again.",
+        message:
+          error instanceof Error && error.message === "VALIDATION_ERROR"
+            ? copy.validationFailure
+            : copy.failure,
       });
     } finally {
       submissionLock.current = false;
@@ -96,7 +108,7 @@ export function ContactForm() {
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="fullName" className="text-sm font-semibold text-foreground">
-            Full name <span aria-hidden="true" className="text-destructive">*</span>
+            {copy.fullName} <span aria-hidden="true" className="text-destructive">*</span>
           </label>
           <input
             id="fullName"
@@ -117,7 +129,7 @@ export function ContactForm() {
 
         <div>
           <label htmlFor="email" className="text-sm font-semibold text-foreground">
-            Email address <span aria-hidden="true" className="text-destructive">*</span>
+            {copy.email} <span aria-hidden="true" className="text-destructive">*</span>
           </label>
           <input
             id="email"
@@ -140,7 +152,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="phone" className="text-sm font-semibold text-foreground">
-          Phone number <span className="font-normal text-muted-foreground">(optional)</span>
+          {copy.phone} <span className="font-normal text-muted-foreground">({copy.optional})</span>
         </label>
         <input
           id="phone"
@@ -162,7 +174,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="subject" className="text-sm font-semibold text-foreground">
-          Subject <span aria-hidden="true" className="text-destructive">*</span>
+          {copy.subject} <span aria-hidden="true" className="text-destructive">*</span>
         </label>
         <input
           id="subject"
@@ -182,7 +194,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="text-sm font-semibold text-foreground">
-          Message <span aria-hidden="true" className="text-destructive">*</span>
+          {copy.message} <span aria-hidden="true" className="text-destructive">*</span>
         </label>
         <textarea
           id="message"
@@ -199,13 +211,13 @@ export function ContactForm() {
           </p>
         ) : (
           <p id="message-help" className="mt-2 text-sm text-muted-foreground">
-            Include the details needed for us to understand your question.
+            {copy.messageHelp}
           </p>
         )}
       </div>
 
       <p className="text-sm leading-6 text-muted-foreground">
-        Fields marked with an asterisk are required.
+        {copy.requiredHelp}
       </p>
 
       {feedback.state !== "idle" ? (
@@ -230,10 +242,10 @@ export function ContactForm() {
         {isSending ? (
           <>
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin motion-reduce:animate-none" />
-            Sending message…
+            {copy.submitting}
           </>
         ) : (
-          "Send message"
+          copy.submit
         )}
       </Button>
     </form>

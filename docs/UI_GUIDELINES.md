@@ -1675,3 +1675,16 @@ Professional technology product
 Academy should look like a technology company that happens to teach technology.
 
 It should not look like a generic course marketplace or traditional training center.
+
+---
+
+## 66. Bilingual and Bidirectional UI
+
+- Arabic is the default language and uses `dir="rtl"`; English uses `dir="ltr"`.
+- Noto Sans Arabic is the primary Arabic face and Inter is the Latin face. Both are bundled by the Next.js font pipeline for production.
+- Prefer logical properties and utilities (`margin-inline`, `padding-inline`, inline start/end) so one component works in both directions.
+- Directional arrows mirror in RTL. Neutral icons do not.
+- Email addresses, telephone inputs, URLs, and technical fragments use isolated LTR presentation inside Arabic pages.
+- The language switch is visible in desktop and mobile navigation and retains the equivalent path, including detail-page slugs.
+- Layouts must tolerate longer translated labels without clipping or horizontal overflow at 390px, 768px, and 1280px.
+- The permanent dark palette, focus treatment, and reduced-motion rules apply identically in both languages.

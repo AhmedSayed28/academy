@@ -1,10 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  academyDifferentiators,
-  learningJourney,
   learningTracks,
 } from "../../src/features/homepage/content";
+import { getDictionary } from "../../src/i18n/translations";
 
 describe("homepage content", () => {
   it("uses the eight documented initial learning tracks", () => {
@@ -21,7 +20,7 @@ describe("homepage content", () => {
   });
 
   it("keeps the documented learning journey in order", () => {
-    expect(learningJourney.map(({ title }) => title)).toEqual([
+    expect(getDictionary("en").home.journey.items.map(({ title }) => title)).toEqual([
       "Choose a track",
       "Learn fundamentals",
       "Practice",
@@ -31,7 +30,7 @@ describe("homepage content", () => {
   });
 
   it("limits Academy differentiators to approved product principles", () => {
-    expect(academyDifferentiators.map(({ title }) => title)).toEqual([
+    expect(getDictionary("en").home.why.items.map(({ title }) => title)).toEqual([
       "Practical learning",
       "Career-oriented paths",
       "Industry-oriented skills",

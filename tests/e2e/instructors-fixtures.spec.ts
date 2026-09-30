@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("listing exposes published fixtures and filters unpublished instructor records", async ({ page }) => {
-  await page.goto("/instructors");
+  await page.goto("/en/instructors");
 
   const profiles = page.getByRole("main").locator("article");
   await expect(profiles).toHaveCount(2);
@@ -11,13 +11,13 @@ test("listing exposes published fixtures and filters unpublished instructor reco
 });
 
 test("optional profile fields render accessibly without empty controls", async ({ page }) => {
-  await page.goto("/instructors");
+  await page.goto("/en/instructors");
 
   const linkedProfile = page.getByRole("article").filter({ hasText: "Synthetic Published Instructor" });
   await expect(linkedProfile.getByText("Profile image not available")).toBeVisible();
   await expect(
     linkedProfile.getByRole("link", {
-      name: "Synthetic profile for Synthetic Published Instructor (opens in a new tab)",
+      name: "Synthetic profile Synthetic Published Instructor (opens in a new tab)",
     }),
   ).toHaveAttribute("target", "_blank");
 

@@ -14,7 +14,7 @@ test("validates required contact fields without sending invalid data", async ({ 
     requestCount += 1;
     await route.abort();
   });
-  await page.goto("/contact");
+  await page.goto("/en/contact");
 
   await page.getByRole("button", { name: "Send message" }).click();
 
@@ -42,7 +42,7 @@ test("submits once, shows loading feedback, and resets after confirmed success",
       body: JSON.stringify({ success: true, data: { submitted: true } }),
     });
   });
-  await page.goto("/contact");
+  await page.goto("/en/contact");
   await completeForm(page);
 
   await page.locator("form").evaluate((form) => {
@@ -98,7 +98,7 @@ test("preserves values after failure and an edited retry replaces the uncertain 
     });
   });
 
-  await page.goto("/contact");
+  await page.goto("/en/contact");
   await completeForm(page);
   await page.getByRole("button", { name: "Send message" }).click();
 
@@ -123,7 +123,7 @@ test("preserves values after failure and an edited retry replaces the uncertain 
 
 test("contact form remains usable without horizontal overflow on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/contact");
+  await page.goto("/en/contact");
 
   await expect(page.getByRole("heading", { name: "How can we help?" })).toBeVisible();
   await expect(page.getByRole("textbox", { name: /^Message/ })).toBeVisible();
@@ -137,4 +137,46 @@ test("contact form remains usable without horizontal overflow on mobile", async 
   expect(await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
   )).toBe(false);
+});
+
+test("Arabic contact localizes validation, success, and safe failure feedback", async ({ page }) => {
+  let requestCount = 0;
+  await page.route("**/api/contact", async (route) => {
+    requestCount += 1;
+    if (requestCount === 1) {
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({
+          success: false,
+          error: { code: "PERSISTENCE_ERROR", message: "Raw internal detail" },
+        }),
+      });
+      return;
+    }
+    await route.fulfill({
+      status: 201,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true, data: { submitted: true } }),
+    });
+  });
+  await page.goto("/ar/contact");
+
+  await page.getByRole("button", { name: "ابعت الرسالة" }).click();
+  await expect(page.getByText("اكتب اسمك بالكامل.")).toBeVisible();
+  await expect(page.getByText("اكتب بريدك الإلكتروني.")).toBeVisible();
+  expect(requestCount).toBe(0);
+
+  await page.getByLabel("الاسم بالكامل").fill("زائر تجريبي");
+  await page.getByLabel("البريد الإلكتروني").fill("visitor@example.com");
+  await page.getByLabel("عنوان الرسالة").fill("سؤال عن الكورس");
+  await page.getByLabel("رسالتك").fill("محتاج أعرف تفاصيل أكتر عن طريقة التعلم في Academy.");
+  await page.getByRole("button", { name: "ابعت الرسالة" }).click();
+  await expect(
+    page.getByRole("alert").filter({ hasText: "مقدرناش نبعت رسالتك دلوقتي" }),
+  ).toBeVisible();
+  await expect(page.getByText("Raw internal detail")).toHaveCount(0);
+
+  await page.getByRole("button", { name: "ابعت الرسالة" }).click();
+  await expect(page.getByRole("status")).toContainText("وصلتنا رسالتك بنجاح");
 });

@@ -1482,3 +1482,13 @@ Low
 Primary Goal:
 Fast, maintainable MVP delivery
 ```
+
+---
+
+## 57. Localization Architecture
+
+Academy uses the Next.js App Router's built-in dynamic locale segment instead of an internationalization dependency. Public pages live below `app/[locale]`, with `ar` and `en` as the only valid locale values. The root and legacy unprefixed routes redirect permanently to their Arabic equivalents; API routes remain unprefixed.
+
+Typed dictionaries in `src/i18n/translations.ts` own visible copy. Stable record identifiers, slugs, prices, publication state, relationships, and validation/business behavior remain language-neutral. Localized content adapters combine those two layers at the server-rendered page boundary. Client forms receive translated labels and validation messages while continuing to submit the same payloads and interpret stable API error codes.
+
+Metadata is generated per locale with a self-referencing canonical, reciprocal `ar`/`en` alternates, and an Arabic `x-default`. The sitemap lists only localized canonical routes. No browser-language detection or locale cookie is used, so an explicitly selected English URL remains English.

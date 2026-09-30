@@ -1,15 +1,15 @@
 import { expect, test } from "@playwright/test";
 
 const reviewRoutes = [
-  "/",
-  "/courses/software-testing-fundamentals",
-  "/tracks/software-testing",
-  "/instructors",
-  "/contact",
-  "/register-interest",
-  "/faq",
-  "/about",
-  "/phase-13-visual-review-not-found",
+  "/en",
+  "/en/courses/software-testing-fundamentals",
+  "/en/tracks/software-testing",
+  "/en/instructors",
+  "/en/contact",
+  "/en/register-interest",
+  "/en/faq",
+  "/en/about",
+  "/en/phase-14-visual-review-not-found",
 ] as const;
 
 function parseRgb(value: string) {
@@ -39,7 +39,7 @@ function contrastRatio(first: string, second: string) {
 test("uses a permanent dark presentation with readable body and primary-action contrast", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   const colors = await page.evaluate(() => {
     const bodyStyle = getComputedStyle(document.body);
@@ -64,7 +64,7 @@ test("uses a permanent dark presentation with readable body and primary-action c
   );
   await expect(page.getByRole("button", { name: /theme|light mode|dark mode/i })).toHaveCount(0);
 
-  await page.goto("/contact");
+  await page.goto("/en/contact");
   const inputPresentation = await page.getByLabel("Full name").evaluate((element) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, colorScheme: style.colorScheme };
@@ -74,7 +74,7 @@ test("uses a permanent dark presentation with readable body and primary-action c
 });
 
 test("shows a visible keyboard focus indicator", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   const primaryAction = page.getByRole("link", { name: "Explore learning tracks" }).first();
   await primaryAction.focus();
@@ -98,7 +98,7 @@ test("keeps content visible and effectively still when reduced motion is request
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
+  await page.goto("/en");
 
   const hero = page.getByRole("heading", {
     name: "Build technology skills you can put into practice.",
@@ -124,7 +124,7 @@ test("keeps content visible and effectively still when reduced motion is request
 test("renders essential hero content without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto("/");
+  await page.goto("/en");
 
   await expect(
     page.getByRole("heading", { name: "Build technology skills you can put into practice." }),

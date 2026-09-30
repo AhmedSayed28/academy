@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("FAQ page presents approved answers with one primary heading", async ({ page }) => {
-  await page.goto("/faq");
+  await page.goto("/en/faq");
 
   await expect(page).toHaveTitle("Frequently Asked Questions | Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
@@ -18,7 +18,7 @@ test("FAQ page presents approved answers with one primary heading", async ({ pag
 });
 
 test("FAQ accordion supports keyboard interaction and correct expanded states", async ({ page }) => {
-  await page.goto("/faq");
+  await page.goto("/en/faq");
 
   const questions = page.locator("details");
   const firstQuestion = questions.nth(0);
@@ -41,29 +41,29 @@ test("FAQ accordion supports keyboard interaction and correct expanded states", 
 });
 
 test("homepage preview, footer link, and unanswered-question CTA navigate correctly", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/en");
 
   const preview = page.locator('section[aria-labelledby="faq-preview-title"]');
   await expect(preview.locator("details")).toHaveCount(4);
   await expect(preview.getByRole("link", { name: "View all questions" })).toHaveAttribute(
     "href",
-    "/faq",
+    "/en/faq",
   );
   await expect(
     page.getByRole("navigation", { name: "Footer navigation" }).getByRole("link", { name: "FAQ" }),
-  ).toHaveAttribute("href", "/faq");
+  ).toHaveAttribute("href", "/en/faq");
 
   await preview.getByRole("link", { name: "View all questions" }).click();
   await expect(page).toHaveURL(/\/faq$/);
   await expect(page.getByRole("link", { name: "Contact Academy", exact: true })).toHaveAttribute(
     "href",
-    "/contact",
+    "/en/contact",
   );
 });
 
 test("FAQ page remains usable without horizontal overflow on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/faq");
+  await page.goto("/en/faq");
 
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.locator("details summary").first().click();

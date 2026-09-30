@@ -6,11 +6,14 @@ import { LearningTrackIcon } from "@/components/learning-track-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { documentedLearningTracks } from "@/config/learning-tracks";
 import { trackService } from "@/features/tracks/services/track.service";
+import { localizeTrack } from "@/i18n/content";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/translations";
 
 import { SectionHeading } from "./section-heading";
 
-export async function LearningTracksSection() {
-  const publishedTracks = await trackService.getPublishedTracks();
+export async function LearningTracksSection({ locale, copy }: { locale: Locale; copy: Dictionary["home"]["tracks"] }) {
+  const publishedTracks = (await trackService.getPublishedTracks()).map((track) => localizeTrack(track, locale));
   const publishedSlugs = new Set(publishedTracks.map((track) => track.slug));
 
   return (
@@ -21,9 +24,9 @@ export async function LearningTracksSection() {
     >
       <Container>
         <SectionHeading
-          eyebrow="Learning tracks"
-          title="Choose a direction, then build step by step."
-          description="Explore the technology fields planned for Academy's structured, career-oriented learning paths. Detailed journeys will be published as each track is approved."
+          eyebrow={copy.eyebrow}
+          title={copy.title}
+          description={copy.description}
           titleId="learning-tracks-title"
         />
 
@@ -43,7 +46,7 @@ export async function LearningTracksSection() {
                   </div>
                   <h3 className="mt-auto pt-8 text-xl font-semibold tracking-tight text-foreground">
                     {isPublished ? (
-                      <Link href={`/tracks/${track.slug}`} className="rounded-sm hover:text-primary">
+                      <Link href={localizePath(locale, `/tracks/${track.slug}`)} className="rounded-sm hover:text-primary">
                         {track.name}
                       </Link>
                     ) : (
@@ -51,16 +54,16 @@ export async function LearningTracksSection() {
                     )}
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    {isPublished ? "Published learning track" : "Planned learning track"}
+                    {isPublished ? copy.publishedTrack : copy.plannedTrack}
                   </p>
                 </article>
               </li>
             );
           })}
         </ul>
-        <Link href="/tracks" className={`${buttonVariants({ variant: "secondary" })} mt-8`}>
-          View all learning tracks
-          <ArrowRight aria-hidden="true" className="size-4" />
+        <Link href={localizePath(locale, "/tracks")} className={`${buttonVariants({ variant: "secondary" })} mt-8`}>
+          {copy.viewAll}
+          <ArrowRight aria-hidden="true" className="directional-icon size-4" />
         </Link>
       </Container>
     </section>

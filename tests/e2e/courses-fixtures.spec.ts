@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("listing exposes published fixtures and filters the unpublished fixture", async ({ page }) => {
-  await page.goto("/courses");
+  await page.goto("/en/courses");
 
   await expect(page.getByRole("main").locator("article")).toHaveCount(2);
   await expect(page.getByRole("heading", { name: "Synthetic Open Course" })).toBeVisible();
@@ -10,7 +10,7 @@ test("listing exposes published fixtures and filters the unpublished fixture", a
 });
 
 test("a published slug renders server content, optional sections, and metadata", async ({ page }) => {
-  const response = await page.goto("/courses/synthetic-open-course");
+  const response = await page.goto("/en/courses/synthetic-open-course");
 
   expect(response?.status()).toBe(200);
   expect(await response?.text()).toContain("Synthetic Open Course");
@@ -26,7 +26,7 @@ test("a published slug renders server content, optional sections, and metadata",
 });
 
 test("a closed course is honest and omits unavailable optional sections", async ({ page }) => {
-  await page.goto("/courses/synthetic-closed-course");
+  await page.goto("/en/courses/synthetic-closed-course");
 
   await expect(page.getByText("Registration for this course is closed.")).toBeVisible();
   await expect(page.getByRole("link", { name: "Register for this course" })).toHaveCount(0);
@@ -35,7 +35,7 @@ test("a closed course is honest and omits unavailable optional sections", async 
 });
 
 test("an unpublished slug returns 404 even when its record exists", async ({ page }) => {
-  const response = await page.goto("/courses/synthetic-unpublished-course");
+  const response = await page.goto("/en/courses/synthetic-unpublished-course");
 
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();

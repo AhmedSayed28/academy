@@ -1,10 +1,13 @@
 import { documentedLearningTracks } from "@/config/learning-tracks";
 import { LearningTrackIcon } from "@/components/learning-track-icon";
+import type { Dictionary } from "@/i18n/translations";
 
 export function PlannedTracksState({
   publishedTrackNames = [],
+  copy,
 }: {
   publishedTrackNames?: readonly string[];
+  copy: Dictionary["tracks"]["planned"] & { plannedTrack: string };
 }) {
   const plannedTracks = documentedLearningTracks.filter(
     (track) => !publishedTrackNames.includes(track.name),
@@ -15,13 +18,12 @@ export function PlannedTracksState({
   return (
     <section aria-labelledby="planned-tracks-title">
       <div className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-primary">Planned content</p>
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary">{copy.eyebrow}</p>
         <h2 id="planned-tracks-title" className="mt-3 text-heading-2 font-bold tracking-tight">
-          Track details are being prepared.
+          {copy.title}
         </h2>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">
-          These technology directions remain planned for Academy. Detailed goals, skills,
-          learning sequences, tools, and related courses will appear only after approval.
+          {copy.description}
         </p>
       </div>
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -37,7 +39,7 @@ export function PlannedTracksState({
                 </span>
               </div>
               <h3 className="mt-auto pt-8 text-xl font-semibold tracking-tight">{track.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">Planned learning track</p>
+              <p className="mt-2 text-sm text-muted-foreground">{copy.plannedTrack}</p>
             </article>
           </li>
         ))}
