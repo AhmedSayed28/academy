@@ -16,12 +16,12 @@ export default async function InstructorsPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-surface py-12 sm:py-16 lg:py-20">
-        <Container>
+      <section className="hero-grid border-b border-border bg-surface py-12 sm:py-16 lg:py-20">
+        <Container className="reveal">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             Academy instructors
           </p>
-          <h1 className="mt-3 max-w-4xl text-heading-1 font-bold tracking-tight text-dark">
+          <h1 className="mt-3 max-w-4xl text-heading-1 font-bold tracking-tight text-foreground">
             Learn from experienced technology practitioners.
           </h1>
           <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">

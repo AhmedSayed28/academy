@@ -32,7 +32,7 @@ export async function LearningTracksSection() {
             const isPublished = publishedSlugs.has(track.slug);
             return (
               <li key={track.name}>
-                <article className="group flex h-full min-h-44 flex-col rounded-xl border border-border bg-background p-5 transition-colors hover:border-primary/40 motion-reduce:transition-none">
+                <article className="card-interactive group flex h-full min-h-44 flex-col rounded-xl border border-border bg-background p-5 motion-reduce:transition-none">
                   <div className="flex items-start justify-between gap-4">
                     <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground motion-reduce:transition-none">
                       <LearningTrackIcon name={track.icon} className="size-5" />

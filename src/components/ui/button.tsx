@@ -4,14 +4,14 @@ import type { ComponentPropsWithRef } from "react";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none",
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold shadow-sm transition-[color,background-color,border-color,box-shadow,transform] hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-50 motion-reduce:transform-none motion-reduce:transition-none",
   {
     variants: {
       variant: {
         primary:
-          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-primary",
+          "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0.75rem_2rem_rgb(74_222_165_/_0.16)] focus-visible:outline-primary",
         secondary:
-          "border border-border bg-surface text-foreground hover:border-primary/40 hover:bg-muted",
+          "border border-border bg-card text-foreground hover:border-primary/50 hover:bg-raised",
         ghost: "text-foreground hover:bg-muted hover:text-primary",
       },
       size: {

@@ -13,11 +13,11 @@ export default function RegisterInterestPage() {
   return (
     <section className="bg-background py-section">
       <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(30rem,1.2fr)] lg:gap-16">
-        <div className="max-w-xl">
+        <div className="reveal max-w-xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             General interest
           </p>
-          <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-dark">
+          <h1 className="mt-3 text-heading-1 font-bold tracking-tight text-foreground">
             Tell us where you want to grow.
           </h1>
           <p className="mt-5 text-body-lg text-muted-foreground">
@@ -33,8 +33,8 @@ export default function RegisterInterestPage() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-8">
-          <h2 className="text-heading-3 font-bold tracking-tight text-dark">
+        <div className="reveal reveal-delay-1 rounded-xl border border-border bg-card p-5 shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.2)] sm:p-8">
+          <h2 className="text-heading-3 font-bold tracking-tight text-foreground">
             Register your interest
           </h2>
           <p className="mt-2 mb-8 text-muted-foreground">

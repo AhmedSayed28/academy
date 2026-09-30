@@ -12,7 +12,7 @@ function ListSection({ id, title, items }: { id: string; title: string; items?: 
   if (!items?.length) return null;
 
   return (
-    <section aria-labelledby={id} className="rounded-xl border border-border bg-card p-5 sm:p-7">
+    <section aria-labelledby={id} className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
       <h2 id={id} className="text-2xl font-bold tracking-tight">
         {title}
       </h2>
@@ -40,7 +40,7 @@ function RegistrationPanel({ course }: { course: Course }) {
         : "Registration details are being prepared.";
 
   return (
-    <aside className="rounded-xl bg-dark p-6 text-dark-foreground sm:p-8" aria-labelledby="registration-title">
+    <aside className="rounded-xl border border-primary/25 bg-surface p-6 text-dark-foreground shadow-[0_1.5rem_4rem_rgb(0_0_0_/_0.24)] sm:p-8" aria-labelledby="registration-title">
       <AvailabilityBadge availability={course.availability} />
       <h2 id="registration-title" className="mt-4 text-2xl font-bold tracking-tight">
         Registration
@@ -77,8 +77,8 @@ function RegistrationPanel({ course }: { course: Course }) {
 export function CourseDetail({ course }: { course: Course }) {
   return (
     <>
-      <section className="border-b border-border bg-surface py-10 sm:py-14 lg:py-20">
-        <Container>
+      <section className="hero-grid border-b border-border bg-surface py-10 sm:py-14 lg:py-20">
+        <Container className="reveal">
           <Link
             href="/courses"
             className="inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary hover:text-primary/80"
@@ -96,7 +96,7 @@ export function CourseDetail({ course }: { course: Course }) {
               </Link>
               <AvailabilityBadge availability={course.availability} />
             </div>
-            <h1 className="mt-5 text-heading-1 font-bold tracking-tight text-dark">{course.title}</h1>
+            <h1 className="mt-5 text-heading-1 font-bold tracking-tight text-foreground">{course.title}</h1>
             <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">{course.shortDescription}</p>
           </div>
           <div className="mt-8 rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6">
@@ -108,7 +108,7 @@ export function CourseDetail({ course }: { course: Course }) {
       <Container className="py-section">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(17rem,1fr)] lg:items-start">
           <div className="space-y-6">
-            <section aria-labelledby="course-overview-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
+            <section aria-labelledby="course-overview-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
               <h2 id="course-overview-title" className="text-2xl font-bold tracking-tight">
                 Course overview
               </h2>
@@ -118,7 +118,7 @@ export function CourseDetail({ course }: { course: Course }) {
             <ListSection id="target-audience-title" title="Who this course is for" items={course.targetAudience} />
             <ListSection id="prerequisites-title" title="Prerequisites" items={course.prerequisites} />
             {course.curriculum?.length ? (
-              <section aria-labelledby="curriculum-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
+              <section aria-labelledby="curriculum-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
                 <h2 id="curriculum-title" className="text-2xl font-bold tracking-tight">
                   Curriculum
                 </h2>
@@ -137,7 +137,7 @@ export function CourseDetail({ course }: { course: Course }) {
               </section>
             ) : null}
             {course.instructor ? (
-              <section aria-labelledby="instructor-title" className="rounded-xl border border-border bg-card p-5 sm:p-7">
+              <section aria-labelledby="instructor-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
                 <h2 id="instructor-title" className="text-2xl font-bold tracking-tight">Instructor</h2>
                 <p className="mt-4 font-bold text-foreground">
                   {course.instructor.slug ? (

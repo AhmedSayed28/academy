@@ -7,7 +7,7 @@ import type { Course } from "@/features/courses/types/course.types";
 
 export function CourseCard({ course }: { course: Course }) {
   return (
-    <article className="flex h-full flex-col rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6">
+    <article className="card-interactive flex h-full flex-col rounded-xl border border-border bg-card p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <p className="text-sm font-semibold text-primary">{course.track}</p>
         <AvailabilityBadge availability={course.availability} />

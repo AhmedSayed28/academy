@@ -85,13 +85,14 @@ The design system should define:
 
 ## 5. Color Palette
 
-Initial brand palette:
+Academy uses one permanent dark palette. Raw values belong in the centralized theme
+configuration; components consume semantic tokens.
 
 ### Primary
 
-`#6366F1`
+`#4ADEA5`
 
-Indigo.
+Green.
 
 Use for:
 
@@ -105,9 +106,9 @@ Use for:
 
 ### Secondary
 
-`#8B5CF6`
+`#38BDF8`
 
-Violet.
+Sky blue.
 
 Use for:
 
@@ -122,9 +123,9 @@ Do not use secondary color as frequently as the primary.
 
 ### Accent
 
-`#22D3EE`
+`#38BDF8`
 
-Cyan.
+Sky blue, sharing the secondary hue where a technical accent is needed.
 
 Use carefully for:
 
@@ -139,22 +140,21 @@ Accent color should not dominate large areas.
 
 ### Dark
 
-`#0F172A`
+`#0B0F14`
 
 Use for:
 
-- Dark hero backgrounds
+- Main page background
 - Footer
-- Important dark surfaces
-- Strong text sections
+- Strong text sections and deep visual regions
 
 ---
 
 ### Background
 
-`#F8FAFC`
+`#0B0F14`
 
-Primary light background.
+Primary dark background.
 
 Use for:
 
@@ -167,20 +167,21 @@ Use for:
 
 Recommended:
 
-`#FFFFFF`
+`#111821`
 
 Use for:
 
-- Cards
-- Forms
-- Content surfaces
+- Alternate sections
 - Navigation
+
+Cards, inputs, forms, and popovers use `#18222E`. Raised and highlighted neutral surfaces use
+`#223142`.
 
 ---
 
 ### Main Text
 
-`#1E293B`
+`#E8EDF4`
 
 Use for primary readable text.
 
@@ -188,7 +189,7 @@ Use for primary readable text.
 
 ### Muted Text
 
-`#64748B`
+`#A7B3C4`
 
 Use for:
 
@@ -204,7 +205,7 @@ Do not use muted text where high readability is required.
 
 Recommended:
 
-`#E2E8F0`
+`#2A394B`
 
 Use for:
 
@@ -224,7 +225,7 @@ Use semantic design tokens.
 
 Recommended:
 
-`#16A34A`
+`#6EE7B7`
 
 Use for:
 
@@ -238,7 +239,7 @@ Use for:
 
 Recommended:
 
-`#F59E0B`
+`#FBBF24`
 
 Use for:
 
@@ -251,7 +252,7 @@ Use for:
 
 Recommended:
 
-`#DC2626`
+`#FB7185`
 
 Use for:
 
@@ -313,9 +314,8 @@ Example:
 ```css
 linear-gradient(
   135deg,
-  #6366F1,
-  #8B5CF6,
-  #22D3EE
+  #4ADEA5,
+  #38BDF8
 )
 ```
 
@@ -337,23 +337,18 @@ Avoid:
 
 ---
 
-## 9. Light and Dark Usage
+## 9. Permanent Dark Theme
 
-Academy v1 should primarily use a light interface.
+Academy uses one permanent dark theme. It does not provide a light theme, theme switcher, or
+system-theme preference. Set the browser and native-control `color-scheme` to dark.
 
-Recommended structure:
+Use the main background for page foundations, the alternate surface for section rhythm, the card
+surface for contained content, and the raised surface for selected or nested content. Nearly all
+large page areas should remain dark. Bright color is reserved for actions, links, icons, badges,
+focus indicators, statuses, and small decorative details.
 
-```text
-Dark / visually strong Hero
-
-Light content sections
-
-Dark Footer
-```
-
-Do not make the entire website dark by default in v1.
-
-Dark mode can be considered later.
+The `dark` token remains a deep background semantic. It must not be used to mean dark-colored text;
+use `foreground` for main text and `muted-foreground` for supporting text.
 
 ---
 
@@ -1208,17 +1203,15 @@ Alternate section backgrounds where helpful.
 Example:
 
 ```text
-Light Background
+Main Dark Background
 
-White
+Alternate Slate Surface
 
-Very Light Tinted Section
+Main Dark Background
 
-White
+Raised Card CTA
 
-Dark CTA
-
-Footer
+Deep Footer
 ```
 
 Avoid changing background color on every single section.
@@ -1317,6 +1310,14 @@ Avoid:
 - Animations that delay interaction
 
 Animations should generally remain short and subtle.
+
+Use opacity and transform for selective one-time entrance reveals, and keep important content in
+the rendered document so it remains visible without JavaScript. Hover and focus transitions should
+normally complete in about 180–200ms; an entrance reveal may use about 600ms. Never use continuous
+decorative animation, scroll hijacking, autoplay media, or large-area effects.
+
+All motion must respect `prefers-reduced-motion`. Under reduced motion, remove transforms, reduce
+animation and transition duration to effectively immediate feedback, and disable smooth scrolling.
 
 ---
 
@@ -1633,20 +1634,20 @@ Avoid:
 
 ## 64. Current Visual Direction
 
-Academy v1 design direction:
+Academy design direction:
 
 ```text
 Style:
 Modern Technology Education
 
 Primary Mode:
-Light
+Permanent dark
 
 Hero:
-May use dark technology-focused treatment
+Dark technical treatment with subtle static grid and glow details
 
 Brand:
-Indigo + Violet + Cyan
+Green + Sky Blue on layered slate surfaces
 
 Layout:
 Spacious and structured

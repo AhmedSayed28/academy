@@ -16,10 +16,10 @@ export default async function TracksPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-surface py-12 sm:py-16 lg:py-20">
-        <Container>
+      <section className="hero-grid border-b border-border bg-surface py-12 sm:py-16 lg:py-20">
+        <Container className="reveal">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">Learning tracks</p>
-          <h1 className="mt-3 max-w-4xl text-heading-1 font-bold tracking-tight text-dark">
+          <h1 className="mt-3 max-w-4xl text-heading-1 font-bold tracking-tight text-foreground">
             Choose a technology direction and follow a structured path.
           </h1>
           <p className="mt-5 max-w-3xl text-body-lg text-muted-foreground">
