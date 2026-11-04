@@ -27,3 +27,7 @@ pnpm build
 ```
 
 `pnpm test:e2e` validates the global responsive layout, navigation behavior, homepage, course, learning-track, instructor, and register-interest experiences. See `AGENTS.md` and `docs/` for engineering and product requirements.
+
+For a new Codex workspace, read [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md) for the current
+implementation snapshot and [`docs/PRODUCT_DECISIONS.md`](docs/PRODUCT_DECISIONS.md) for later
+approved brand decisions. The running site's name and palette still predate those decisions.
