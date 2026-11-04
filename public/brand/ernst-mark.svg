@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Ernst mark</title>
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="#071A33"/>
+  <path d="M337 154H166c-12 0-22 10-22 22v160c0 12 10 22 22 22h171" fill="none" stroke="#FFFFFF" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M166 256h141" fill="none" stroke="#FFFFFF" stroke-width="42" stroke-linecap="round"/>
+  <path d="M284 113h104" stroke="#10C981" stroke-width="16" stroke-linecap="round"/>
+  <path d="M316 145h104" stroke="#0B7BFF" stroke-width="16" stroke-linecap="round"/>
+</svg>

@@ -1697,14 +1697,18 @@ It should not look like a generic course marketplace or traditional training cen
 
 The approved Ernst artwork is stored under `public/brand` with stable filenames:
 
-- `ernst-logo.png` is the full transparent wordmark used in the global header and footer.
-- `ernst-mark.png` is the compact mark reserved for small placements.
+- `ernst-logo.svg` is the supplied transparent wordmark used in the global header and footer. Its
+  view box is tightened to remove unused transparent canvas without changing the artwork.
+- `ernst-mark.svg` is the supplied compact vector mark reserved for small placements.
 - `ernst-favicon.png` is the approved 512 × 512 source for browser and app-icon derivatives.
 - `ernst-og-image.png` is the approved 1200 × 630 social-sharing image.
 - `ernst-geometric-background.png` is the approved dark geometric artwork used only in the homepage hero.
+- `ernst-footer-cover.png` is the approved Arabic campaign cover used once as a responsive visual
+  banner above the footer navigation.
 
-Use the full wordmark for primary brand placement. On the permanent dark interface, place the navy
-wordmark on a white surface with its built-in clear space intact. Do not crop, stretch, recolor,
-rotate, add effects, or reconstruct the artwork. Use the compact mark only where the wordmark cannot
-remain legible, including favicons and app icons. Do not repeat either logo on cards, section
-headings, forms, or decorative UI.
+Use the full wordmark for primary brand placement. The dark interface uses the approved white
+treatment without a surrounding card, while the original navy vector remains the source asset.
+Never stretch, rotate, add effects, or reconstruct the artwork. Use the compact mark only where the
+wordmark cannot remain legible, including favicons and app icons. Keep the footer cover proportional,
+crop it only through responsive `object-fit` behavior, and do not use it as a repeated section
+background. Do not repeat either logo on cards, section headings, forms, or decorative UI.

@@ -13,18 +13,18 @@ export function BrandLogo({
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-lg bg-white",
-        placement === "header" ? "w-[9.25rem] px-1.5 py-1" : "w-[11.25rem] px-2 py-1.5",
+        "inline-flex shrink-0 items-center",
+        placement === "header" ? "w-[7.5rem] sm:w-[8.5rem]" : "w-[9.5rem]",
         className,
       )}
     >
       <Image
         src={siteConfig.assets.logo}
         alt={siteConfig.name}
-        width={900}
-        height={240}
-        sizes={placement === "header" ? "148px" : "180px"}
-        className="h-auto w-full"
+        width={430}
+        height={160}
+        sizes={placement === "header" ? "(min-width: 640px) 136px, 120px" : "152px"}
+        className="h-auto w-full brightness-0 invert"
         loading="eager"
         unoptimized
       />

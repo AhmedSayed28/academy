@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -13,7 +14,19 @@ export function SiteFooter({ locale, copy }: { locale: Locale; copy: Dictionary[
   ];
 
   return (
-    <footer className="bg-dark text-dark-foreground">
+    <footer className="overflow-hidden border-t border-dark-border bg-dark text-dark-foreground">
+      <Container className="pt-8 md:pt-10">
+        <div className="relative aspect-[16/7] overflow-hidden rounded-2xl border border-dark-border bg-raised shadow-2xl shadow-black/20 sm:aspect-[3/1]">
+          <Image
+            src={siteConfig.assets.footerCover}
+            alt="Ernst — اتعلم. طبق. اتقدم. إيرنست هتجهزك للشغل"
+            fill
+            sizes="(max-width: 639px) 150vw, (min-width: 1280px) 1152px, calc(100vw - 3rem)"
+            className="object-cover object-center"
+          />
+        </div>
+      </Container>
+
       <Container className="py-10 md:py-12">
         <div className="grid gap-8 border-b border-dark-border pb-8 sm:grid-cols-[minmax(0,2fr)_minmax(10rem,1fr)]">
           <div className="max-w-xl">

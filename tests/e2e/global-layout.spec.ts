@@ -6,10 +6,24 @@ test("desktop layout exposes global navigation and footer without broken future 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/en");
 
-  await expect(page.locator('header img[alt="Ernst Academy"]')).toBeVisible();
+  const headerLogo = page.locator('header img[alt="Ernst Academy"]');
+  await expect(headerLogo).toBeVisible();
+  await expect(headerLogo).toHaveAttribute("src", "/brand/ernst-logo.svg");
   await expect(
     page.getByRole("banner").getByRole("link", { name: "Ernst Academy home" }),
   ).toHaveAttribute("href", "/en");
+  const footerCover = page.getByAltText(
+    "Ernst — اتعلم. طبق. اتقدم. إيرنست هتجهزك للشغل",
+  );
+  await footerCover.scrollIntoViewIfNeeded();
+  await expect(footerCover).toBeVisible();
+  await expect
+    .poll(() =>
+      footerCover.evaluate(
+        (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+      ),
+    )
+    .toBe(true);
 
   const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
   await expect(primaryNavigation.getByRole("link", { name: "Home" })).toHaveAttribute(

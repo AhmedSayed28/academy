@@ -84,11 +84,13 @@ is reviewed and merged, verify the deployed response independently.
 4. Verify all public routes return the expected status and navigation.
 5. Verify unique page titles, absolute production canonicals, Open Graph metadata, and Twitter
    metadata in deployed HTML, including the Ernst Academy site name and approved social image.
-6. Verify `/robots.txt` allows public paths, excludes `/api/`, and references the production
+6. Confirm the SVG wordmark renders without excess canvas in the header and footer, and that the
+   Arabic footer cover loads proportionally without causing horizontal overflow.
+7. Verify `/robots.txt` allows public paths, excludes `/api/`, and references the production
    sitemap.
-7. Verify `/sitemap.xml` contains only implemented static routes and published detail records.
-8. Verify an unknown path returns HTTP 404 and remains non-indexable.
-9. Verify a preview uses production canonicals and remains non-indexable, using an authorized
+8. Verify `/sitemap.xml` contains only implemented static routes and published detail records.
+9. Verify an unknown path returns HTTP 404 and remains non-indexable.
+10. Verify a preview uses production canonicals and remains non-indexable, using an authorized
    request if Deployment Protection is enabled.
 
 ## Localized route deployment checks

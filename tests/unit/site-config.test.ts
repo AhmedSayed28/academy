@@ -6,11 +6,12 @@ describe("site configuration", () => {
   it("keeps the approved Ernst identity and shared navigation in one source", () => {
     expect(siteConfig.name).toBe("Ernst Academy");
     expect(siteConfig.assets).toEqual({
-      logo: "/brand/ernst-logo.png",
-      mark: "/brand/ernst-mark.png",
+      logo: "/brand/ernst-logo.svg",
+      mark: "/brand/ernst-mark.svg",
       favicon: "/brand/ernst-favicon.png",
       openGraph: "/brand/ernst-og-image.png",
       geometricBackground: "/brand/ernst-geometric-background.png",
+      footerCover: "/brand/ernst-footer-cover.png",
     });
     expect(siteConfig.navigation.map(({ id }) => id)).toEqual([
       "home",
