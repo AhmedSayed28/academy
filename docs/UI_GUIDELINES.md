@@ -1704,7 +1704,7 @@ The approved Ernst artwork is stored under `public/brand` with stable filenames:
 - `ernst-og-image.png` is the approved 1200 × 630 social-sharing image.
 - `ernst-geometric-background.png` is the approved dark geometric artwork used only in the homepage hero.
 - `ernst-footer-cover.png` is the approved Arabic campaign cover used once as a responsive visual
-  banner above the footer navigation.
+  inside the footer identity column, directly below the logo and description.
 
 Use the full wordmark for primary brand placement. The dark interface uses the approved white
 treatment without a surrounding card, while the original navy vector remains the source asset.
