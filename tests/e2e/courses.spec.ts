@@ -4,7 +4,7 @@ test("visitors can discover the approved course with truthful published facts", 
   const response = await page.goto("/en/courses");
 
   expect(response?.status()).toBe(200);
-  await expect(page).toHaveTitle("Technology Courses | Academy");
+  await expect(page).toHaveTitle("Technology Courses | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Build practical skills");
   await expect(page.getByRole("heading", { name: "Software Testing Fundamentals" })).toBeVisible();
   await expect(page.getByText("7,500 EGP")).toBeVisible();
@@ -17,7 +17,7 @@ test("course details connect the approved track, instructor, and interest flow",
   await page.getByRole("link", { name: "Software Testing Fundamentals" }).click();
 
   await expect(page).toHaveURL(/\/courses\/software-testing-fundamentals$/);
-  await expect(page).toHaveTitle("Software Testing Fundamentals | Academy");
+  await expect(page).toHaveTitle("Software Testing Fundamentals | Ernst Academy");
   await expect(page.getByRole("heading", { name: "Module 1 — Manual Testing" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Module 4 — UI Automation Testing" })).toBeVisible();
   await expect(page.getByText("Start date:", { exact: true })).toBeVisible();

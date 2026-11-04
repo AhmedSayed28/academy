@@ -5,7 +5,7 @@ const productionUrl = "https://e2eacademy.vercel.app";
 test("renders canonical and approved social metadata", async ({ page }) => {
   await page.goto("/en/about");
 
-  await expect(page).toHaveTitle("About Academy | Academy");
+  await expect(page).toHaveTitle("About Ernst Academy | Ernst Academy");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
     `${productionUrl}/en/about`,
@@ -13,6 +13,14 @@ test("renders canonical and approved social metadata", async ({ page }) => {
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
     "content",
     `${productionUrl}/en/about`,
+  );
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute(
+    "content",
+    "Ernst Academy",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    `${productionUrl}/brand/ernst-og-image.png`,
   );
   await expect(page.locator('link[rel="alternate"][hreflang="ar"]')).toHaveAttribute(
     "href",
@@ -24,7 +32,15 @@ test("renders canonical and approved social metadata", async ({ page }) => {
   );
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
     "content",
-    "summary",
+    "summary_large_image",
+  );
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+    "content",
+    `${productionUrl}/brand/ernst-og-image.png`,
+  );
+  await expect(page.locator('link[rel="icon"][type="image/x-icon"]')).toHaveAttribute(
+    "href",
+    /favicon\.ico/,
   );
 });
 

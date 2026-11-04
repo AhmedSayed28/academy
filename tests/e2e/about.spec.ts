@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-test("about page presents the approved Academy purpose with a clear heading structure", async ({ page }) => {
+test("about page presents the approved Ernst Academy purpose with a clear heading structure", async ({ page }) => {
   await page.goto("/en/about");
 
-  await expect(page).toHaveTitle("About Academy | Academy");
+  await expect(page).toHaveTitle("About Ernst Academy | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await expect(
     page.getByRole("heading", {
@@ -14,7 +14,7 @@ test("about page presents the approved Academy purpose with a clear heading stru
   await expect(page.getByRole("heading", { name: "Our mission" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Our vision" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Understand, practice, then connect." })).toBeVisible();
-  await expect(page.getByText("Academy provides learning direction and practical development.")).toBeVisible();
+  await expect(page.getByText("Ernst Academy provides learning direction and practical development.")).toBeVisible();
   await expect(page.getByText(/employment, certification, or a specific career outcome/)).toBeVisible();
 });
 

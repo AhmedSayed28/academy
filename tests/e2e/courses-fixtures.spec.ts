@@ -14,7 +14,7 @@ test("a published slug renders server content, optional sections, and metadata",
 
   expect(response?.status()).toBe(200);
   expect(await response?.text()).toContain("Synthetic Open Course");
-  await expect(page).toHaveTitle("Synthetic Open Course | Academy");
+  await expect(page).toHaveTitle("Synthetic Open Course | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1, name: "Synthetic Open Course" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "What you will learn" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Curriculum" })).toBeVisible();

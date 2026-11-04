@@ -6,30 +6,35 @@
 
 :root {
   color-scheme: dark;
-  --background: #0b0f14;
-  --foreground: #e8edf4;
-  --surface: #111821;
-  --card: #18222e;
-  --card-foreground: #e8edf4;
-  --raised: #223142;
-  --popover: #18222e;
-  --popover-foreground: #e8edf4;
-  --primary: #4adea5;
-  --primary-foreground: #07130f;
-  --secondary: #38bdf8;
-  --secondary-foreground: #071119;
-  --accent: #38bdf8;
-  --accent-foreground: #071119;
-  --dark: #0b0f14;
-  --dark-foreground: #e8edf4;
-  --dark-muted: #a7b3c4;
-  --dark-border: #2a394b;
-  --muted-foreground: #a7b3c4;
-  --muted: #223142;
-  --border: #2a394b;
-  --input: #3a4b5f;
-  --ring: #4adea5;
-  --success: #6ee7b7;
+  --brand-primary: #0b2e6b;
+  --brand-secondary: #10c981;
+  --brand-accent: #0b7bff;
+  --brand-neutral: #e5e7eb;
+  --brand-white: #ffffff;
+  --background: #071a33;
+  --foreground: #ffffff;
+  --surface: #09213f;
+  --card: #0b274a;
+  --card-foreground: #ffffff;
+  --raised: #10365f;
+  --popover: #0b274a;
+  --popover-foreground: #ffffff;
+  --primary: #10c981;
+  --primary-foreground: #071a33;
+  --secondary: #63adff;
+  --secondary-foreground: #071a33;
+  --accent: #63adff;
+  --accent-foreground: #071a33;
+  --dark: #071a33;
+  --dark-foreground: #ffffff;
+  --dark-muted: #c2c9d2;
+  --dark-border: #245078;
+  --muted-foreground: #c2c9d2;
+  --muted: #10365f;
+  --border: #245078;
+  --input: #3b6588;
+  --ring: #10c981;
+  --success: #10c981;
   --warning: #fbbf24;
   --destructive: #fb7185;
   --destructive-foreground: #17070a;
@@ -78,6 +83,11 @@
   --color-warning: var(--warning);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-neutral: var(--brand-neutral);
+  --color-brand-white: var(--brand-white);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -101,8 +111,8 @@
   body {
     @apply min-h-screen bg-background font-sans text-foreground antialiased;
     background-image:
-      radial-gradient(circle at 8% -10%, rgb(74 222 165 / 0.06), transparent 30rem),
-      radial-gradient(circle at 92% 12%, rgb(56 189 248 / 0.05), transparent 28rem);
+      radial-gradient(circle at 8% -10%, rgb(16 201 129 / 0.08), transparent 30rem),
+      radial-gradient(circle at 92% 12%, rgb(11 123 255 / 0.08), transparent 28rem);
   }
 
   a,
@@ -156,10 +166,22 @@
     inset: 0;
     z-index: -1;
     background-image:
-      linear-gradient(rgb(74 222 165 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(56 189 248 / 0.04) 1px, transparent 1px);
+      linear-gradient(rgb(16 201 129 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(11 123 255 / 0.055) 1px, transparent 1px);
     background-size: 3.5rem 3.5rem;
     mask-image: linear-gradient(to bottom, black, transparent 82%);
+    content: "";
+  }
+
+  .brand-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(90deg, rgb(7 26 51 / 0.97) 0%, rgb(7 26 51 / 0.82) 46%, rgb(7 26 51 / 0.38) 100%),
+      url("/brand/ernst-geometric-background.png");
+    background-position: center;
+    background-size: cover;
     content: "";
   }
 

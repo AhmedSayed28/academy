@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -18,9 +19,10 @@ export function SiteFooter({ locale, copy }: { locale: Locale; copy: Dictionary[
           <div className="max-w-xl">
             <Link
               href={localizePath(locale, "/")}
-              className="inline-flex min-h-11 items-center rounded-md text-xl font-bold tracking-tight"
+              aria-label={copy.navigation.homeLabel}
+              className="inline-flex min-h-11 items-center rounded-lg focus-visible:outline-offset-4"
             >
-              {siteConfig.name}
+              <BrandLogo placement="footer" />
             </Link>
             <p className="mt-2 text-sm leading-6 text-dark-muted">{copy.description}</p>
           </div>

@@ -4,7 +4,7 @@ test("instructor listing presents the approved image-free profile", async ({ pag
   const response = await page.goto("/en/instructors");
 
   expect(response?.status()).toBe(200);
-  await expect(page).toHaveTitle("Technology Instructors | Academy");
+  await expect(page).toHaveTitle("Technology Instructors | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await expect(page.getByRole("main").locator("article")).toHaveCount(1);
   await expect(page.getByRole("heading", { name: "Ahmed Sayed Ahmed" })).toBeVisible();

@@ -64,7 +64,7 @@ test("Arabic FAQ supports keyboard interaction", async ({ page }) => {
   const question = page.locator("details").first().locator("summary");
   await question.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByText(/Academy منصة لتعليم التكنولوجيا/)).toBeVisible();
+  await expect(page.getByText(/Ernst Academy منصة لتعليم التكنولوجيا/)).toBeVisible();
 });
 
 test("invalid locale and unknown localized content return real 404 responses", async ({ page }) => {

@@ -53,11 +53,23 @@ describe("metadata", () => {
       languages: { ar: "/ar/about", en: "/en/about", "x-default": "/ar/about" },
     });
     expect(metadata.openGraph).toMatchObject({
-      title: "About | Academy",
+      title: "About | Ernst Academy",
       url: "/en/about",
-      siteName: "Academy",
+      siteName: "Ernst Academy",
+      images: [
+        {
+          url: "/brand/ernst-og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Ernst Academy - Software learning, built for real work.",
+        },
+      ],
     });
-    expect(metadata.twitter).toMatchObject({ card: "summary", title: "About | Academy" });
+    expect(metadata.twitter).toMatchObject({
+      card: "summary_large_image",
+      title: "About | Ernst Academy",
+      images: ["/brand/ernst-og-image.png"],
+    });
   });
 
   it("publishes course metadata only for a published record", async () => {

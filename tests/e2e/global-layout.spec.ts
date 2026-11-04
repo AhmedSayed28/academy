@@ -6,6 +6,11 @@ test("desktop layout exposes global navigation and footer without broken future 
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/en");
 
+  await expect(page.locator('header img[alt="Ernst Academy"]')).toBeVisible();
+  await expect(
+    page.getByRole("banner").getByRole("link", { name: "Ernst Academy home" }),
+  ).toHaveAttribute("href", "/en");
+
   const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
   await expect(primaryNavigation.getByRole("link", { name: "Home" })).toHaveAttribute(
     "aria-current",
@@ -41,6 +46,8 @@ test("desktop layout exposes global navigation and footer without broken future 
 test("mobile menu supports disclosure, focus, escape, and touch-sized controls", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en");
+
+  await expect(page.locator('header img[alt="Ernst Academy"]')).toBeVisible();
 
   const menuButton = page.getByRole("button", { name: "Open navigation menu" });
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");
