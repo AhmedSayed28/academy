@@ -19,7 +19,7 @@ test("a published track renders server content, metadata, and approved relations
 
   expect(response?.status()).toBe(200);
   expect(await response?.text()).toContain("Synthetic first step");
-  await expect(page).toHaveTitle("Software Testing Learning Track | Academy");
+  await expect(page).toHaveTitle("Software Testing Learning Track | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1, name: "Software Testing" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Career goal" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Skills you will build" })).toBeVisible();

@@ -1,6 +1,6 @@
-# Academy
+# Ernst Academy
 
-Academy is a practical technology education platform. The public experience includes the homepage, course catalog, documented learning-track directions, an instructor directory ready for approved profiles, and a general-interest form backed by Supabase.
+Ernst Academy is a practical technology education platform. The public experience includes the homepage, course catalog, documented learning-track directions, an instructor directory ready for approved profiles, and a general-interest form backed by Supabase.
 
 ## Local development
 
@@ -17,6 +17,9 @@ need no Supabase credentials. Lead and contact submission require the server-onl
 configuration and database migrations described in [`docs/DATABASE.md`](docs/DATABASE.md).
 Deployment environment scope and verification are documented in
 [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
+The approved Ernst identity assets live in `public/brand`. Logo, icon, palette, and placement rules
+are documented in [`docs/UI_GUIDELINES.md`](docs/UI_GUIDELINES.md).
 
 ## Checks
 

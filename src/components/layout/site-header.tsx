@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { siteConfig, type NavigationItem } from "@/config/site";
@@ -156,16 +157,10 @@ export function SiteHeader({
         <Link
           href={localizePath(locale, "/")}
           aria-label={copy.homeLabel}
-          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-md font-bold tracking-tight text-foreground hover:text-primary"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-lg focus-visible:outline-offset-4"
           onClick={closeMenu}
         >
-          <span
-            aria-hidden="true"
-            className="grid size-9 place-items-center rounded-lg bg-primary text-sm text-primary-foreground shadow-sm"
-          >
-            A
-          </span>
-          <span>{siteConfig.name}</span>
+          <BrandLogo />
         </Link>
 
         <nav aria-label={copy.primaryNavigation} className="hidden items-center gap-1 lg:flex">
