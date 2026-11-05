@@ -311,8 +311,8 @@ const en = {
     title: "How can we help?",
     description: "Ask us about Ernst Academy, its learning approach, or the technology education you are looking for. Share enough detail for us to understand your question.",
     otherWays: "Other ways to contact us",
-    emailErnst Academy: "Email Ernst Academy",
-    whatsappErnst Academy: "WhatsApp Ernst Academy",
+    emailAcademy: "Email Ernst Academy",
+    whatsappAcademy: "WhatsApp Ernst Academy",
     formTitle: "Send a message",
     formDescription: "Complete the form to send your question to Ernst Academy.",
     form: {
@@ -429,7 +429,7 @@ const ar = {
     ],
   },
   contact: {
-    eyebrow: "تواصل مع Ernst Academy", title: "نقدر نساعدك إزاي؟", description: "اسألنا عن Ernst Academy أو طريقة التعلم أو نوع التعليم التكنولوجي اللي بتدور عليه. شارك تفاصيل كفاية علشان نفهم سؤالك.", otherWays: "طرق تانية للتواصل", emailErnst Academy: "ابعت إيميل لـErnst Academy", whatsappErnst Academy: "كلم Ernst Academy على WhatsApp", formTitle: "ابعتلنا سؤالك", formDescription: "كمّل البيانات علشان تبعت سؤالك لـErnst Academy.",
+    eyebrow: "تواصل مع Ernst Academy", title: "نقدر نساعدك إزاي؟", description: "اسألنا عن Ernst Academy أو طريقة التعلم أو نوع التعليم التكنولوجي اللي بتدور عليه. شارك تفاصيل كفاية علشان نفهم سؤالك.", otherWays: "طرق تانية للتواصل", emailAcademy: "ابعت إيميل لـErnst Academy", whatsappAcademy: "كلم Ernst Academy على WhatsApp", formTitle: "ابعتلنا سؤالك", formDescription: "كمّل البيانات علشان تبعت سؤالك لـErnst Academy.",
     form: { fullName: "الاسم بالكامل", email: "البريد الإلكتروني", phone: "رقم الموبايل", optional: "اختياري", subject: "عنوان الرسالة", message: "رسالتك", messageHelp: "اكتب التفاصيل اللي تساعدنا نفهم سؤالك.", requiredHelp: "الخانات اللي عليها علامة النجمة مطلوبة.", submit: "ابعت الرسالة", submitting: "جاري إرسال الرسالة…", success: "وصلتنا رسالتك بنجاح. شكرًا لتواصلك مع Ernst Academy.", failure: "مقدرناش نبعت رسالتك دلوقتي. بياناتك لسه موجودة، جرّب تاني بعد شوية.", validationFailure: "راجع الخانات المحددة وجرّب تاني.", validation: { fullNameMin: "اكتب اسمك بالكامل.", fullNameMax: "الاسم لازم يكون 100 حرف أو أقل.", emailRequired: "اكتب بريدك الإلكتروني.", emailMax: "البريد الإلكتروني لازم يكون 254 حرف أو أقل.", emailInvalid: "اكتب بريد إلكتروني صحيح.", phoneMax: "رقم الموبايل لازم يكون 30 حرف أو أقل.", phoneInvalid: "اكتب رقم موبايل صحيح.", subjectMin: "اكتب عنوان للرسالة.", subjectMax: "عنوان الرسالة لازم يكون 150 حرف أو أقل.", messageMin: "اكتب رسالة من 10 حروف على الأقل.", messageMax: "الرسالة لازم تكون 2,000 حرف أو أقل." } },
   },
   interest: {
