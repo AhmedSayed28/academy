@@ -5,32 +5,12 @@ import { instructorService } from "../../src/features/instructors/services/instr
 import { trackService } from "../../src/features/tracks/services/track.service";
 
 describe("approved public content", () => {
-  it("publishes the approved course as one featured four-module diploma", async () => {
+  it("publishes exactly the four approved standalone courses without invented details", async () => {
     const courses = await courseService.getPublishedCourses();
 
-    expect(courses).toHaveLength(1);
-    expect(courses[0]).toMatchObject({
-      slug: "software-testing-fundamentals",
-      title: "Software Testing Fundamentals",
-      track: "Software Testing",
-      trackSlug: "software-testing",
-      level: "Beginner",
-      duration: "4 months",
-      availability: "Upcoming",
-      startDate: "To be announced",
-      price: { amount: 7500, currency: "EGP" },
-      registrationUrl: "/register-interest",
-      featured: true,
-      published: true,
-    });
-    expect(courses[0]?.deliveryType).toBeUndefined();
-    expect(courses[0]?.curriculum).toHaveLength(4);
-    expect(courses[0]?.curriculum?.map(({ title }) => title)).toEqual([
-      "Module 1 — Manual Testing",
-      "Module 2 — API Testing",
-      "Module 3 — Database Testing",
-      "Module 4 — UI Automation Testing",
-    ]);
+    expect(courses.map(({ slug }) => slug)).toEqual(["istqb-foundation-level", "software-testing-practical", "front-end-development", "back-end-development"]);
+    expect(courses.every((course) => course.featured && course.published)).toBe(true);
+    expect(courses.every((course) => !course.price && !course.duration && !course.instructor && !course.curriculum)).toBe(true);
   });
 
   it("publishes the approved track with a valid course relationship", async () => {
@@ -38,12 +18,10 @@ describe("approved public content", () => {
 
     expect(detail?.track).toMatchObject({
       name: "Software Testing",
-      courseSlugs: ["software-testing-fundamentals"],
+      courseSlugs: ["istqb-foundation-level", "software-testing-practical"],
       published: true,
     });
-    expect(detail?.relatedCourses.map(({ slug }) => slug)).toEqual([
-      "software-testing-fundamentals",
-    ]);
+    expect(detail?.relatedCourses.map(({ slug }) => slug)).toEqual(["istqb-foundation-level", "software-testing-practical"]);
   });
 
   it("publishes only the approved image-free instructor profile", async () => {

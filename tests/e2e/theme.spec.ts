@@ -2,11 +2,10 @@ import { expect, test } from "@playwright/test";
 
 const reviewRoutes = [
   "/en",
-  "/en/courses/software-testing-fundamentals",
+  "/en/courses/istqb-foundation-level",
   "/en/tracks/software-testing",
-  "/en/instructors",
   "/en/contact",
-  "/en/register-interest",
+  "/en/course-registration",
   "/en/faq",
   "/en/about",
   "/en/phase-14-visual-review-not-found",

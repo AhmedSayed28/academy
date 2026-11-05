@@ -9,11 +9,10 @@ const staticPaths = [
   "/",
   "/courses",
   "/tracks",
-  "/instructors",
   "/about",
   "/contact",
   "/faq",
-  "/register-interest",
+  "/course-registration",
 ] as const;
 
 interface SitemapSources {

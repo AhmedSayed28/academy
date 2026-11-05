@@ -5,25 +5,14 @@ import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/translations";
 
 export function localizeCourse(course: Course, locale: Locale): Course {
-  if (course.slug !== "software-testing-fundamentals") return course;
-
-  const copy = getDictionary(locale).courseContent;
-  return {
-    ...course,
-    title: copy.title,
-    shortDescription: copy.shortDescription,
-    description: copy.description,
-    instructor: course.instructor
-      ? { ...course.instructor, title: copy.instructorTitle }
-      : undefined,
-    learningOutcomes: [...copy.learningOutcomes],
-    targetAudience: [...copy.targetAudience],
-    prerequisites: [...copy.prerequisites],
-    curriculum: copy.curriculum.map((section) => ({
-      title: section.title,
-      topics: [...section.topics],
-    })),
+  if (locale === "en") return course;
+  const arabic: Record<string, { shortDescription: string; description: string; track: string }> = {
+    "istqb-foundation-level": { shortDescription: "كورس ISTQB مستقل وجزء من مسار Software Testing.", description: "كورس ISTQB Foundation Level متاح لوحده، وممكن تسجّل فيه مع Software Testing Practical من خلال مسار Software Testing.", track: "Software Testing" },
+    "software-testing-practical": { shortDescription: "كورس Software Testing عملي مستقل وجزء من مسار Software Testing.", description: "كورس Software Testing Practical متاح لوحده، وممكن تسجّل فيه مع ISTQB Foundation Level من خلال مسار Software Testing.", track: "Software Testing" },
+    "front-end-development": { shortDescription: "كورس Front End مستقل وجزء من مسار Full Stack Development.", description: "كورس Front End Development متاح لوحده، وممكن تسجّل فيه مع Back End Development من خلال مسار Full Stack Development.", track: "Front End Development" },
+    "back-end-development": { shortDescription: "كورس Back End مستقل وجزء من مسار Full Stack Development.", description: "كورس Back End Development متاح لوحده، وممكن تسجّل فيه مع Front End Development من خلال مسار Full Stack Development.", track: "Back End Development" },
   };
+  return arabic[course.slug] ? { ...course, ...arabic[course.slug] } : course;
 }
 
 export function localizeTrack(track: Track, locale: Locale): Track {

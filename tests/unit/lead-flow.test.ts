@@ -10,8 +10,8 @@ const validRequest = {
   submissionId: "ebad4e3d-d9b7-4fd8-8e9d-a56c5c26866c",
   fullName: "  Test Learner  ",
   email: "  LEARNER@example.com ",
-  phone: "",
-  message: "  Interested in practical engineering skills.  ",
+  phone: "+20 100 000 0000",
+  selectedCourseSlug: "istqb-foundation-level",
 };
 
 function request(body: unknown) {
@@ -23,26 +23,27 @@ function request(body: unknown) {
 }
 
 describe("lead form validation", () => {
-  it("accepts the minimal follow-up details without a course or track", () => {
+  it("accepts all required details with an approved course", () => {
     expect(
       leadFormSchema.parse({
         fullName: "Test Learner",
         email: "learner@example.com",
-        phone: "",
-        message: "",
+        phone: "+20 100 000 0000",
+        selectedCourseSlug: "istqb-foundation-level",
       }),
     ).toEqual({
       fullName: "Test Learner",
       email: "learner@example.com",
-      phone: "",
-      message: "",
+      phone: "+20 100 000 0000",
+      selectedCourseSlug: "istqb-foundation-level",
     });
   });
 
   it.each([
-    ["missing name", { fullName: "", email: "learner@example.com", phone: "", message: "" }],
-    ["invalid email", { fullName: "Test Learner", email: "not-email", phone: "", message: "" }],
-    ["invalid phone", { fullName: "Test Learner", email: "learner@example.com", phone: "call me", message: "" }],
+    ["missing name", { fullName: "", email: "learner@example.com", phone: "+20100", selectedCourseSlug: "istqb-foundation-level" }],
+    ["invalid email", { fullName: "Test Learner", email: "not-email", phone: "+20100", selectedCourseSlug: "istqb-foundation-level" }],
+    ["invalid phone", { fullName: "Test Learner", email: "learner@example.com", phone: "call me", selectedCourseSlug: "istqb-foundation-level" }],
+    ["obsolete selection", { fullName: "Test Learner", email: "learner@example.com", phone: "+20100", selectedCourseSlug: "software-testing-fundamentals" }],
   ])("rejects %s", (_name, input) => {
     expect(leadFormSchema.safeParse(input).success).toBe(false);
   });
@@ -70,8 +71,8 @@ describe("POST /api/leads", () => {
         submissionId: validRequest.submissionId,
         fullName: "Test Learner",
         email: "learner@example.com",
-        phone: null,
-        message: "Interested in practical engineering skills.",
+        phone: "+20 100 000 0000",
+        selectedCourseSlug: "istqb-foundation-level",
       },
     ]);
   });
@@ -126,7 +127,7 @@ describe("Supabase lead repository", () => {
         fullName: "Test Learner",
         email: "learner@example.com",
         phone: null,
-        message: null,
+        selectedCourseSlug: "full-stack-development",
       }),
     ).rejects.toThrow("Lead persistence is not configured.");
     expect(fetchImplementation).not.toHaveBeenCalled();
@@ -147,8 +148,8 @@ describe("Supabase lead repository", () => {
       submissionId: validRequest.submissionId,
       fullName: "Test Learner",
       email: "learner@example.com",
-      phone: null,
-      message: "Test-only interest",
+      phone: "+20100",
+      selectedCourseSlug: "software-testing-track",
     };
 
     await repository.create(lead);
@@ -167,8 +168,8 @@ describe("Supabase lead repository", () => {
       submission_id: lead.submissionId,
       full_name: lead.fullName,
       email: lead.email,
-      phone: null,
-      message: lead.message,
+      phone: "+20100",
+      selected_course_slug: lead.selectedCourseSlug,
     });
   });
 });

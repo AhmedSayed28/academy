@@ -2,6 +2,11 @@
 
 ## 1. Project Overview
 
+Current Academy catalog: ISTQB Foundation Level, Software Testing Practical, Front End
+Development, and Back End Development. Software Testing Track and Full Stack Development are
+combined registration choices. Instructor profiles are temporarily unpublished, without deleting
+their stored data.
+
 Academy is a modern technology education platform focused on practical, career-oriented learning.
 
 The platform will provide structured learning paths, professional technology courses, instructor-led programs, and real-world project-based education in areas such as:

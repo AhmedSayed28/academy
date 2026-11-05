@@ -11,6 +11,7 @@ import {
   type LeadFormValues,
 } from "@/features/leads/schemas/lead.schema";
 import type { Dictionary } from "@/i18n/translations";
+import { registrationOptions } from "@/features/leads/registration-options";
 
 type SubmissionFeedback =
   | { state: "idle" }
@@ -42,7 +43,7 @@ function getApiErrorCode(value: unknown): string | undefined {
   return typeof code === "string" ? code : undefined;
 }
 
-export function RegisterInterestForm({ copy }: { copy: Dictionary["interest"]["form"] }) {
+export function RegisterInterestForm({ copy, initialSelection = "" }: { copy: Dictionary["interest"]["form"]; initialSelection?: string }) {
   const [feedback, setFeedback] = useState<SubmissionFeedback>({ state: "idle" });
   const submissionLock = useRef(false);
   const submissionId = useRef<string | null>(null);
@@ -53,7 +54,7 @@ export function RegisterInterestForm({ copy }: { copy: Dictionary["interest"]["f
     formState: { errors, isSubmitting },
   } = useForm<LeadFormValues>({
     resolver: zodResolver(createLeadFormSchema(copy.validation)),
-    defaultValues: { fullName: "", email: "", phone: "", message: "" },
+    defaultValues: { fullName: "", email: "", phone: "", selectedCourseSlug: initialSelection },
   });
 
   async function handleValidSubmit(values: LeadFormValues) {
@@ -149,7 +150,7 @@ export function RegisterInterestForm({ copy }: { copy: Dictionary["interest"]["f
 
       <div>
         <label htmlFor="phone" className="text-sm font-semibold text-foreground">
-          {copy.phone} <span className="font-normal text-muted-foreground">({copy.optional})</span>
+          {copy.phone} <span aria-hidden="true" className="text-destructive">*</span>
         </label>
         <input
           id="phone"
@@ -170,26 +171,27 @@ export function RegisterInterestForm({ copy }: { copy: Dictionary["interest"]["f
       </div>
 
       <div>
-        <label htmlFor="message" className="text-sm font-semibold text-foreground">
-          {copy.message}{" "}
-          <span className="font-normal text-muted-foreground">({copy.optional})</span>
+        <label htmlFor="selectedCourseSlug" className="text-sm font-semibold text-foreground">
+          {copy.selection} <span aria-hidden="true" className="text-destructive">*</span>
         </label>
-        <textarea
-          id="message"
-          rows={5}
+        <select
+          id="selectedCourseSlug"
           disabled={disabled}
-          aria-invalid={errors.message ? "true" : "false"}
-          aria-describedby={errors.message ? "message-error" : "message-help"}
+          aria-invalid={errors.selectedCourseSlug ? "true" : "false"}
+          aria-describedby={errors.selectedCourseSlug ? "selection-error" : "selection-help"}
           className={inputClassName}
-          {...register("message")}
-        />
-        {errors.message ? (
-          <p id="message-error" className="mt-2 text-sm text-destructive">
-            {errors.message.message}
+          {...register("selectedCourseSlug")}
+        >
+          <option value="">{copy.selectionPlaceholder}</option>
+          {registrationOptions.map((option) => <option key={option.slug} value={option.slug}>{copy.options[option.slug]}</option>)}
+        </select>
+        {errors.selectedCourseSlug ? (
+          <p id="selection-error" className="mt-2 text-sm text-destructive">
+            {errors.selectedCourseSlug.message}
           </p>
         ) : (
-          <p id="message-help" className="mt-2 text-sm text-muted-foreground">
-            {copy.messageHelp}
+          <p id="selection-help" className="mt-2 text-sm text-muted-foreground">
+            {copy.selectionHelp}
           </p>
         )}
       </div>

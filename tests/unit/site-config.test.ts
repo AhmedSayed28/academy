@@ -9,7 +9,6 @@ describe("site configuration", () => {
       "home",
       "courses",
       "tracks",
-      "instructors",
       "about",
       "contact",
     ]);
@@ -18,10 +17,10 @@ describe("site configuration", () => {
   it("only marks routes implemented in this phase as available", () => {
     expect(
       siteConfig.navigation.filter(({ available }) => available).map(({ href }) => href),
-    ).toEqual(["/", "/courses", "/tracks", "/instructors", "/about", "/contact"]);
+    ).toEqual(["/", "/courses", "/tracks", "/about", "/contact"]);
     expect(siteConfig.primaryAction).toMatchObject({
       id: "registerInterest",
-      href: "/register-interest",
+      href: "/course-registration",
       available: true,
     });
     expect(siteConfig.footerNavigation).toEqual([

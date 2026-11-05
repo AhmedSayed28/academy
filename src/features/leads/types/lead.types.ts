@@ -7,7 +7,7 @@ export interface LeadRecord {
   fullName: string;
   email: string;
   phone: string | null;
-  message: string | null;
+  selectedCourseSlug: string;
 }
 
 export type LeadApiSuccess = {
@@ -18,7 +18,7 @@ export type LeadApiSuccess = {
 export type LeadApiError = {
   success: false;
   error: {
-    code: "VALIDATION_ERROR" | "PERSISTENCE_ERROR";
+    code: "VALIDATION_ERROR" | "PERSISTENCE_ERROR" | "RATE_LIMITED";
     message: string;
   };
 };

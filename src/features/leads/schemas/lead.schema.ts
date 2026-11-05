@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { registrationOptions } from "@/features/leads/registration-options";
 
 const phonePattern = /^[+()\d\s.-]+$/;
 
@@ -10,7 +11,9 @@ export interface LeadValidationMessages {
   emailInvalid: string;
   phoneMax: string;
   phoneInvalid: string;
-  messageMax: string;
+  phoneRequired: string;
+  selectionRequired: string;
+  selectionInvalid: string;
 }
 
 const englishMessages: LeadValidationMessages = {
@@ -21,7 +24,9 @@ const englishMessages: LeadValidationMessages = {
   emailInvalid: "Enter a valid email address.",
   phoneMax: "Phone number must be 30 characters or fewer.",
   phoneInvalid: "Enter a valid phone number.",
-  messageMax: "Message must be 1,000 characters or fewer.",
+  phoneRequired: "Enter your phone number.",
+  selectionRequired: "Select a course or registration path.",
+  selectionInvalid: "Select an available course or registration path.",
 };
 
 export function createLeadFormSchema(messages: LeadValidationMessages) {
@@ -40,14 +45,15 @@ export function createLeadFormSchema(messages: LeadValidationMessages) {
   phone: z
     .string()
     .trim()
+    .min(1, messages.phoneRequired)
     .max(30, messages.phoneMax)
-    .refine((value) => value.length === 0 || phonePattern.test(value), {
+    .refine((value) => phonePattern.test(value), {
       message: messages.phoneInvalid,
     }),
-  message: z
-    .string()
-    .trim()
-    .max(1000, messages.messageMax),
+  selectedCourseSlug: z.string().trim().min(1, messages.selectionRequired).refine(
+    (value) => registrationOptions.some((option) => option.slug === value),
+    messages.selectionInvalid,
+  ),
   });
 }
 
@@ -58,8 +64,7 @@ export const leadRequestSchema = leadFormSchema
   .transform((value) => ({
     ...value,
     email: value.email.toLowerCase(),
-    phone: value.phone || null,
-    message: value.message || null,
+    phone: value.phone,
   }));
 
 export type LeadFormValues = z.input<typeof leadFormSchema>;

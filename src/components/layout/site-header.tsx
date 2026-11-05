@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { Container } from "@/components/layout/container";
@@ -124,6 +124,7 @@ export function SiteHeader({
   copy: Dictionary["site"]["navigation"];
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
@@ -146,7 +147,8 @@ export function SiteHeader({
 
   const closeMenu = () => setIsMenuOpen(false);
   const alternateLocale: Locale = locale === "ar" ? "en" : "ar";
-  const alternateHref = replacePathLocale(pathname, alternateLocale);
+  const query = searchParams.toString();
+  const alternateHref = `${replacePathLocale(pathname, alternateLocale)}${query ? `?${query}` : ""}`;
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">

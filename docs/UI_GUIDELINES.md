@@ -47,6 +47,11 @@ Avoid visual styles that feel:
 
 ## 3. Core Design Principle
 
+Course cards show only approved standalone offerings and avoid instructor, price, duration,
+schedule, or delivery claims until those details are published. Combined paths are visually
+separated from course cards and explicitly identify the two courses they include. Registration
+uses a required native select with localized labels, errors, and RTL/LTR behavior.
+
 Clarity is more important than decoration.
 
 Every visual element should help the visitor:

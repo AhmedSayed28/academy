@@ -2,7 +2,7 @@ import type { FaqItem } from "@/features/faq/content";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/translations";
 
-const actionPaths = ["/about", undefined, "/courses", "/register-interest", undefined, "/contact", "/contact"] as const;
+const actionPaths = ["/about", undefined, "/courses", "/course-registration", undefined, "/contact", "/contact"] as const;
 
 export function getLocalizedFaqItems(locale: Locale): readonly FaqItem[] {
   return getDictionary(locale).faq.items.map((item, index) => {

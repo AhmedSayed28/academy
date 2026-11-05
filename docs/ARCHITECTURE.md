@@ -25,6 +25,11 @@ This document is the primary technical reference for implementation decisions.
 
 ## 2. Architecture Goals
 
+Course registration remains within the existing UI → service → repository → Supabase flow. The
+server validates a stable option slug against the six approved choices before persistence; no
+payment, authentication, email, or LMS dependency is introduced. Catalog and instructor records
+remain source-controlled, while instructor routes and links are temporarily unpublished.
+
 The architecture should optimize for:
 
 - Simplicity
