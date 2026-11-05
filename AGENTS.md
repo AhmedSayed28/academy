@@ -14,12 +14,19 @@ Before implementing a feature, read relevant documents inside:
 
 At minimum, review:
 
+- CODEX_HANDOFF.md
+- PRODUCT_DECISIONS.md
 - PROJECT_VISION.md
 - ARCHITECTURE.md
 - UI_GUIDELINES.md
 - FEATURES.md
 
 Do not invent product requirements when documentation already defines the expected behavior.
+
+`docs/PRODUCT_DECISIONS.md` records later approved brand and product decisions. Where an older
+example or provisional palette in this file or another v1 document conflicts with those decisions,
+follow the later decision. `docs/CODEX_HANDOFF.md` records implementation status and remaining work;
+verify its status against the current code and `main` before acting.
 
 ---
 
