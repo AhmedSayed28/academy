@@ -5,7 +5,7 @@ async function completeForm(page: Page) {
   await page.getByLabel("Email address").fill("visitor@example.com");
   await page.getByLabel("Phone number").fill("+20 100 000 0000");
   await page.getByLabel("Subject").fill("Course question");
-  await page.getByRole("textbox", { name: /^Message/ }).fill("Please share more about the Academy learning approach.");
+  await page.getByRole("textbox", { name: /^Message/ }).fill("Please share more about the Ernst Academy learning approach.");
 }
 
 test("validates required contact fields without sending invalid data", async ({ page }) => {
@@ -59,7 +59,7 @@ test("submits once, shows loading feedback, and resets after confirmed success",
     email: "visitor@example.com",
     phone: "+20 100 000 0000",
     subject: "Course question",
-    message: "Please share more about the Academy learning approach.",
+    message: "Please share more about the Ernst Academy learning approach.",
   });
   expect(submittedBody?.submissionId).toMatch(
     /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i,
@@ -170,7 +170,7 @@ test("Arabic contact localizes validation, success, and safe failure feedback", 
   await page.getByLabel("الاسم بالكامل").fill("زائر تجريبي");
   await page.getByLabel("البريد الإلكتروني").fill("visitor@example.com");
   await page.getByLabel("عنوان الرسالة").fill("سؤال عن الكورس");
-  await page.getByLabel("رسالتك").fill("محتاج أعرف تفاصيل أكتر عن طريقة التعلم في Academy.");
+  await page.getByLabel("رسالتك").fill("محتاج أعرف تفاصيل أكتر عن طريقة التعلم في Ernst Academy.");
   await page.getByRole("button", { name: "ابعت الرسالة" }).click();
   await expect(
     page.getByRole("alert").filter({ hasText: "مقدرناش نبعت رسالتك دلوقتي" }),

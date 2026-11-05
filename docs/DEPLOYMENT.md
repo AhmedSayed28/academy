@@ -2,7 +2,7 @@
 
 ## Canonical production origin
 
-Academy's canonical public origin is:
+Ernst Academy's canonical public origin is:
 
 ```text
 https://e2eacademy.vercel.app
@@ -15,6 +15,14 @@ and `sitemap.xml` stable when a preview is rendered on a temporary Vercel hostna
 
 Local builds and development servers also require this variable. Start from `.env.example` and
 keep real secret values in ignored local files or the Vercel environment settings.
+
+## Brand and social metadata
+
+The platform identity is `Ernst Academy`. Localized page metadata uses that name for title templates,
+Open Graph site identity, and Twitter metadata. The approved 1200 × 630 social image is published at
+`/brand/ernst-og-image.png`; favicon and app-icon metadata use the approved compact Ernst mark.
+After deployment, verify these asset URLs return successfully and that social debuggers refresh any
+cached preview from the previous identity.
 
 ## Required Vercel environment variables
 
@@ -75,12 +83,14 @@ is reviewed and merged, verify the deployed response independently.
 3. Redeploy the merged `main` commit if any environment setting was added or changed.
 4. Verify all public routes return the expected status and navigation.
 5. Verify unique page titles, absolute production canonicals, Open Graph metadata, and Twitter
-   metadata in deployed HTML.
-6. Verify `/robots.txt` allows public paths, excludes `/api/`, and references the production
+   metadata in deployed HTML, including the Ernst Academy site name and approved social image.
+6. Confirm the SVG wordmark renders without excess canvas in the header and footer, and that the
+   Arabic footer cover loads proportionally without causing horizontal overflow.
+7. Verify `/robots.txt` allows public paths, excludes `/api/`, and references the production
    sitemap.
-7. Verify `/sitemap.xml` contains only implemented static routes and published detail records.
-8. Verify an unknown path returns HTTP 404 and remains non-indexable.
-9. Verify a preview uses production canonicals and remains non-indexable, using an authorized
+8. Verify `/sitemap.xml` contains only implemented static routes and published detail records.
+9. Verify an unknown path returns HTTP 404 and remains non-indexable.
+10. Verify a preview uses production canonicals and remains non-indexable, using an authorized
    request if Deployment Protection is enabled.
 
 ## Localized route deployment checks

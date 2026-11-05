@@ -1,8 +1,8 @@
-# Academy Platform — UI Guidelines v1.0
+# Ernst Academy Platform — UI Guidelines v1.0
 
 ## 1. Purpose
 
-This document defines the visual and interaction standards for the Academy platform.
+This document defines the visual and interaction standards for the Ernst Academy platform.
 
 Its purpose is to ensure that all pages and components follow a consistent visual language.
 
@@ -22,7 +22,7 @@ The platform should feel like a modern technology product, not a traditional tra
 
 ## 2. Design Personality
 
-The Academy interface should feel:
+The Ernst Academy interface should feel:
 
 - Modern
 - Clean
@@ -90,47 +90,47 @@ The design system should define:
 
 ## 5. Color Palette
 
-Academy uses one permanent dark palette. Raw values belong in the centralized theme
+Ernst Academy uses one permanent dark palette. Raw values belong in the centralized theme
 configuration; components consume semantic tokens.
 
 ### Primary
 
-`#4ADEA5`
+`#0B2E6B`
+
+Navy.
+
+Use for:
+
+- Core identity surfaces
+- Deep branded panels
+- Logo artwork on approved light surfaces
+- Structural brand accents
+
+---
+
+### Secondary
+
+`#10C981`
 
 Green.
 
 Use for:
 
 - Primary actions
-- Links
+- Links and focus states
+- Success feedback
 - Important highlights
-- Active states
-- Selected elements
 
----
-
-### Secondary
-
-`#38BDF8`
-
-Sky blue.
-
-Use for:
-
-- Secondary brand accents
-- Gradients
-- Decorative highlights
-- Selected visual elements
-
-Do not use secondary color as frequently as the primary.
+Green is the primary interactive color on the permanent dark interface because it preserves strong
+contrast against the dark background.
 
 ---
 
 ### Accent
 
-`#38BDF8`
+`#0B7BFF`
 
-Sky blue, sharing the secondary hue where a technical accent is needed.
+Bright blue.
 
 Use carefully for:
 
@@ -145,7 +145,7 @@ Accent color should not dominate large areas.
 
 ### Dark
 
-`#0B0F14`
+`#071A33`
 
 Use for:
 
@@ -157,7 +157,7 @@ Use for:
 
 ### Background
 
-`#0B0F14`
+`#071A33`
 
 Primary dark background.
 
@@ -172,21 +172,21 @@ Use for:
 
 Recommended:
 
-`#111821`
+`#09213F`
 
 Use for:
 
 - Alternate sections
 - Navigation
 
-Cards, inputs, forms, and popovers use `#18222E`. Raised and highlighted neutral surfaces use
-`#223142`.
+Cards, inputs, forms, and popovers use derived navy surfaces such as `#0B274A`. Raised and
+highlighted neutral surfaces use `#10365F`.
 
 ---
 
 ### Main Text
 
-`#E8EDF4`
+`#FFFFFF`
 
 Use for primary readable text.
 
@@ -194,7 +194,7 @@ Use for primary readable text.
 
 ### Muted Text
 
-`#A7B3C4`
+`#C2C9D2`
 
 Use for:
 
@@ -210,7 +210,7 @@ Do not use muted text where high readability is required.
 
 Recommended:
 
-`#2A394B`
+`#245078`
 
 Use for:
 
@@ -230,7 +230,7 @@ Use semantic design tokens.
 
 Recommended:
 
-`#6EE7B7`
+`#10C981`
 
 Use for:
 
@@ -269,7 +269,9 @@ Use for:
 
 ### Info
 
-Primary or cyan-based styling may be used for informational states.
+The approved accent blue or an accessible lighter tint may be used for informational states. Small
+text must use a tint that reaches WCAG AA contrast on `#071A33`; the exact accent remains available
+for larger graphics and decorative details.
 
 ---
 
@@ -319,8 +321,8 @@ Example:
 ```css
 linear-gradient(
   135deg,
-  #4ADEA5,
-  #38BDF8
+  #10C981,
+  #0B7BFF
 )
 ```
 
@@ -344,7 +346,7 @@ Avoid:
 
 ## 9. Permanent Dark Theme
 
-Academy uses one permanent dark theme. It does not provide a light theme, theme switcher, or
+Ernst Academy uses one permanent dark theme. It does not provide a light theme, theme switcher, or
 system-theme preference. Set the browser and native-control `color-scheme` to dark.
 
 Use the main background for page foundations, the alternate surface for section rhythm, the card
@@ -607,7 +609,7 @@ Do not make sections visually cramped.
 
 ## 17. Border Radius
 
-Academy should feel modern but not excessively rounded.
+Ernst Academy should feel modern but not excessively rounded.
 
 Recommended:
 
@@ -1176,7 +1178,7 @@ Learning Tracks
 
 Featured Courses
 
-Why Academy
+Why Ernst Academy
 
 Learning Experience
 
@@ -1466,7 +1468,7 @@ Technical terminology is appropriate when describing actual technical courses.
 
 ## 56. Language Strategy
 
-Academy may eventually support Arabic and English.
+Ernst Academy may eventually support Arabic and English.
 
 Initial implementation should avoid decisions that make RTL support unnecessarily difficult.
 
@@ -1562,7 +1564,7 @@ Avoid turning the About page into a long corporate essay.
 Prefer clear sections:
 
 - Mission
-- Why Academy
+- Why Ernst Academy
 - Teaching Philosophy
 - Practical Learning
 - Instructors
@@ -1639,7 +1641,7 @@ Avoid:
 
 ## 64. Current Visual Direction
 
-Academy design direction:
+Ernst Academy design direction:
 
 ```text
 Style:
@@ -1652,7 +1654,7 @@ Hero:
 Dark technical treatment with subtle static grid and glow details
 
 Brand:
-Green + Sky Blue on layered slate surfaces
+Navy + green + bright blue on layered deep-navy surfaces
 
 Layout:
 Spacious and structured
@@ -1677,7 +1679,7 @@ Professional technology product
 
 ## 65. Final Design Principle
 
-Academy should look like a technology company that happens to teach technology.
+Ernst Academy should look like a technology company that happens to teach technology.
 
 It should not look like a generic course marketplace or traditional training center.
 
@@ -1693,3 +1695,25 @@ It should not look like a generic course marketplace or traditional training cen
 - The language switch is visible in desktop and mobile navigation and retains the equivalent path, including detail-page slugs.
 - Layouts must tolerate longer translated labels without clipping or horizontal overflow at 390px, 768px, and 1280px.
 - The permanent dark palette, focus treatment, and reduced-motion rules apply identically in both languages.
+
+---
+
+## 67. Approved Brand Assets
+
+The approved Ernst artwork is stored under `public/brand` with stable filenames:
+
+- `ernst-logo.svg` is the supplied transparent wordmark used in the global header and footer. Its
+  view box is tightened to remove unused transparent canvas without changing the artwork.
+- `ernst-mark.svg` is the supplied compact vector mark reserved for small placements.
+- `ernst-favicon.png` is the approved 512 × 512 source for browser and app-icon derivatives.
+- `ernst-og-image.png` is the approved 1200 × 630 social-sharing image.
+- `ernst-geometric-background.png` is the approved dark geometric artwork used only in the homepage hero.
+- `ernst-footer-cover.png` is the approved Arabic campaign cover used once as a responsive visual
+  inside the footer identity column, directly below the logo and description.
+
+Use the full wordmark for primary brand placement. The dark interface uses the approved white
+treatment without a surrounding card, while the original navy vector remains the source asset.
+Never stretch, rotate, add effects, or reconstruct the artwork. Use the compact mark only where the
+wordmark cannot remain legible, including favicons and app icons. Keep the footer cover proportional,
+crop it only through responsive `object-fit` behavior, and do not use it as a repeated section
+background. Do not repeat either logo on cards, section headings, forms, or decorative UI.

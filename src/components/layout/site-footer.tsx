@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { localizePath, type Locale } from "@/i18n/config";
@@ -12,17 +14,27 @@ export function SiteFooter({ locale, copy }: { locale: Locale; copy: Dictionary[
   ];
 
   return (
-    <footer className="bg-dark text-dark-foreground">
+    <footer className="overflow-hidden border-t border-dark-border bg-dark text-dark-foreground">
       <Container className="py-10 md:py-12">
         <div className="grid gap-8 border-b border-dark-border pb-8 sm:grid-cols-[minmax(0,2fr)_minmax(10rem,1fr)]">
-          <div className="max-w-xl">
+          <div className="min-w-0 max-w-3xl">
             <Link
               href={localizePath(locale, "/")}
-              className="inline-flex min-h-11 items-center rounded-md text-xl font-bold tracking-tight"
+              aria-label={copy.navigation.homeLabel}
+              className="inline-flex min-h-11 items-center rounded-lg focus-visible:outline-offset-4"
             >
-              {siteConfig.name}
+              <BrandLogo placement="footer" />
             </Link>
             <p className="mt-2 text-sm leading-6 text-dark-muted">{copy.description}</p>
+            <div className="relative mt-5 aspect-[16/7] overflow-hidden rounded-2xl border border-dark-border bg-raised shadow-2xl shadow-black/20 sm:aspect-[3/1]">
+              <Image
+                src={siteConfig.assets.footerCover}
+                alt="Ernst — اتعلم. طبق. اتقدم. إيرنست هتجهزك للشغل"
+                fill
+                sizes="(max-width: 639px) 150vw, (min-width: 1280px) 760px, 62vw"
+                className="object-cover object-center"
+              />
+            </div>
           </div>
 
           <nav aria-label={copy.navigation.footerNavigation}>

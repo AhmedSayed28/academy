@@ -31,11 +31,20 @@ export function createPageMetadata({ title, description, path, locale }: PageMet
       type: "website",
       locale: getOpenGraphLocale(locale),
       alternateLocale: [getOpenGraphLocale(locale === "ar" ? "en" : "ar")],
+      images: [
+        {
+          url: siteConfig.assets.openGraph,
+          width: 1200,
+          height: 630,
+          alt: "Ernst Academy - Software learning, built for real work.",
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: socialTitle,
       description,
+      images: [siteConfig.assets.openGraph],
     },
   };
 }

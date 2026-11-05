@@ -29,7 +29,7 @@ describe("homepage content", () => {
     ]);
   });
 
-  it("limits Academy differentiators to approved product principles", () => {
+  it("limits Ernst Academy differentiators to approved product principles", () => {
     expect(getDictionary("en").home.why.items.map(({ title }) => title)).toEqual([
       "Practical learning",
       "Career-oriented paths",

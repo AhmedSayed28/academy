@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("FAQ page presents approved answers with one primary heading", async ({ page }) => {
   await page.goto("/en/faq");
 
-  await expect(page).toHaveTitle("Frequently Asked Questions | Academy");
+  await expect(page).toHaveTitle("Frequently Asked Questions | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
   await expect(page.getByRole("heading", { level: 1, name: "Answers for your next step." })).toBeVisible();
   await expect(page.locator("details")).toHaveCount(7);
@@ -55,7 +55,7 @@ test("homepage preview, footer link, and unanswered-question CTA navigate correc
 
   await preview.getByRole("link", { name: "View all questions" }).click();
   await expect(page).toHaveURL(/\/faq$/);
-  await expect(page.getByRole("link", { name: "Contact Academy", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: "Contact Ernst Academy", exact: true })).toHaveAttribute(
     "href",
     "/en/contact",
   );

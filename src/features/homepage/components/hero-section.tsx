@@ -8,7 +8,7 @@ import type { Dictionary } from "@/i18n/translations";
 
 export function HeroSection({ copy }: { copy: Dictionary["home"]["hero"] }) {
   return (
-    <section className="hero-grid bg-dark text-dark-foreground">
+    <section className="brand-hero hero-grid bg-dark text-dark-foreground">
       <div
         aria-hidden="true"
         className="absolute -start-24 top-16 size-64 rounded-full bg-primary/20 blur-3xl"

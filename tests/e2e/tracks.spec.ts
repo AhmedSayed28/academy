@@ -15,7 +15,7 @@ test("track listing publishes Software Testing and keeps seven directions planne
   const response = await page.goto("/en/tracks");
 
   expect(response?.status()).toBe(200);
-  await expect(page).toHaveTitle("Technology Learning Tracks | Academy");
+  await expect(page).toHaveTitle("Technology Learning Tracks | Ernst Academy");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Choose a technology direction");
   await expect(page.getByRole("heading", { name: "Published learning tracks" })).toBeVisible();
   await expect(page.getByRole("link", { name: "View learning track" })).toHaveAttribute(

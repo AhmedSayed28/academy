@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="160" viewBox="44 38 430 160" role="img" aria-labelledby="title desc">
+  <title id="title">Ernst Academy logo</title>
+  <desc id="desc">Ernst wordmark with a subtle forward-motion accent.</desc>
+  <rect width="900" height="240" fill="none"/>
+  <g fill="#0B2E6B">
+    <text x="54" y="178" font-family="Arial, Helvetica, sans-serif" font-size="166" font-weight="700" letter-spacing="-7">Ernst</text>
+  </g>
+</svg>

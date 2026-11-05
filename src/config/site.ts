@@ -52,8 +52,16 @@ const footerNavigation = [
 ] satisfies NavigationItem[];
 
 export const siteConfig = {
-  name: "Academy",
+  name: "Ernst Academy",
   url: parseAppUrl(process.env.NEXT_PUBLIC_APP_URL),
+  assets: {
+    logo: "/brand/ernst-logo.svg",
+    mark: "/brand/ernst-mark.svg",
+    favicon: "/brand/ernst-favicon.png",
+    openGraph: "/brand/ernst-og-image.png",
+    geometricBackground: "/brand/ernst-geometric-background.png",
+    footerCover: "/brand/ernst-footer-cover.png",
+  },
   navigation,
   footerNavigation,
   primaryAction: {

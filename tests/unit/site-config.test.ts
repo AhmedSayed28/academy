@@ -3,8 +3,16 @@ import { describe, expect, it } from "vitest";
 import { siteConfig } from "../../src/config/site";
 
 describe("site configuration", () => {
-  it("keeps the placeholder brand and shared navigation in one source", () => {
-    expect(siteConfig.name).toBe("Academy");
+  it("keeps the approved Ernst identity and shared navigation in one source", () => {
+    expect(siteConfig.name).toBe("Ernst Academy");
+    expect(siteConfig.assets).toEqual({
+      logo: "/brand/ernst-logo.svg",
+      mark: "/brand/ernst-mark.svg",
+      favicon: "/brand/ernst-favicon.png",
+      openGraph: "/brand/ernst-og-image.png",
+      geometricBackground: "/brand/ernst-geometric-background.png",
+      footerCover: "/brand/ernst-footer-cover.png",
+    });
     expect(siteConfig.navigation.map(({ id }) => id)).toEqual([
       "home",
       "courses",
