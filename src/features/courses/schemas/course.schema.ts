@@ -71,8 +71,8 @@ export const courseSchema = z
       .string()
       .trim()
       .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Track slugs must use lowercase kebab-case"),
-    level: courseLevelSchema,
-    duration: z.string().trim().min(1),
+    level: courseLevelSchema.optional(),
+    duration: z.string().trim().min(1).optional(),
     deliveryType: courseDeliveryTypeSchema.optional(),
     availability: courseAvailabilitySchema,
     startDate: z.union([z.iso.date(), z.literal("To be announced")]).optional(),

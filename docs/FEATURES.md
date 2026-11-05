@@ -223,10 +223,13 @@ Primary action:
 - Missing optional information does not break layout.
 - Cards are responsive.
 
-### Phase 11 implementation
+### Course registration phase
 
-The homepage features the published `Software Testing Fundamentals` course. It is one four-month
-diploma with four curriculum modules, not four separate courses.
+The current public catalog replaces that diploma with four standalone courses: ISTQB Foundation
+Level, Software Testing Practical, Front End Development, and Back End Development. Software
+Testing Track and Full Stack Development are combined registration paths, not separate curricula.
+Instructor content is temporarily unpublished. A registration request requires an approved stable
+option slug and does not confirm payment, a place, or enrollment.
 
 ---
 

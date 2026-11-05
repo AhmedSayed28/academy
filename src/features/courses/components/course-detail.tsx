@@ -138,24 +138,6 @@ export function CourseDetail({ course, locale, copy }: { course: Course; locale:
                 </ol>
               </section>
             ) : null}
-            {course.instructor ? (
-              <section aria-labelledby="instructor-title" className="card-interactive rounded-xl border border-border bg-card p-5 sm:p-7">
-                <h2 id="instructor-title" className="text-2xl font-bold tracking-tight">{copy.instructor}</h2>
-                <p className="mt-4 font-bold text-foreground">
-                  {course.instructor.slug ? (
-                    <Link
-                      href={`${localizePath(locale, "/instructors")}#${course.instructor.slug}`}
-                      className="rounded-sm hover:text-primary"
-                    >
-                      {course.instructor.name}
-                    </Link>
-                  ) : (
-                    course.instructor.name
-                  )}
-                </p>
-                {course.instructor.title ? <p className="mt-1 text-muted-foreground">{course.instructor.title}</p> : null}
-              </section>
-            ) : null}
           </div>
           <div className="lg:sticky lg:top-24">
             <RegistrationPanel course={course} locale={locale} copy={copy} />

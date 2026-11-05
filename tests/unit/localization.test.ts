@@ -32,9 +32,7 @@ describe("localization", () => {
   });
 
   it("localizes approved copy while preserving stable facts and destinations", async () => {
-    const course = await courseService.getPublishedCourseBySlug(
-      "software-testing-fundamentals",
-    );
+    const course = await courseService.getPublishedCourseBySlug("istqb-foundation-level");
     const track = await trackService.getPublishedTrackBySlug("software-testing");
     const instructor = (await instructorService.getPublishedInstructors())[0];
 
@@ -47,13 +45,10 @@ describe("localization", () => {
     const arabicInstructor = localizeInstructor(instructor!, "ar");
 
     expect(arabicCourse).toMatchObject({
-      slug: "software-testing-fundamentals",
-      duration: "4 months",
-      startDate: "To be announced",
-      price: { amount: 7500, currency: "EGP" },
-      registrationUrl: "/register-interest",
+      slug: "istqb-foundation-level",
+      registrationUrl: "/course-registration?course=istqb-foundation-level",
     });
-    expect(arabicCourse.description).toContain("دبلومة Software Testing");
+    expect(arabicCourse.description).toContain("ISTQB Foundation Level");
     expect(arabicTrack.slug).toBe("software-testing");
     expect(arabicInstructor.biography).toContain("أكتر من خمس سنين");
     expect(arabicInstructor.professionalLinks?.[0]?.url).toBe(

@@ -28,7 +28,7 @@ const approvedTrackRecords: readonly unknown[] = [
     skills: trackCopy.skills,
     learningJourney: trackCopy.learningJourney,
     tools: ["Jira", "Postman", "SQL", "Java", "Selenium WebDriver", "TestNG", "Maven", "Git"],
-    courseSlugs: ["software-testing-fundamentals"],
+    courseSlugs: ["istqb-foundation-level", "software-testing-practical"],
     published: true,
   },
 ];

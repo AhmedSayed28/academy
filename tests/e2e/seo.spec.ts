@@ -50,18 +50,23 @@ test("serves static routes and approved published detail routes in the sitemap",
   for (const path of [
     "/courses",
     "/tracks",
-    "/instructors",
     "/about",
     "/contact",
     "/faq",
-    "/register-interest",
-    "/courses/software-testing-fundamentals",
+    "/course-registration",
+    "/courses/istqb-foundation-level",
+    "/courses/software-testing-practical",
+    "/courses/front-end-development",
+    "/courses/back-end-development",
     "/tracks/software-testing",
   ]) {
     expect(body).toContain(`<loc>${productionUrl}/ar${path === "/" ? "" : path}</loc>`);
     expect(body).toContain(`<loc>${productionUrl}/en${path === "/" ? "" : path}</loc>`);
   }
   expect(body).not.toContain(`<loc>${productionUrl}/courses</loc>`);
+  expect(body).not.toContain("/instructors");
+  expect(body).not.toContain("/register-interest");
+  expect(body).not.toContain("software-testing-fundamentals");
   expect(body).toContain('hreflang="x-default"');
   expect(body).not.toContain("<lastmod>");
   expect(body).not.toContain("/api/");

@@ -47,7 +47,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <ArrowRight aria-hidden="true" className="directional-icon size-4" />
               </Link>
               <Link
-                href={localizePath(locale, "/register-interest")}
+                href={localizePath(locale, "/course-registration")}
                 className={cn(
                   buttonVariants({ variant: "secondary", size: "large" }),
                   "border-dark-border bg-dark-foreground/5 text-dark-foreground hover:border-accent/50 hover:bg-dark-foreground/10",
@@ -186,7 +186,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 {copy.browseCourses}
               </Link>
               <Link
-                href={localizePath(locale, "/register-interest")}
+                href={localizePath(locale, "/course-registration")}
                 className={buttonVariants({ variant: "secondary", size: "large" })}
               >
                 {copy.registerInterest}

@@ -56,6 +56,11 @@ access; the route handler is the public boundary and sends the `sb_secret_` key 
 
 ## Leads table
 
+Course registration phase: `selected_course_slug` stores one of the four approved course slugs or
+two approved combined-path slugs. It is nullable only so historical leads remain valid. New API
+requests require it, and merge-on-conflict updates the selection and edited contact details when a
+client retries with the same `submission_id`.
+
 `public.leads` stores the normalized name, email, optional phone, optional message, creation time,
 and a client-generated `submission_id`. The unique submission ID makes a retried request
 idempotent, while the repository's merge-on-conflict behavior ensures edited details replace an

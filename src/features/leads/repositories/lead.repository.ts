@@ -41,7 +41,7 @@ export function createSupabaseLeadRepository(
           full_name: lead.fullName,
           email: lead.email,
           phone: lead.phone,
-          message: lead.message,
+          selected_course_slug: lead.selectedCourseSlug,
         }),
       });
 

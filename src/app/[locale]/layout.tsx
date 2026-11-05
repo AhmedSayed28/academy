@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Arabic } from "next/font/google";
+import { Suspense } from "react";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -65,7 +66,7 @@ export default async function RootLayout({
           {dictionary.site.navigation.skipToContent}
         </a>
         <div className="flex min-h-screen flex-col">
-          <SiteHeader locale={locale} copy={dictionary.site.navigation} />
+          <Suspense><SiteHeader locale={locale} copy={dictionary.site.navigation} /></Suspense>
           <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
             {children}
           </main>

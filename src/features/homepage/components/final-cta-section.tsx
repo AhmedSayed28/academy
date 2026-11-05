@@ -35,7 +35,7 @@ export function FinalCtaSection({ locale, copy }: { locale: Locale; copy: Dictio
                 <ArrowRight aria-hidden="true" className="directional-icon size-4" />
               </Link>
               <Link
-                href={localizePath(locale, "/register-interest")}
+                href={localizePath(locale, "/course-registration")}
                 className={cn(
                   buttonVariants({ variant: "secondary", size: "large" }),
                   "border-dark-border bg-dark-foreground/5 text-dark-foreground hover:border-accent/50 hover:bg-dark-foreground/10",

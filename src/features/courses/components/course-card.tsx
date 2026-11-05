@@ -24,21 +24,6 @@ export function CourseCard({ course, locale }: { course: Course; locale: Locale 
       <div className="mt-6 border-t border-border pt-5">
         <CourseFacts course={course} locale={locale} compact />
       </div>
-      {course.instructor ? (
-        <p className="mt-5 text-sm text-muted-foreground">
-          {copy.instructor}:{" "}
-          {course.instructor.slug ? (
-            <Link
-              href={`${localizePath(locale, "/instructors")}#${course.instructor.slug}`}
-              className="font-semibold text-foreground hover:text-primary"
-            >
-              {course.instructor.name}
-            </Link>
-          ) : (
-            <span className="font-semibold text-foreground">{course.instructor.name}</span>
-          )}
-        </p>
-      ) : null}
       <Link
         href={localizePath(locale, `/courses/${course.slug}`)}
         className="mt-5 inline-flex min-h-11 items-center gap-2 self-start rounded-md font-semibold text-primary hover:text-primary/80"

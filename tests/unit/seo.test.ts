@@ -98,7 +98,9 @@ describe("sitemap and robots", () => {
     expect(urls).toContain(`${productionUrl}/ar/courses/synthetic-open-course`);
     expect(urls).toContain(`${productionUrl}/en/courses/synthetic-closed-course`);
     expect(urls).toContain(`${productionUrl}/ar/tracks/synthetic-software-testing-track`);
-    expect(urls).toHaveLength(22);
+    expect(urls).toHaveLength(20);
+    expect(urls.join("\n")).not.toContain("/instructors");
+    expect(urls.join("\n")).not.toContain("/register-interest");
     expect(urls).not.toContain(`${productionUrl}/courses`);
     expect(urls.join("\n")).not.toContain("unpublished");
     expect(entries.every((entry) => entry.lastModified === undefined)).toBe(true);

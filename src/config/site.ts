@@ -43,7 +43,6 @@ const navigation = [
   { id: "home", href: "/", available: true },
   { id: "courses", href: "/courses", available: true },
   { id: "tracks", href: "/tracks", available: true },
-  { id: "instructors", href: "/instructors", available: true },
   { id: "about", href: "/about", available: true },
   { id: "contact", href: "/contact", available: true },
 ] satisfies NavigationItem[];
@@ -59,7 +58,7 @@ export const siteConfig = {
   footerNavigation,
   primaryAction: {
     id: "registerInterest",
-    href: "/register-interest",
+    href: "/course-registration",
     available: true,
   } satisfies NavigationItem,
   contact: {
